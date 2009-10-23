@@ -1,0 +1,24 @@
+#summary Demo applet
+
+<applet
+  
+codebase = "."
+  
+code     = "com.petersoft.DemoApplet.class"
+  
+archive  = "http://petersoft-java-style-2.googlecode.com/files/PetersoftJavaStyle2_DemoApplet.jar" 
+  
+name     = "Demo Applet"
+  
+width    = "400"
+  
+height   = "300"
+  
+hspace   = "0"
+  
+vspace   = "0"
+  
+align    = "middle"
+>
+
+</applet>
