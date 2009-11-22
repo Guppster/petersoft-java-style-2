@@ -1,0 +1,4 @@
+#summary changes
+
+= 20091122 =
+changed the view port background to white
