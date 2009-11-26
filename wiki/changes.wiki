@@ -2,3 +2,6 @@
 
 * 20091122 *
 changed the view port background to white
+
+* 20091126 *
+forgot to add anti-alias, re-added it
