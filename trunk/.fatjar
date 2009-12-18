@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sat Oct 17 00:08:16 CST 2009
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=PetersoftJavaStyle2.jar
+manifest.mergeall=true
+manifest.mainclass=com.petersoft.Application
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
