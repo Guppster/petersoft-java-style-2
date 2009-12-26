@@ -6,12 +6,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 
 import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
 import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicButtonListener;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
@@ -55,6 +56,8 @@ public class ButtonUI extends BasicButtonUI {
 	Color internalPressingBGColor = new Color(225, 237, 255);
 	Color disabledInternalBGColor = new Color(230, 230, 230);
 
+	Color buttonRollOverColor = new Color(145, 145, 145);
+
 	public ButtonUI() {
 		super();
 	}
@@ -90,30 +93,10 @@ public class ButtonUI extends BasicButtonUI {
 		if (c.getParent() instanceof BasicInternalFrameTitlePane) {
 		} else if (c.getParent() instanceof JToolBar) {
 			if (button.getModel().isRollover()) {
-				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
-
-				g.drawImage(mouseOverMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
-				g.drawImage(mouseOverMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
-
-				g.drawImage(mouseOverUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+				g.setColor(buttonRollOverColor);
+				g.drawRect(1, 1, button.getWidth() - 3, button.getHeight() - 3);
 			}
 		} else {
-			// if (button.isEnabled()) {
-			// if (button.getModel().isPressed()) {
-			//
-			// } else {
-			// g.setColor(internalBGColor);
-			// g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
-			// }
-			// } else {
-			// g.setColor(disabledInternalBGColor);
-			// g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
-			// }
-			// if (button.isEnabled()) {
 			if (button.getModel().isRollover()) {
 				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
 				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
@@ -137,24 +120,10 @@ public class ButtonUI extends BasicButtonUI {
 				g.drawImage(normalMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
 				g.drawImage(normalLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
 			}
-
 		}
 
 		super.paint(g, c);
 	}
-
-	// public void update(Graphics g, JComponent c) {
-	// AbstractButton b = (AbstractButton) c;
-	// // if (b.isOpaque() && !b.getModel().isPressed() && b.isEnabled()) {
-	// if (b.getModel().isRollover()) {
-	// System.out.println("overing");
-	// paint(g, c);
-	// g.setColor(Color.red);
-	// g.fillRect(0, 0, 1000, 1000);
-	// } else {
-	// super.update(g, c);
-	// }
-	// }
 
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
 		g.setColor(new Color(140, 140, 140));
@@ -168,6 +137,23 @@ public class ButtonUI extends BasicButtonUI {
 	protected void paintButtonPressed(Graphics g, AbstractButton b) {
 		g.setColor(internalPressingBGColor);
 		g.fillRect(4, 4, b.getWidth() - 8, b.getHeight() - 8);
+	}
+
+	public void update(Graphics g, JComponent c) {
+		AbstractButton button = (AbstractButton) c;
+		if ((c.getBackground() instanceof UIResource) && button.isContentAreaFilled() && c.isEnabled()) {
+			ButtonModel model = button.getModel();
+			if (!(c.getParent() instanceof JToolBar)) {
+				if (!model.isArmed() && !model.isPressed()) {
+					paint(g, c);
+					return;
+				}
+			} else if (model.isRollover()) {
+				paint(g, c);
+				return;
+			}
+		}
+		super.update(g, c);
 	}
 
 }

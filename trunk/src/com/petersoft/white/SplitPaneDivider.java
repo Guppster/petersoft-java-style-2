@@ -9,7 +9,7 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 public class SplitPaneDivider extends BasicSplitPaneDivider {
-	Color bgColor = new Color(169, 209, 255);
+	Color bgColor = new Color(235, 248, 255);
 	Color lineColor = new Color(140, 150, 240);
 
 	public SplitPaneDivider(BasicSplitPaneUI ui) {
@@ -34,7 +34,7 @@ public class SplitPaneDivider extends BasicSplitPaneDivider {
 		if (super.orientation == JSplitPane.VERTICAL_SPLIT) {
 			g.drawLine(0, 0, this.getWidth(), 0);
 			g.drawLine(0, this.getHeight() - 1, this.getWidth(), this.getHeight() - 1);
-		}else{
+		} else {
 			g.drawLine(0, 0, 0, this.getHeight());
 			g.drawLine(this.getWidth() - 1, 0, this.getWidth() - 1, this.getHeight());
 		}

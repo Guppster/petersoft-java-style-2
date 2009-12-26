@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -24,8 +25,10 @@ import javax.swing.SwingUtilities;
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class NewJFrame extends javax.swing.JFrame {
-	private JTable jTable1;
-	private JScrollPane jScrollPane1;
+	private JTabbedPane jTabbedPane1;
+	private JPanel jPanel2;
+	private JPanel jPanel1;
+	private JPanel jPanel3;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -56,15 +59,20 @@ public class NewJFrame extends javax.swing.JFrame {
 			BorderLayout thisLayout = new BorderLayout();
 			getContentPane().setLayout(thisLayout);
 			{
-				jScrollPane1 = new JScrollPane();
-				getContentPane().add(jScrollPane1, BorderLayout.CENTER);
-				jScrollPane1.setBounds(99, 37, 213, 119);
+				jTabbedPane1 = new JTabbedPane();
+				getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
+				jTabbedPane1.setTabPlacement(JTabbedPane.LEFT);
 				{
-					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
-					jTable1 = new JTable();
-					jScrollPane1.setViewportView(jTable1);
-					jTable1.setModel(jTable1Model);
-					jTable1.setBounds(99, 37, 213, 119);
+					jPanel2 = new JPanel();
+					jTabbedPane1.addTab("jPanel2", null, jPanel2, null);
+				}
+				{
+					jPanel1 = new JPanel();
+					jTabbedPane1.addTab("jPanel1", null, jPanel1, null);
+				}
+				{
+					jPanel3 = new JPanel();
+					jTabbedPane1.addTab("jPanel3", null, jPanel3, null);
 				}
 			}
 			pack();

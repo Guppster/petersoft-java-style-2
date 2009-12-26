@@ -1,8 +1,5 @@
 package com.petersoft.white;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
