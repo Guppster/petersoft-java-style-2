@@ -118,6 +118,10 @@ public class JMainFrame extends JFrame {
 	private JSplitPane jSplitPane1;
 	private JPanel jPanel8;
 	private JButton jButton1;
+	private JButton jButton19;
+	private JButton jButton18;
+	private JButton jButton17;
+	private JToolBar jToolBar2;
 	private JButton jButton16;
 	private JPanel jPanel17;
 	private JTextField jTextField2;
@@ -552,13 +556,13 @@ public class JMainFrame extends JFrame {
 				jButton6 = new JButton();
 				jPanel12.add(jButton6);
 				jButton6.setText("JButton");
-				jButton6.setBounds(183, 67, 112, 25);
+				jButton6.setBounds(35, 56, 112, 25);
 			}
 			{
 				jButton7 = new JButton();
 				jPanel12.add(jButton7);
 				jButton7.setText("JButton with icon");
-				jButton7.setBounds(183, 139, 220, 36);
+				jButton7.setBounds(35, 118, 220, 36);
 				jButton7.setIcon(new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")));
 			}
 			{
@@ -566,8 +570,35 @@ public class JMainFrame extends JFrame {
 				jPanel12.add(jButton8);
 				jButton8.setText("JButton with icon");
 				jButton8.setIcon(new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")));
-				jButton8.setBounds(183, 219, 220, 36);
+				jButton8.setBounds(35, 209, 220, 36);
 				jButton8.setHorizontalAlignment(SwingConstants.LEFT);
+			}
+			{
+				jToolBar2 = new JToolBar();
+				jPanel12.add(jToolBar2);
+				jToolBar2.setBounds(271, 58, 364, 33);
+				{
+					jButton17 = new JButton();
+					jToolBar2.add(jButton17);
+					jButton17.setText("JButton with icon");
+					jButton17.setHorizontalAlignment(SwingConstants.LEFT);
+					jButton17.setIcon(new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")));
+					jButton17.setBounds(35, 209, 220, 36);
+				}
+				{
+					jButton18 = new JButton();
+					jToolBar2.add(jButton18);
+					jButton18.setText("JButton");
+					jButton18.setBounds(35, 56, 112, 25);
+				}
+				{
+					jButton19 = new JButton();
+					jToolBar2.add(jButton19);
+					jButton19.setText("JButton with icon");
+					jButton19.setHorizontalAlignment(SwingConstants.LEFT);
+					jButton19.setIcon(new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")));
+					jButton19.setBounds(35, 209, 220, 36);
+				}
 			}
 		}
 		{

@@ -7,25 +7,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ContainerListener;
-import java.beans.PropertyChangeListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicToolBarUI;
@@ -36,8 +31,6 @@ public class ToolBarUI extends BasicToolBarUI {
 	private static List components = new ArrayList();
 
 	protected ContainerListener contListener;
-
-	protected PropertyChangeListener rolloverListener;
 
 	private static Border nonRolloverBorder;
 
@@ -101,6 +94,7 @@ public class ToolBarUI extends BasicToolBarUI {
 
 	public void installUI(JComponent c) {
 		super.installUI(c);
+		setRolloverBorders(true);
 		register(c);
 	}
 
@@ -117,10 +111,6 @@ public class ToolBarUI extends BasicToolBarUI {
 		if (contListener != null) {
 			toolBar.addContainerListener(contListener);
 		}
-		rolloverListener = createRolloverListener();
-		if (rolloverListener != null) {
-			toolBar.addPropertyChangeListener(rolloverListener);
-		}
 	}
 
 	protected void uninstallListeners() {
@@ -129,14 +119,11 @@ public class ToolBarUI extends BasicToolBarUI {
 		if (contListener != null) {
 			toolBar.removeContainerListener(contListener);
 		}
-		rolloverListener = createRolloverListener();
-		if (rolloverListener != null) {
-			toolBar.removePropertyChangeListener(rolloverListener);
-		}
+
 	}
 
 	protected Border createRolloverBorder() {
-		return super.createRolloverBorder();
+		return new LineBorder(Color.blue);
 	}
 
 	protected Border createNonRolloverBorder() {
@@ -167,10 +154,6 @@ public class ToolBarUI extends BasicToolBarUI {
 		return null;
 	}
 
-	protected PropertyChangeListener createRolloverListener() {
-		return null;
-	}
-
 	protected void setDragOffset(Point p) {
 		if (!GraphicsEnvironment.isHeadless()) {
 			if (dragWindow == null) {
@@ -181,15 +164,17 @@ public class ToolBarUI extends BasicToolBarUI {
 	}
 
 	public void update(Graphics g, JComponent c) {
+		super.update(g, c);
 		// System.out.println(c.getClass().getName());
 		// JOptionPane.showMessageDialog(null,
-		// c.getParent().getClass().getName() + "\n" +
+		// c.getParent().getClass().getName() + "\n" + //
 		// c.getParent().getParent().getClass().getName());
 		// JOptionPane.showMessageDialog(null,
-		// c.getParent().getParent().getClass().getName());
+		// c.getParent().getParent().getClass().getName()); //
 		// System.out.println();
 
 		g.drawImage(toolbarBackgroundImage, 0, 0, 99999, c.getHeight(), null);
+
 		// g.setColor(new Color(170, 179, 179));
 		// g.drawLine(0, 0, c.getWidth(), 0);
 		// g.drawLine(0, 0, 0, c.getHeight());

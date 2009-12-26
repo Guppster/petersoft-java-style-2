@@ -35,7 +35,7 @@ public class Application {
 			// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
 			// UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-			 UIManager.setLookAndFeel("com.petersoft.white.PetersoftWhiteLookAndFeel");
+			UIManager.setLookAndFeel("com.petersoft.white.PetersoftWhiteLookAndFeel");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
