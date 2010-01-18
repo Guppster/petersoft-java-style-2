@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -58,6 +59,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import com.petersoft.advancedswing.diskpanel.DiskPanel;
+import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
+import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
+import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -118,6 +124,37 @@ public class JMainFrame extends JFrame {
 	private JSplitPane jSplitPane1;
 	private JPanel jPanel8;
 	private JButton jButton1;
+	private JPanel jPanel20;
+	private JPanel jPanel22;
+	private JPanel jPanel24;
+	private JPanel jPanel26;
+	private JProgressBar jProgressBar3;
+	private JTable jTable10;
+	private JTable jTable9;
+	private JPanel jPanel31;
+	private JPanel jPanel30;
+	private JPanel jPanel28;
+	private JPanel jPanel25;
+	private JMaximizableTabbedPane jMaximizableTabbedPane2;
+	private JMaximizableTabbedPane jMaximizableTabbedPane1;
+	private JSplitPane jSplitPane6;
+	private JPanel jPanel23;
+	private JPanel jPanel21;
+	private JMaximizableTabbedPane jTabbedPane6;
+	private JSplitPane jSplitPane5;
+	private JMaximizableTabbedPane_BasePanel jMaximizableTabbedPane_BasePanel1;
+	private JTable jTable8;
+	private JTable jTable7;
+	private JTable jTable6;
+	private JTable jTable5;
+	private JTabbedPane jTabbedPane5;
+	private JClosableTabbedPane jTabbedPane4;
+	private JSplitPane jSplitPane4;
+	private JTable jTable4;
+	private JSplitPane jSplitPane3;
+	private JPanel jPanel19;
+	private DiskPanel diskPanel1;
+	private JPanel jPanel18;
 	private JButton jButton19;
 	private JButton jButton18;
 	private JButton jButton17;
@@ -420,6 +457,157 @@ public class JMainFrame extends JFrame {
 		JCheckBox5.setBounds(99, 132, -1, -1);
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
+		{
+			jPanel20 = new JPanel();
+			jTabbedPane1.addTab("JMaximizableTabbedPane", null, jPanel20, null);
+			jPanel20.setLayout(null);
+			{
+				jMaximizableTabbedPane_BasePanel1 = new JMaximizableTabbedPane_BasePanel();
+				jPanel20.add(jMaximizableTabbedPane_BasePanel1);
+				jMaximizableTabbedPane_BasePanel1.setBounds(42, 33, 580, 291);
+				{
+					jSplitPane5 = new JSplitPane();
+					jMaximizableTabbedPane_BasePanel1.add(jSplitPane5, "MAIN");
+					jSplitPane5.setOrientation(JSplitPane.VERTICAL_SPLIT);
+					jSplitPane5.setDividerLocation(140);
+					{
+						jTabbedPane6 = new JMaximizableTabbedPane();
+						jSplitPane5.add(jTabbedPane6, JSplitPane.TOP);
+						{
+							jPanel21 = new JPanel();
+							jTabbedPane6.addTab("jPanel21", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel21, null);
+						}
+						{
+							jPanel22 = new JPanel();
+							jTabbedPane6.addTabWithCloseButton("jPanel22", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel22, null);
+						}
+						{
+							jPanel23 = new JPanel();
+							jTabbedPane6.addTab("jPanel23", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel23, null);
+						}
+						{
+							jPanel30 = new JPanel();
+							jTabbedPane6.addTab("jPanel30", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel30, null);
+						}
+					}
+					{
+						jSplitPane6 = new JSplitPane();
+						jSplitPane5.add(jSplitPane6, JSplitPane.BOTTOM);
+						jSplitPane6.setDividerLocation(200);
+						{
+							jMaximizableTabbedPane1 = new JMaximizableTabbedPane();
+							jSplitPane6.add(jMaximizableTabbedPane1, JSplitPane.RIGHT);
+							{
+								jPanel26 = new JPanel();
+								jMaximizableTabbedPane1.addTab("jPanel26", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jPanel26, null);
+								{
+									TableModel jTable9Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+									jTable9 = new JTable();
+									jPanel26.add(jTable9);
+									jTable9.setModel(jTable9Model);
+								}
+							}
+							{
+								jPanel31 = new JPanel();
+								jMaximizableTabbedPane1.addTab("jPanel31", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jPanel31, null);
+							}
+							{
+								TableModel jTable10Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+								jTable10 = new JTable();
+								jMaximizableTabbedPane1.addTab("jTable10", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jTable10, null);
+								jTable10.setModel(jTable10Model);
+							}
+						}
+						{
+							jMaximizableTabbedPane2 = new JMaximizableTabbedPane();
+							jSplitPane6.add(jMaximizableTabbedPane2, JSplitPane.LEFT);
+							{
+								jPanel24 = new JPanel();
+								jMaximizableTabbedPane2.addTab("jPanel24", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel24, null);
+							}
+							{
+								jPanel25 = new JPanel();
+								jMaximizableTabbedPane2.addTab("jPanel25", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel25, null);
+							}
+							{
+								jPanel28 = new JPanel();
+								jMaximizableTabbedPane2.addTab("jPanel28", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel28, null);
+							}
+							{
+								jProgressBar3 = new JProgressBar();
+								jMaximizableTabbedPane2.addTab("jProgressBar3", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jProgressBar3, null);
+								jProgressBar3.setValue(50);
+							}
+						}
+					}
+				}
+			}
+		}
+		{
+			jPanel19 = new JPanel();
+			jTabbedPane1.addTab("JClosableTabPane", null, jPanel19, null);
+			jPanel19.setLayout(null);
+			{
+				jSplitPane3 = new JSplitPane();
+				jPanel19.add(jSplitPane3);
+				jSplitPane3.setBounds(60, 18, 538, 323);
+				jSplitPane3.setOrientation(JSplitPane.VERTICAL_SPLIT);
+				jSplitPane3.setDividerLocation(100);
+				{
+					TableModel jTable4Model = new DefaultTableModel(new String[][] { { "11", "22" }, { "33", "44" } }, new String[] { "Column 1", "Column 2" });
+					jTable4 = new JTable();
+					jSplitPane3.add(jTable4, JSplitPane.TOP);
+					jTable4.setModel(jTable4Model);
+				}
+				{
+					jSplitPane4 = new JSplitPane();
+					jSplitPane3.add(jSplitPane4, JSplitPane.BOTTOM);
+					jSplitPane4.setDividerLocation(200);
+					{
+						jTabbedPane4 = new JClosableTabbedPane(jPanel19);
+						jSplitPane4.add(jTabbedPane4, JSplitPane.RIGHT);
+						{
+							TableModel jTable7Model = new DefaultTableModel(new String[][] { { "aa", "bb" }, { "cc", "dd" } }, new String[] { "Column 1", "Column 2" });
+							jTable7 = new JTable();
+							jTabbedPane4.addTab("jTable7", null, jTable7, null);
+							jTable7.setModel(jTable7Model);
+						}
+						{
+							TableModel jTable8Model = new DefaultTableModel(new String[][] { { "!!", "@@" }, { "##", "$$" } }, new String[] { "Column 1", "Column 2" });
+							jTable8 = new JTable();
+							jTabbedPane4.addTab("jTable8", null, jTable8, null);
+							jTable8.setModel(jTable8Model);
+						}
+					}
+					{
+						jTabbedPane5 = new JTabbedPane();
+						jSplitPane4.add(jTabbedPane5, JSplitPane.LEFT);
+						{
+							TableModel jTable5Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+							jTable5 = new JTable();
+							jTabbedPane5.addTab("jTable5", null, jTable5, null);
+							jTable5.setModel(jTable5Model);
+						}
+						{
+							TableModel jTable6Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+							jTable6 = new JTable();
+							jTabbedPane5.addTab("jTable6", null, jTable6, null);
+							jTable6.setModel(jTable6Model);
+						}
+					}
+				}
+			}
+		}
+		{
+			jPanel18 = new JPanel();
+			BorderLayout jPanel18Layout = new BorderLayout();
+			jTabbedPane1.addTab("DiskPanel", null, jPanel18, null);
+			jPanel18.setLayout(jPanel18Layout);
+			{
+				diskPanel1 = new DiskPanel(new File("src/com/petersoft/JMainFrame.java"));
+				jPanel18.add(diskPanel1, BorderLayout.CENTER);
+			}
+		}
 		{
 			jPanel17 = new JPanel();
 			jTabbedPane1.addTab("Tooltip", null, jPanel17, null);
@@ -742,9 +930,9 @@ public class JMainFrame extends JFrame {
 				jPanel2.add(jScrollPane1);
 				jScrollPane1.setBounds(130, 176, 292, 151);
 				{
-					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" } }, new String[] {
+							"Column 1", "Column 2" });
 					jTable1 = new JTable();
 					jScrollPane1.setViewportView(jTable1);
 					jTable1.setModel(jTable1Model);
@@ -878,6 +1066,7 @@ public class JMainFrame extends JFrame {
 					jButton9 = new JButton();
 					jToolBar1.add(jButton9);
 					jButton9.setText("jButton9");
+					jButton9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/white/images/PCheckBox/pcheckbox_beanicon32.png")));
 				}
 				{
 					jToggleButton5 = new JToggleButton();
@@ -1011,14 +1200,13 @@ public class JMainFrame extends JFrame {
 
 	private void jButton14ActionPerformed(ActionEvent evt) {
 		Object[] options = { "Yes, please", "No, thanks", "No eggs, no ham!" };
-		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null, options, options[2]);
 	}
 
 	private void jButton15ActionPerformed(ActionEvent evt) {
 		Object[] possibilities = { "ham", "spam", "yam" };
-		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null,
-				possibilities, "ham");
+		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
 	}
 
 }

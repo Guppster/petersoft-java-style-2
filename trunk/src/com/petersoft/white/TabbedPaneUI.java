@@ -9,36 +9,38 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class TabbedPaneUI extends BasicTabbedPaneUI {
 	// north
-	Image top_tabLeft = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftTab.png")).getImage();
-	Image top_tabMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_middleTab.png")).getImage();
-	Image top_tabRight = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightTab.png")).getImage();
-	Image top_tabRight_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightTab.png")).getImage();
-	Image top_tabSelectedLeft = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftSelectedTab.png")).getImage();
-	Image top_tabSelectedLeft_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftSelectedTab.png")).getImage();
-	Image top_tabSelectedMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_middleSelectedTab.png")).getImage();
-	Image top_tabSelectedRight = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightSelectedTab.png")).getImage();
-	Image top_tabSelectedRight_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightSelectedTab.png")).getImage();
+	protected Image top_tabLeft = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftTab.png")).getImage();
+	protected Image top_tabMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_middleTab.png")).getImage();
+	protected Image top_tabRight = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightTab.png")).getImage();
+	protected Image top_tabRight_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightTab.png")).getImage();
+	protected Image top_tabSelectedLeft = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftSelectedTab.png")).getImage();
+	protected Image top_tabSelectedLeft_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftSelectedTab.png")).getImage();
+	protected Image top_tabSelectedMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_middleSelectedTab.png")).getImage();
+	protected Image top_tabSelectedRight = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightSelectedTab.png")).getImage();
+	protected Image top_tabSelectedRight_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_rightSelectedTab.png")).getImage();
 	// end north
 
 	// left
-	Image left_tabBottom = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomTab.png")).getImage();
-	Image left_tabBottom_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomTab_repeat.png")).getImage();
-	Image left_tabMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_middleTab.png")).getImage();
-	Image left_tabTop = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topTab.png")).getImage();
-	Image left_tabTop_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topTab_repeat.png")).getImage();
-	Image left_tabSelectedBottom = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomSelectedTab.png")).getImage();
-	Image left_tabSelectedBottom_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomSelectedTab_repeat.png")).getImage();
-	Image left_tabSelectedMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_middleSelectedTab.png")).getImage();
-	Image left_tabSelectedTop = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topSelectedTab.png")).getImage();
-	Image left_tabSelectedTop_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topSelectedTab_repeat.png")).getImage();
-	Color selectedBackground = new Color(188, 218, 244);
+	protected Image left_tabBottom = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomTab.png")).getImage();
+	protected Image left_tabBottom_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomTab_repeat.png")).getImage();
+	protected Image left_tabMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_middleTab.png")).getImage();
+	protected Image left_tabTop = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topTab.png")).getImage();
+	protected Image left_tabTop_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topTab_repeat.png")).getImage();
+	protected Image left_tabSelectedBottom = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomSelectedTab.png")).getImage();
+	protected Image left_tabSelectedBottom_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_bottomSelectedTab_repeat.png")).getImage();
+	protected Image left_tabSelectedMiddle = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_middleSelectedTab.png")).getImage();
+	protected Image left_tabSelectedTop = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topSelectedTab.png")).getImage();
+	protected Image left_tabSelectedTop_repeat = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_left_topSelectedTab_repeat.png")).getImage();
+	protected Color selectedBackground = new Color(188, 218, 244);
 
 	// end left
 
@@ -47,6 +49,7 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	}
 
 	protected void installListeners() {
+
 		super.installListeners();
 		// tabPane.addMouseMotionListener((MouseMotionListener) mouseListener);
 	}
@@ -70,8 +73,6 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	// }
 
 	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-		// super.paintTabBorder(g, tabPlacement, tabIndex, x, y, w, h,
-		// isSelected);
 		Insets contentBorderInsets = getContentBorderInsets(tabPlacement);
 
 		if ((tabPane.getTabPlacement() == BOTTOM) && (contentBorderInsets.top == 5)) {
@@ -119,44 +120,31 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 				g.drawImage(left_tabBottom_repeat, x + 4, y + h - 4, w - 4, 4, null);
 			}
 		}
+	}
 
-		// g.setColor(new Color(169, 209, 255));
-		// g.drawLine(x, h - 1, x + w, h - 1);
-
+	protected void paintIcon(Graphics g, int tabPlacement, int tabIndex, Icon icon, Rectangle iconRect, boolean isSelected) {
+		if (icon != null) {
+			icon.paintIcon(tabPane, g, iconRect.x, iconRect.y + 1);
+		}
 	}
 
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
 		super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
-
-		/*
-		 * 
-		 * int yOffset = 0;
-		 * 
-		 * if ((tabPlacement == TOP) && isSelected) { yOffset = 1; }
-		 * 
-		 * if (tabPlacement == BOTTOM) { yOffset = isSelected ? (-2) : (-1); }
-		 * 
-		 * g.setFont(font);
-		 * 
-		 * View v = getTextViewForTab(tabIndex);
-		 * 
-		 * if (v != null) { // html textRect.y += yOffset; v.paint(g, textRect);
-		 * } else { // plain text int mnemIndex =
-		 * tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-		 * 
-		 * if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
-		 * g.setColor(tabPane.getForegroundAt(tabIndex));
-		 * BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex,
-		 * textRect.x, textRect.y + metrics.getAscent() + yOffset); } else { //
-		 * tab disabled
-		 * g.setColor(tabPane.getBackgroundAt(tabIndex).brighter());
-		 * BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex,
-		 * textRect.x, textRect.y + metrics.getAscent());
-		 * g.setColor(tabPane.getBackgroundAt(tabIndex).darker());
-		 * BasicGraphicsUtils.drawStringUnderlineCharAt(g, title, mnemIndex,
-		 * textRect.x - 1, (textRect.y + metrics.getAscent()) - 1); } }
-		 */
 	}
+
+	// protected void layoutLabel(int tabPlacement, FontMetrics metrics, int
+	// tabIndex, String title, Icon icon, Rectangle tabRect, Rectangle iconRect,
+	// Rectangle textRect, boolean isSelected) {
+	// // this function layoutLabel put the close icon to the right hand side
+	// textRect.x = 0;
+	// textRect.y = 0;
+	// iconRect.x = 0;
+	// iconRect.y = 0;
+	// SwingUtilities.layoutCompoundLabel((JComponent) tabPane, metrics, title,
+	// icon, SwingUtilities.CENTER, SwingUtilities.CENTER,
+	// SwingUtilities.CENTER, SwingUtilities.LEFT, tabRect, iconRect,
+	// textRect, textIconGap + 2);
+	// }
 
 	public void paint(Graphics g, JComponent c) {
 		// g.setColor(Color.red);
