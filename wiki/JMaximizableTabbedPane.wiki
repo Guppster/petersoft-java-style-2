@@ -18,6 +18,6 @@ Step 2) Then you can create many JMaximizableTabbedPane on top of JMaximizableTa
 
 Example:
 
-checkout this file [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/JMainFrame.java] from svn too see a real example
+checkout this file [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/JMainFrame.java] from svn to see a real example
 
 [http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane.png]
