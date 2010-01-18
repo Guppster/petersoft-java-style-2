@@ -1,5 +1,6 @@
 package com.petersoft.white;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -51,12 +52,10 @@ public class ComboBoxUI extends BasicComboBoxUI {
 		return pComboBox_ComboPopup;
 	}
 
-	// public ListCellRenderer createRenderer() {
-	// return new ComboBox_Renderer();
-	// }
-
 	public void paint(Graphics g, JComponent c) {
 		super.paint(g, c);
+//		g.setColor(Color.RED);
+//		g.fillRect(0,0,500,500);
 	}
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
