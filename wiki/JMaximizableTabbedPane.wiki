@@ -2,7 +2,7 @@
 
 = Introduction =
 
-It is a JTabbedPane that supports "close button" and "maximum button" for each tab.
+It is a JTabbedPane that supports "close" and "maximum" for each tab. Pretty much like the tabbedpane in eclipse.
 
 [http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane20100118.png]
 
