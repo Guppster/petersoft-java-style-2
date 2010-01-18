@@ -7,9 +7,9 @@ It is a JTabbedPane that supports "close button" and "maximum button" for each t
 [http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane20100118.png]
 
 
-= Details =
+= Usage =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Step 1) Create a JMaximizableTabbedPane_BasePanel object and add it to the bottom
+Step 2) Then you can create many JMaximizableTabbedPane on top of JMaximizableTabbedPane_BasePanel
+
+Example:
