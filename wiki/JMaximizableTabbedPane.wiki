@@ -1,0 +1,15 @@
+#summary JMaximizableTabbedPane
+
+= Introduction =
+
+It is a JTabbedPane that supports "close button" and "maximum button" for each tab.
+
+[http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane20100118.png]
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
