@@ -5,3 +5,9 @@
 You can use DiskPanel control to display the byte from a file
 
 [http://petersoft-java-style-2.googlecode.com/files/diskpanel20100118.png]
+
+= Usage =
+DiskPanel diskPanel1 = new DiskPanel(new File("yourFile"));
+
+then add the diskPanel to anywhere
+jPanel1.add(diskPanel1);
