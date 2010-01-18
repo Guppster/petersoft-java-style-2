@@ -13,6 +13,9 @@ Step 1) Create a JMaximizableTabbedPane_BasePanel object and add it to the botto
 
 Step 2) Then you can create many JMaximizableTabbedPane on top of JMaximizableTabbedPane_BasePanel
 
+
+!!! when you double click the tab, the tab will zoom to JMaximizableTabbedPane_BasePanel.
+
 Example:
 
 [http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane.png]
