@@ -10,6 +10,7 @@ It is a JTabbedPane that supports "close button" and "maximum button" for each t
 = Usage =
 
 Step 1) Create a JMaximizableTabbedPane_BasePanel object and add it to the bottom
+
 Step 2) Then you can create many JMaximizableTabbedPane on top of JMaximizableTabbedPane_BasePanel
 
 Example:
