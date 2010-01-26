@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 
+import com.petersoft.white.ButtonUI;
 import com.petersoft.white.CheckBoxUI;
 import com.petersoft.white.TabbedPaneUI;
 
@@ -17,7 +18,7 @@ public class JMaximizableTabbedPaneUI extends TabbedPaneUI {
 	int tabHeight;
 	int tabX;
 	int tabY;
-	ImageIcon closeIcon = new ImageIcon(CheckBoxUI.class.getResource("images/JMaximizableTabbedpane/closeIcon.gif"));
+	ImageIcon closeIcon = new ImageIcon(this.getClass().getResource("/com/petersoft/white/images/JMaximizableTabbedPane/closeIcon.gif"));
 	protected JMaximizableTabbedPane jMaximizableTabbedPane;
 
 	public static ComponentUI createUI(JComponent c) {

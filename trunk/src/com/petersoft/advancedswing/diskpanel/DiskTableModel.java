@@ -70,14 +70,14 @@ public class DiskTableModel extends DefaultTableModel {
 				}
 			} else if (column == getColumnCount() - 1) {
 				String str = "";
-				for (int x = 0; x < 8; x++) {
+				for (int x = 0; x < getByteColumnCount(); x++) {
 					str += (char) tempBytes[(int) (row * getByteColumnCount() + x)];
 				}
 				return str;
 			} else {
 				byte b = tempBytes[(int) (row * getByteColumnCount() + (column - 1))];
 				if (radix == 16) {
-//					return "0x" + Long.toHexString(b & 0xff);
+					// return "0x" + Long.toHexString(b & 0xff);
 					return String.format("%02x", b & 0xff);
 				} else if (radix == 10) {
 					return b;
@@ -90,6 +90,11 @@ public class DiskTableModel extends DefaultTableModel {
 		} catch (Exception ex) {
 			return "-";
 		}
+	}
+
+	public void setColumnCount(int columnCount) {
+		numberOfColumn = columnCount;
+		setOffset(getOffset());
 	}
 
 	public int getColumnCount() {
