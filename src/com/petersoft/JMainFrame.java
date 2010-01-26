@@ -126,20 +126,18 @@ public class JMainFrame extends JFrame {
 	private JButton jButton1;
 	private JPanel jPanel20;
 	private JPanel jPanel22;
-	private JPanel jPanel24;
-	private JPanel jPanel26;
-	private JProgressBar jProgressBar3;
-	private JTable jTable10;
-	private JTable jTable9;
-	private JPanel jPanel31;
-	private JPanel jPanel30;
-	private JPanel jPanel28;
-	private JPanel jPanel25;
+	private JLabel jLabel9;
+	private JLabel jLabel8;
+	private JLabel jLabel7;
+	private JLabel jLabel6;
+	private JLabel jLabel5;
+	private JLabel jLabel4;
+	private JLabel jLabel3;
+	private JLabel jLabel2;
+	private JLabel jLabel1;
 	private JMaximizableTabbedPane jMaximizableTabbedPane2;
 	private JMaximizableTabbedPane jMaximizableTabbedPane1;
 	private JSplitPane jSplitPane6;
-	private JPanel jPanel23;
-	private JPanel jPanel21;
 	private JMaximizableTabbedPane jTabbedPane6;
 	private JSplitPane jSplitPane5;
 	private JMaximizableTabbedPane_BasePanel jMaximizableTabbedPane_BasePanel1;
@@ -474,20 +472,23 @@ public class JMainFrame extends JFrame {
 						jTabbedPane6 = new JMaximizableTabbedPane();
 						jSplitPane5.add(jTabbedPane6, JSplitPane.TOP);
 						{
-							jPanel21 = new JPanel();
-							jTabbedPane6.addTab("jPanel21", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel21, null);
+							jLabel1 = new JLabel();
+							jTabbedPane6.addTabWithCloseButton("jLabel1", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jLabel1, null);
+							jLabel1.setText("1");
+						}
+						{
+							jLabel2 = new JLabel();
+							jTabbedPane6.addTab("jLabel2", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/question.png")), jLabel2, null);
+							jLabel2.setText("2");
+						}
+						{
+							jLabel3 = new JLabel();
+							jTabbedPane6.addTab("jLabel3", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jLabel3, null);
+							jLabel3.setText("3");
 						}
 						{
 							jPanel22 = new JPanel();
 							jTabbedPane6.addTabWithCloseButton("jPanel22", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel22, null);
-						}
-						{
-							jPanel23 = new JPanel();
-							jTabbedPane6.addTab("jPanel23", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel23, null);
-						}
-						{
-							jPanel30 = new JPanel();
-							jTabbedPane6.addTab("jPanel30", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/error.png")), jPanel30, null);
 						}
 					}
 					{
@@ -498,45 +499,39 @@ public class JMainFrame extends JFrame {
 							jMaximizableTabbedPane1 = new JMaximizableTabbedPane();
 							jSplitPane6.add(jMaximizableTabbedPane1, JSplitPane.RIGHT);
 							{
-								jPanel26 = new JPanel();
-								jMaximizableTabbedPane1.addTab("jPanel26", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jPanel26, null);
-								{
-									TableModel jTable9Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
-									jTable9 = new JTable();
-									jPanel26.add(jTable9);
-									jTable9.setModel(jTable9Model);
-								}
+								jLabel7 = new JLabel();
+								jMaximizableTabbedPane1.addTab("jLabel7", null, jLabel7, null);
+								jLabel7.setText("7");
 							}
 							{
-								jPanel31 = new JPanel();
-								jMaximizableTabbedPane1.addTab("jPanel31", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jPanel31, null);
+								jLabel8 = new JLabel();
+								jMaximizableTabbedPane1.addTab("jLabel8", null, jLabel8, null);
+								jLabel8.setText("8");
 							}
 							{
-								TableModel jTable10Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
-								jTable10 = new JTable();
-								jMaximizableTabbedPane1.addTab("jTable10", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/warning.png")), jTable10, null);
-								jTable10.setModel(jTable10Model);
+								jLabel9 = new JLabel();
+								jMaximizableTabbedPane1.addTab("jLabel9", null, jLabel9, null);
+								jLabel9.setText("9");
 							}
 						}
 						{
 							jMaximizableTabbedPane2 = new JMaximizableTabbedPane();
 							jSplitPane6.add(jMaximizableTabbedPane2, JSplitPane.LEFT);
 							{
-								jPanel24 = new JPanel();
-								jMaximizableTabbedPane2.addTab("jPanel24", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel24, null);
+								jLabel4 = new JLabel();
+								jMaximizableTabbedPane2.addTab("jLabel4", null, jLabel4, null);
+								jLabel4.setText("4");
+								jLabel4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/white/images/DiskPanel/cog.png")));
 							}
 							{
-								jPanel25 = new JPanel();
-								jMaximizableTabbedPane2.addTab("jPanel25", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel25, null);
+								jLabel5 = new JLabel();
+								jMaximizableTabbedPane2.addTab("jLabel5", null, jLabel5, null);
+								jLabel5.setText("5");
 							}
 							{
-								jPanel28 = new JPanel();
-								jMaximizableTabbedPane2.addTab("jPanel28", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jPanel28, null);
-							}
-							{
-								jProgressBar3 = new JProgressBar();
-								jMaximizableTabbedPane2.addTab("jProgressBar3", new ImageIcon(this.getClass().getResource("white/images/JOptionPane/information.png")), jProgressBar3, null);
-								jProgressBar3.setValue(50);
+								jLabel6 = new JLabel();
+								jMaximizableTabbedPane2.addTab("jLabel6", null, jLabel6, null);
+								jLabel6.setText("6");
 							}
 						}
 					}

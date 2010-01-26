@@ -38,6 +38,8 @@ import com.petersoft.advancedswing.pager.PagerTextFieldEventListener;
 */
 public class DiskPanel extends JPanel {
 	private JScrollPane jScrollPane1;
+	private JComboBox jColumnCountComboBox;
+	private JLabel jLabel2;
 	private JComboBox jRowCountComboBox;
 	private JLabel jLabel1;
 	private JComboBox jRadixComboBox;
@@ -124,9 +126,27 @@ public class DiskPanel extends JPanel {
 					jPanel1.add(jRowCountComboBox);
 					jRowCountComboBox.setModel(jRowCountComboBoxModel);
 					jRowCountComboBox.setEditable(true);
+					jRowCountComboBox.setPreferredSize(new java.awt.Dimension(61, 27));
 					jRowCountComboBox.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jRowCountComboBoxActionPerformed(evt);
+						}
+					});
+				}
+				{
+					jLabel2 = new JLabel();
+					jPanel1.add(jLabel2);
+					jLabel2.setText("Col count");
+				}
+				{
+					ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "8", "10", "16", "20", "24", "30" });
+					jColumnCountComboBox = new JComboBox();
+					jPanel1.add(jColumnCountComboBox);
+					jColumnCountComboBox.setModel(jComboBox1Model);
+					jColumnCountComboBox.setEditable(true);
+					jColumnCountComboBox.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jColumnCountComboBoxActionPerformed(evt);
 						}
 					});
 				}
@@ -172,6 +192,12 @@ public class DiskPanel extends JPanel {
 
 	private void jRowCountComboBoxActionPerformed(ActionEvent evt) {
 		model.setRowCount(Integer.parseInt(jRowCountComboBox.getSelectedItem().toString()));
+		model.fireTableStructureChanged();
+		model.fireTableDataChanged();
+	}
+
+	private void jColumnCountComboBoxActionPerformed(ActionEvent evt) {
+		model.setColumnCount(Integer.parseInt(jColumnCountComboBox.getSelectedItem().toString()));
 		model.fireTableStructureChanged();
 		model.fireTableDataChanged();
 	}
