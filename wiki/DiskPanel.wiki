@@ -2,7 +2,7 @@
 
 = Introduction =
 
-You can use DiskPanel control to display the byte from a file
+You can use DiskPanel control to display every bytes of a file
 
 [http://petersoft-java-style-2.googlecode.com/files/diskpanel20100118.png]
 
