@@ -8,6 +8,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Point;
@@ -45,6 +46,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -587,6 +589,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 		list.addListSelectionListener(createListSelectionListener(fc));
 		list.addMouseListener(createDoubleClickListener(fc, list));
 		list.addMouseListener(createSingleClickListener(fc, list));
+
 		getModel().addListDataListener(new ListDataListener() {
 			public void contentsChanged(ListDataEvent e) {
 				// Update the selection after JList has been updated
@@ -975,14 +978,12 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * Returns the preferred size of the specified <code>JFileChooser</code>.
-	 * The preferred size is at least as large, in both height and width, as the
-	 * preferred size recommended by the file chooser's layout manager.
+	 * Returns the preferred size of the specified <code>JFileChooser</code>. The preferred size is at least as large, in both height and width, as the preferred size recommended
+	 * by the file chooser's layout manager.
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the preferred width and
-	 *         height of the file chooser
+	 * @return a <code>Dimension</code> specifying the preferred width and height of the file chooser
 	 */
 	public Dimension getPreferredSize(JComponent c) {
 		int prefWidth = PREF_SIZE.width;
@@ -1000,8 +1001,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the minimum width and height
-	 *         of the file chooser
+	 * @return a <code>Dimension</code> specifying the minimum width and height of the file chooser
 	 */
 	public Dimension getMinimumSize(JComponent c) {
 		return MIN_SIZE;
@@ -1012,8 +1012,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the maximum width and height
-	 *         of the file chooser
+	 * @return a <code>Dimension</code> specifying the maximum width and height of the file chooser
 	 */
 	public Dimension getMaximumSize(JComponent c) {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -1294,8 +1293,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/*
-	 * Listen for filechooser property changes, such as the selected file
-	 * changing, or the type of the dialog changing.
+	 * Listen for filechooser property changes, such as the selected file changing, or the type of the dialog changing.
 	 */
 	public PropertyChangeListener createPropertyChangeListener(JFileChooser fc) {
 		return new PropertyChangeListener() {
@@ -1393,8 +1391,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * Property to remember whether a directory is currently selected in the UI.
-	 * This is normally called by the UI on a selection event.
+	 * Property to remember whether a directory is currently selected in the UI. This is normally called by the UI on a selection event.
 	 * 
 	 * @param directorySelected
 	 *            if a directory is currently selected.
@@ -1680,7 +1677,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 					JFileChooser fc = getFileChooser();
 					int index = list.locationToIndex(e.getPoint());
 
-					if ((!fc.isMultiSelectionEnabled() || (fc.getSelectedFiles().length <= 1)) && (index >= 0) && list.isSelectedIndex(index) && (getEditIndex() == index) && (editFile == null)) {
+					if ((!fc.isMultiSelectionEnabled() || (fc.getSelectedFiles().length <= 1)) && (index >= 0) && list.isSelectedIndex(index) && (getEditIndex() == index)
+							&& (editFile == null)) {
 						editFileName(index);
 					} else {
 						if (index >= 0) {
@@ -1717,7 +1715,23 @@ public class FileChooserUI extends BasicFileChooserUI {
 			String fileName = getFileChooser().getName(file);
 			setText(fileName);
 
-			Icon icon = getFileChooser().getIcon(file);
+			Icon icon;
+			if (file.isDirectory()) {
+				icon = getFileChooser().getIcon(file);
+			} else {
+				try {
+					icon = FileSystemView.getFileSystemView().getSystemIcon(file);
+					if (getFileChooser().getIcon(file) == icon) {
+						ImageIcon icon2 = new ImageIcon(this.getClass().getResource(
+								"images/PFileChooser/fileTypeIcons/" + file.getName().substring(file.getName().lastIndexOf(".") + 1) + ".gif"));
+						Image img = icon2.getImage();
+						Image newimg = img.getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH);
+						icon = new ImageIcon(newimg);
+					}
+				} catch (Exception ex) {
+					icon = getFileChooser().getIcon(file);
+				}
+			}
 			setIcon(icon);
 
 			if (isSelected) {
@@ -1814,9 +1828,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 		}
 
 		/**
-		 * Adds the directory to the model and sets it to be selected,
-		 * additionally clears out the previous selected directory and the paths
-		 * leading up to it, if any.
+		 * Adds the directory to the model and sets it to be selected, additionally clears out the previous selected directory and the paths leading up to it, if any.
 		 */
 		private void addItem(File directory) {
 
@@ -2006,10 +2018,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * <code>ButtonAreaLayout</code> behaves in a similar manner to
-	 * <code>FlowLayout</code>. It lays out all components from left to right,
-	 * flushed right. The widths of all components will be set to the largest
-	 * preferred size width.
+	 * <code>ButtonAreaLayout</code> behaves in a similar manner to <code>FlowLayout</code>. It lays out all components from left to right, flushed right. The widths of all
+	 * components will be set to the largest preferred size width.
 	 */
 	private static class ButtonAreaLayout implements LayoutManager {
 		private int hGap = 5;

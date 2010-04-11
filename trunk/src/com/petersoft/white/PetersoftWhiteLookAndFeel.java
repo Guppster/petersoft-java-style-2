@@ -148,7 +148,7 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("FileChooser.homeFolderIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/home.png")));
 		table.put("FileChooser.listViewIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/horizontal.png")));
 		table.put("FileChooser.newFolderIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/newDir.png")));
-		table.put("FileChooser.upFolderIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/up.png")));
+		table.put("FileChooser.upFolderIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/directoryUp.png")));
 
 		table.put("List.background", Color.white);
 		table.put("List.border", new LineBorder(Color.gray));

@@ -999,9 +999,8 @@ public class JMainFrame extends JFrame {
 			{
 				pOpenPFileChooserDialogButton = new JButton();
 				pPFileChooserDialogPanel.add(pOpenPFileChooserDialogButton);
-				pOpenPFileChooserDialogButton.setBounds(99, 35, 150, 2);
+				pOpenPFileChooserDialogButton.setBounds(99, 35, 198, 31);
 				pOpenPFileChooserDialogButton.setText("PFileChooserDialog");
-				pOpenPFileChooserDialogButton.setPreferredSize(new java.awt.Dimension(126, 24));
 				pOpenPFileChooserDialogButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						pOpenPFileChooserDialogButtonActionPerformed(evt);
