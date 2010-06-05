@@ -17,6 +17,8 @@ import javax.swing.plaf.basic.BasicButtonListener;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
+import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
+
 public class ButtonUI extends BasicButtonUI {
 	private final static ButtonUI buttonUI = new ButtonUI();
 	// Icon disableIcon;
@@ -91,7 +93,7 @@ public class ButtonUI extends BasicButtonUI {
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		if (c.getParent() instanceof BasicInternalFrameTitlePane) {
-		} else if (c.getParent() instanceof JToolBar) {
+		} else if (c.getParent() instanceof JToolBar || c.getParent() instanceof JDropDownButton) {
 			if (button.getModel().isRollover()) {
 				g.setColor(buttonRollOverColor);
 				g.drawRect(1, 1, button.getWidth() - 3, button.getHeight() - 3);

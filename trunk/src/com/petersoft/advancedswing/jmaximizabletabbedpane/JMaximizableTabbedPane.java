@@ -25,7 +25,6 @@ import java.util.Iterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -36,9 +35,6 @@ import javax.swing.JToolBar;
 import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-
-import com.petersoft.advancedswing.jclosabletabbedpane.CloseTabIcon;
-import com.petersoft.white.CheckBoxUI;
 
 public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener {
 	double scaleRatio = 0.7;
