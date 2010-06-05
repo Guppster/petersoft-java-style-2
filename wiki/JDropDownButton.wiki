@@ -21,6 +21,8 @@ Get the instance of the JPopupMenu
 jDropDownButton1.getjPopupMenu()
 }}}
 
+source : [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/advancedswing/jdropdownbutton/JDropDownButton.java]
+
 <table border="0"><tr><td>
 [http://www.kingofcoders.com http://www.kingofcoders.com/images/KOC_logo2.jpg]
 </td>
