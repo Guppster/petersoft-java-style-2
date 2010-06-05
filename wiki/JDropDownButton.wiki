@@ -1,13 +1,12 @@
 #summary JDropDownButton
 
-= Introduction =
+= JDropDownButton =
 
-Add your content here.
+[http://petersoft-java-style-2.googlecode.com/files/jDropDownButton.png]
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+JDropDownButton jDropDownButton1 = new JDropDownButton();
+jDropDownButton1.setText("jDropDownButton 1");
+jDropDownButton1.add(new JMenuItem("jMenuItem1"));
+jDropDownButton1.add(new JMenuItem("jMenuItem2"));
+}}}
