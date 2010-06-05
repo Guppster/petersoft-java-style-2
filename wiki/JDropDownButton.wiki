@@ -10,3 +10,14 @@ jDropDownButton1.setText("jDropDownButton 1");
 jDropDownButton1.add(new JMenuItem("jMenuItem1"));
 jDropDownButton1.add(new JMenuItem("jMenuItem2"));
 }}}
+
+<table border="0"><tr><td>
+[http://www.kingofcoders.com http://www.kingofcoders.com/images/KOC_logo2.jpg]
+</td>
+<td>
+</td>
+<td>
+[http://www.rmit.edu.au/compsci http://peter-bochs.googlecode.com/files/rmit.gif]
+</td>
+</tr>
+</table>
