@@ -62,6 +62,7 @@ import javax.swing.table.TableModel;
 
 import com.petersoft.advancedswing.diskpanel.DiskPanel;
 import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
+import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
 
@@ -126,6 +127,10 @@ public class JMainFrame extends JFrame {
 	private JButton jButton1;
 	private JPanel jPanel20;
 	private JPanel jPanel22;
+	private JToolBar jToolBar3;
+	private JDropDownButton jDropDownButton2;
+	private JDropDownButton jDropDownButton1;
+	private JPanel jPanel21;
 	private JLabel jLabel9;
 	private JLabel jLabel8;
 	private JLabel jLabel7;
@@ -291,7 +296,7 @@ public class JMainFrame extends JFrame {
 		JScrollBar3.addAdjustmentListener(new JMainFrame_JScrollBar3_adjustmentAdapter(this));
 		JScrollBar2.setVisibleAmount(1);
 		JScrollBar3.setVisibleAmount(1);
-		this.setTitle("PetersoftJavaStyle Demo");
+		this.setTitle("PetersoftJavaStyle Demo " + Globals.version);
 		{
 			jMenuBar1 = new JMenuBar();
 			setJMenuBar(jMenuBar1);
@@ -455,6 +460,45 @@ public class JMainFrame extends JFrame {
 		JCheckBox5.setBounds(99, 132, -1, -1);
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
+		{
+			jPanel21 = new JPanel();
+			jTabbedPane1.addTab("JDropDownButton", null, jPanel21, null);
+			jPanel21.setLayout(null);
+			{
+				jDropDownButton1 = new JDropDownButton();
+				jDropDownButton1.setText("jDropDownButton 1");
+				JMenuItem m = new JMenuItem("jMenuItem1");
+				jDropDownButton1.add(m);
+				jDropDownButton1.add(new JMenuItem("jMenuItem2"));
+				jDropDownButton1.remove(m);
+				jPanel21.add(jDropDownButton1);
+				jDropDownButton1.setBounds(288, 78, 182, 37);
+				jDropDownButton1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jDropDownButton1ActionPerformed(evt);
+					}
+				});
+			}
+			{
+				jToolBar3 = new JToolBar();
+				jPanel21.add(jToolBar3);
+				jToolBar3.setBounds(288, 29, 182, 39);
+				{
+					jDropDownButton2 = new JDropDownButton();
+					jToolBar3.add(jDropDownButton2);
+					jDropDownButton2.setText("jDropDownButton 2");
+					jDropDownButton2.setBounds(213, 27, 179, 29);
+					jDropDownButton2.setPreferredSize(new java.awt.Dimension(178, 35));
+					jDropDownButton2.add(new JMenuItem("jMenuItem1"));
+					jDropDownButton2.add(new JMenuItem("jMenuItem2"));
+					jDropDownButton2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jDropDownButton2ActionPerformed(evt);
+						}
+					});
+				}
+			}
+		}
 		{
 			jPanel20 = new JPanel();
 			jTabbedPane1.addTab("JMaximizableTabbedPane", null, jPanel20, null);
@@ -1201,6 +1245,14 @@ public class JMainFrame extends JFrame {
 	private void jButton15ActionPerformed(ActionEvent evt) {
 		Object[] possibilities = { "ham", "spam", "yam" };
 		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
+	}
+
+	private void jDropDownButton2ActionPerformed(ActionEvent evt) {
+		JOptionPane.showMessageDialog(this, "jDropDownButton2.actionPerformed, event=" + evt.toString().replace(',', '\n'));
+	}
+
+	private void jDropDownButton1ActionPerformed(ActionEvent evt) {
+		JOptionPane.showMessageDialog(this, "jDropDownButton1.actionPerformed, event=" + evt.toString().replace(',', '\n'));
 	}
 
 }

@@ -10,7 +10,6 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuBarUI;
-import javax.swing.plaf.metal.MetalMenuBarUI;
 
 public class MenuBarUI extends BasicMenuBarUI {
 	Image menubarBG = new ImageIcon(ScrollBarUI.class.getResource("images/PMenu/menubarBG.png")).getImage();

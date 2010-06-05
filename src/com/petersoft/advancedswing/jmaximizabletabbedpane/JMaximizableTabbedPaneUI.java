@@ -6,11 +6,8 @@ import java.awt.Rectangle;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 
-import com.petersoft.white.ButtonUI;
-import com.petersoft.white.CheckBoxUI;
 import com.petersoft.white.TabbedPaneUI;
 
 public class JMaximizableTabbedPaneUI extends TabbedPaneUI {

@@ -15,17 +15,12 @@ import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
-import javax.swing.plaf.synth.SynthContext;
 import javax.swing.text.JTextComponent;
-
-import sun.swing.plaf.synth.SynthUI;
 
 public class TextFieldUI extends BasicTextFieldUI implements FocusListener {
 	// static JTextComponent _editor;

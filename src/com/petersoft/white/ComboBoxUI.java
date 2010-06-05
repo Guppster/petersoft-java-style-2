@@ -1,6 +1,5 @@
 package com.petersoft.white;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -10,12 +9,10 @@ import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
-import javax.swing.plaf.metal.MetalComboBoxEditor;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 public class ComboBoxUI extends BasicComboBoxUI {
