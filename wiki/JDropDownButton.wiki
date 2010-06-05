@@ -11,6 +11,11 @@ jDropDownButton1.add(new JMenuItem("jMenuItem1"));
 jDropDownButton1.add(new JMenuItem("jMenuItem2"));
 }}}
 
+To remove a JMenuItem
+{{{
+jDropDownButton1.remove(jMenuItem1);
+}}}
+
 <table border="0"><tr><td>
 [http://www.kingofcoders.com http://www.kingofcoders.com/images/KOC_logo2.jpg]
 </td>
