@@ -1,3 +1,14 @@
 #summary A better JFileChooser
 
 You can filter the file list by input some text in the textbox on the upper right corner.
+
+To user this dialog, just change your look and feel to :
+{{{
+try {
+    UIManager.setLookAndFeel("com.petersoft.white.PetersoftWhiteLookAndFeel");
+} catch (Exception e) {
+    e.printStackTrace();
+}
+}}}
+
+[http://petersoft-java-style-2.googlecode.com/files/jfilechooser.png]
