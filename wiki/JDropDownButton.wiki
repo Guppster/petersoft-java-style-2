@@ -7,8 +7,10 @@
 {{{
 JDropDownButton jDropDownButton1 = new JDropDownButton();
 jDropDownButton1.setText("jDropDownButton 1");
-jDropDownButton1.add(new JMenuItem("jMenuItem1"));
-jDropDownButton1.add(new JMenuItem("jMenuItem2"));
+JMenuItem jMenuItem1=new JMenuItem("hello");
+JMenuItem jMenuItem2=new JMenuItem("hi");
+jDropDownButton1.add(jMenuItem1);
+jDropDownButton1.add(jMenuItem2);
 }}}
 
 To remove a JMenuItem
@@ -23,12 +25,14 @@ jDropDownButton1.getjPopupMenu()
 
 Event - to detect you have clicked the button or the jmenuitem
 {{{
-if (evt.getSource() instanceof JMenuItem) {
-	if (evt.getActionCommand().equals("jMenuItem1")) {
-
-	} else if (evt.getActionCommand().equals("jMenuItem2")) {
-
+if (jDropDownButton1.getEventSource() != null) {
+	if (jDropDownButton1.getEventSource() == jMenuItem1) {
+		System.out.println("jMenuItem1");
+	} else if (jDropDownButton1.getEventSource() == jMenuItem2) {
+		System.out.println("jMenuItem2");
 	}
+} else {
+	System.out.println("button clicked");
 }
 }}}
 source : [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/advancedswing/jdropdownbutton/JDropDownButton.java]
