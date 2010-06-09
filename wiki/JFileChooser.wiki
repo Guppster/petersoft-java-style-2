@@ -1,0 +1,3 @@
+#summary A better JFileChooser
+
+You can filter the file list by input some text in the textbox on the upper right corner.
