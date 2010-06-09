@@ -21,6 +21,16 @@ Get the instance of the JPopupMenu
 jDropDownButton1.getjPopupMenu()
 }}}
 
+Event - to detect you have clicked the button or the jmenuitem
+{{{
+if (evt.getSource() instanceof JMenuItem) {
+	if (evt.getActionCommand().equals("jMenuItem1")) {
+
+	} else if (evt.getActionCommand().equals("jMenuItem2")) {
+
+	}
+}
+}}}
 source : [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/advancedswing/jdropdownbutton/JDropDownButton.java]
 
 <table border="0"><tr><td>
