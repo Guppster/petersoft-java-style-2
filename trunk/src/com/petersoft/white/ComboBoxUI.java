@@ -128,36 +128,37 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	// return new Dimension(cachedMinimumSize);
 	// }
 
-	public Dimension getMinimumSize(JComponent c) {
-		if (!isMinimumSizeDirty) {
-			return new Dimension(cachedMinimumSize);
-		}
-
-		Dimension size = null;
-
-		if (!comboBox.isEditable() && arrowButton != null) {
-			Insets buttonInsets = arrowButton.getInsets();
-			Insets insets = comboBox.getInsets();
-
-			size = getDisplaySize();
-			size.width += insets.left + insets.right;
-			size.width += buttonInsets.right;
-			size.width += arrowButton.getMinimumSize().width;
-			size.height += insets.top + insets.bottom;
-			size.height += buttonInsets.top + buttonInsets.bottom;
-		} else if (comboBox.isEditable() && arrowButton != null && editor != null) {
-			size = super.getMinimumSize(c);
-			Insets margin = arrowButton.getMargin();
-			size.height += margin.top + margin.bottom;
-			size.width += margin.left + margin.right;
-		} else {
-			size = super.getMinimumSize(c);
-		}
-
-		cachedMinimumSize.setSize(size.width, size.height);
-		isMinimumSizeDirty = false;
-
-		return new Dimension(cachedMinimumSize);
-	}
+	// public Dimension getMinimumSize(JComponent c) {
+	// if (!isMinimumSizeDirty) {
+	// return new Dimension(cachedMinimumSize);
+	// }
+	//
+	// Dimension size = null;
+	//
+	// if (!comboBox.isEditable() && arrowButton != null) {
+	// Insets buttonInsets = arrowButton.getInsets();
+	// Insets insets = comboBox.getInsets();
+	//
+	// size = getDisplaySize();
+	// size.width += insets.left + insets.right;
+	// size.width += buttonInsets.right;
+	// size.width += arrowButton.getMinimumSize().width;
+	// size.height += insets.top + insets.bottom;
+	// size.height += buttonInsets.top + buttonInsets.bottom;
+	// } else if (comboBox.isEditable() && arrowButton != null && editor !=
+	// null) {
+	// size = super.getMinimumSize(c);
+	// Insets margin = arrowButton.getMargin();
+	// size.height += margin.top + margin.bottom;
+	// size.width += margin.left + margin.right;
+	// } else {
+	// size = super.getMinimumSize(c);
+	// }
+	//
+	// cachedMinimumSize.setSize(size.width, size.height);
+	// isMinimumSizeDirty = false;
+	//
+	// return new Dimension(cachedMinimumSize);
+	// }
 
 }

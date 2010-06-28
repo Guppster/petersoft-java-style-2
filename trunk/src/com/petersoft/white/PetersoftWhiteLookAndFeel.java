@@ -81,6 +81,8 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 			isInstalled = true;
 
 			// UIManager.put("ScrollBar.alternateLayout",Boolean.TRUE);
+			UIManager.put("FileChooser.lookInLabelText","fuck");
+
 			UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo("PetersoftWhiteLookAndFeel", "com.petersoft.white.PetersoftWhiteLookAndFeel"));
 		}
 	}
@@ -129,6 +131,8 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
+		
+		table.put("TextArea.background", Color.white);
 
 		table.put("TextField.focusInputMap", fieldInputMap);
 		table.put("PasswordField.focusInputMap", fieldInputMap);

@@ -3,6 +3,7 @@ package com.petersoft.advancedswing.jmaximizabletabbedpane;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -35,8 +37,9 @@ import javax.swing.JToolBar;
 import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.plaf.TabbedPaneUI;
 
-public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener {
+public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener, MouseMotionListener {
 	double scaleRatio = 0.7;
 
 	private HashMap<String, Component> maps = new HashMap<String, Component>();
@@ -52,14 +55,33 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 	HashSet<Integer> closableTabIndex = new HashSet<Integer>();
 
 	public JMaximizableTabbedPane() {
-		this(false);
+		super();
+		init(false);
 	}
 
 	public JMaximizableTabbedPane(boolean isMaximized) {
 		super();
-		this.setUI(new JMaximizableTabbedPaneUI());
+		init(isMaximized);
+	}
+
+	public JMaximizableTabbedPane(int tabPlacement) {
+		super(tabPlacement);
+		init(false);
+	}
+
+	public JMaximizableTabbedPane(int tabPlacement, int tabLayoutPolicy) {
+		super(tabPlacement, tabLayoutPolicy);
+		init(false);
+	}
+
+	private void init(boolean isMaximized) {
 		this.isMaximized = isMaximized;
 		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+
+	public void setUI(TabbedPaneUI ui) {
+		super.setUI(new JMaximizableTabbedPaneUI());
 	}
 
 	public HashSet<Integer> getClosableTabIndex() {
@@ -198,6 +220,8 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 				if (obj instanceof JMaximizableTabbedPane_BasePanel) {
 					JMaximizableTabbedPane_BasePanel basePanel = (JMaximizableTabbedPane_BasePanel) obj;
 					JMaximizableTabbedPane tabbedPane = (JMaximizableTabbedPane) e.getSource();
+					// tabbedPane.setUI(new JMaximizableTabbedPaneUI());
+					System.out.println(tabbedPane.getUI());
 					int selectedIndex = tabbedPane.getSelectedIndex();
 					if (!tabbedPane.isMaximized) {
 						JMaximizableTabbedPane newTabbedPane = new JMaximizableTabbedPane(true);
@@ -243,8 +267,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 
 						// get all the tabs
 						/*
-						 * at this monent, all the tabs in current tabbedpane is moved to the newtab, so getAllTabs will not able to get
-						 * them
+						 * at this monent, all the tabs in current tabbedpane is moved to the newtab, so getAllTabs will not able to get them
 						 */
 						HashSet<Component> allComponents = new HashSet<Component>();
 						getAllTabs(this, allComponents);
@@ -324,6 +347,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						cardLayout.show(basePanel, "newtab");
 						return;
 					} else {
+
 						Component components[] = new Component[tabbedPane.getTabCount()];
 						String componentsName[] = new String[tabbedPane.getTabCount()];
 						Icon componentsIcon[] = new Icon[tabbedPane.getTabCount()];
@@ -336,7 +360,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						for (int x = 0; x < components.length; x++) {
 							tabbedPane.getOriginalClosableTabbedPane().addTab(componentsName[x], componentsIcon[x], components[x]);
 						}
-
+						System.out.println("aa=" + closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setClosableTabIndex(closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setSelectedIndex(selectedIndex);
 						CardLayout cardLayout = (CardLayout) basePanel.getLayout();
@@ -416,11 +440,10 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 		};
 
 		/*
-		 * This is a small hack to avoid Windows GUI bug, that prevent a new window from stealing focus (without this windowFocusListener,
-		 * most of the time the new frame would just blink from foreground to background). A windowFocusListener is added to the frame, and
-		 * if the time between the frame beeing in foreground and the frame beeing in background is less that 100ms, it just brings the
-		 * windows to the front once again. Then it removes the windowFocusListener. Note that this hack would not be required on Linux or
-		 * UNIX based systems.
+		 * This is a small hack to avoid Windows GUI bug, that prevent a new window from stealing focus (without this windowFocusListener, most of the time the new frame would just
+		 * blink from foreground to background). A windowFocusListener is added to the frame, and if the time between the frame beeing in foreground and the frame beeing in
+		 * background is less that 100ms, it just brings the windows to the front once again. Then it removes the windowFocusListener. Note that this hack would not be required on
+		 * Linux or UNIX based systems.
 		 */
 
 		frame.addWindowFocusListener(windowFocusListener);
@@ -477,5 +500,25 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 	}
 
 	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		int tabNumber = getUI().tabForCoordinate(this, e.getX(), e.getY());
+		if (this.closableTabIndex.contains(tabNumber) && tabNumber >= 0) {
+			Rectangle tabRect = getUI().getTabBounds(this, tabNumber);
+
+			if (e.getX() > tabRect.x + tabRect.width - 20) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			} else {
+				setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+			}
+		}
 	}
 }

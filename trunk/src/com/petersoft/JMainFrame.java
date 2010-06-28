@@ -20,12 +20,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxEditor;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -53,6 +55,7 @@ import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
@@ -65,16 +68,13 @@ import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
+import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
- * Builder, which is free for non-commercial use. If Jigloo is being used
- * commercially (ie, by a corporation, company or business for any purpose
- * whatever) then you should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details. Use of Jigloo implies
- * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
- * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
- * ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
+ * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
+ * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
+ * CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class JMainFrame extends JFrame {
 	JTabbedPane jTabbedPane1 = new JTabbedPane();
@@ -127,6 +127,8 @@ public class JMainFrame extends JFrame {
 	private JButton jButton1;
 	private JPanel jPanel20;
 	private JPanel jPanel22;
+	private JSearchTextField jSearchTextField1;
+	private JPanel jPanel23;
 	private JToolBar jToolBar3;
 	private JDropDownButton jDropDownButton2;
 	private JDropDownButton jDropDownButton1;
@@ -414,7 +416,6 @@ public class JMainFrame extends JFrame {
 		pIntroductionTextArea.setText("Petersoft Java Style 2");
 		pIntroductionPanel.setLayout(borderLayout3);
 		jTabbedPane1.addTab("JToggleButton", null, pTogglePanel, null);
-		pFileChooserPanel.setLayout(null);
 		{
 			jToggleButton2 = new JToggleButton();
 			pTogglePanel.add(jToggleButton2);
@@ -449,17 +450,31 @@ public class JMainFrame extends JFrame {
 		JRadioButtonPanel.add(JRadioButton5);
 		jToggleButton4.setBounds(161, 135, 229, 33);
 		buttonGroup2.add(JRadioButton4);
+		JRadioButton4.setBounds(192, 180, 165, 18);
 		buttonGroup2.add(JRadioButton3);
+		JRadioButton3.setBounds(192, 135, 165, 18);
 		buttonGroup2.add(JRadioButton5);
+		JRadioButton5.setBounds(192, 91, 165, 18);
 		jTabbedPane1.add(JCheckBoxPanel, "JCheckBox");
 		JCheckBoxPanel.add(JCheckBox3);
-		JCheckBox3.setBounds(99, 35, 150, 29);
+		JCheckBox3.setBounds(136, 60, 150, 29);
 		JCheckBoxPanel.add(JCheckBox4);
-		JCheckBox4.setBounds(99, 84, -1, -1);
+		JCheckBox4.setBounds(136, 108, 150, 29);
 		JCheckBoxPanel.add(JCheckBox5);
-		JCheckBox5.setBounds(99, 132, -1, -1);
+		JCheckBox5.setBounds(136, 157, 150, 29);
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
+		{
+			jPanel23 = new JPanel();
+			jTabbedPane1.addTab("JSearchTextField", null, jPanel23, null);
+			jPanel23.setLayout(null);
+			{
+				jSearchTextField1 = new JSearchTextField();
+				jPanel23.add(jSearchTextField1);
+				jSearchTextField1.setText("jSearchTextField1");
+				jSearchTextField1.setBounds(90, 67, 165, 24);
+			}
+		}
 		{
 			jPanel21 = new JPanel();
 			jTabbedPane1.addTab("JDropDownButton", null, jPanel21, null);
@@ -472,7 +487,7 @@ public class JMainFrame extends JFrame {
 				jDropDownButton1.add(new JMenuItem("jMenuItem2"));
 				jDropDownButton1.remove(m);
 				jPanel21.add(jDropDownButton1);
-				jDropDownButton1.setBounds(288, 78, 182, 37);
+				jDropDownButton1.setBounds(103, 74, 181, 35);
 				jDropDownButton1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						jDropDownButton1ActionPerformed(evt);
@@ -482,15 +497,14 @@ public class JMainFrame extends JFrame {
 			{
 				jToolBar3 = new JToolBar();
 				jPanel21.add(jToolBar3);
-				jToolBar3.setBounds(288, 29, 182, 39);
+				jToolBar3.setBounds(103, 29, 367, 39);
 				{
 					jDropDownButton2 = new JDropDownButton();
 					jToolBar3.add(jDropDownButton2);
 					jDropDownButton2.setText("jDropDownButton 2");
-					jDropDownButton2.setBounds(213, 27, 179, 29);
-					jDropDownButton2.setPreferredSize(new java.awt.Dimension(178, 35));
-					jDropDownButton2.add(new JMenuItem("jMenuItem1"));
-					jDropDownButton2.add(new JMenuItem("jMenuItem2"));
+					jDropDownButton2.setPreferredSize(new java.awt.Dimension(349, 35));
+					jDropDownButton2.add(jMenuItem1);
+					jDropDownButton2.add(jMenuItem2);
 					jDropDownButton2.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							jDropDownButton2ActionPerformed(evt);
@@ -969,9 +983,9 @@ public class JMainFrame extends JFrame {
 				jPanel2.add(jScrollPane1);
 				jScrollPane1.setBounds(130, 176, 292, 151);
 				{
-					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" } }, new String[] {
-							"Column 1", "Column 2" });
+					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
 					jTable1 = new JTable();
 					jScrollPane1.setViewportView(jTable1);
 					jTable1.setModel(jTable1Model);
@@ -1060,6 +1074,8 @@ public class JMainFrame extends JFrame {
 		BorderLayout JToolBarPanelLayout = new BorderLayout();
 		JToolBarPanel.setLayout(JToolBarPanelLayout);
 		JToolBarPanel.setPreferredSize(new java.awt.Dimension(658, 495));
+		GroupLayout pFileChooserPanelLayout = new GroupLayout((JComponent) pFileChooserPanel);
+		pFileChooserPanel.setLayout(pFileChooserPanelLayout);
 		jTabbedPane1.addTab("JFileChooser", null, pFileChooserPanel, null);
 		{
 			JRadioButton1 = new JRadioButton();
@@ -1164,9 +1180,11 @@ public class JMainFrame extends JFrame {
 		// 333));
 		{
 			jFileChooser1 = new JFileChooser();
-			pFileChooserPanel.add(jFileChooser1);
-			jFileChooser1.setPreferredSize(new java.awt.Dimension(500, 326));
 		}
+		pFileChooserPanelLayout.setVerticalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 322, Short.MAX_VALUE)
+				.addContainerGap());
+		pFileChooserPanelLayout.setHorizontalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 655, Short.MAX_VALUE)
+				.addContainerGap());
 		pVersionLabel.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
 		pVersionLabel.setText("version : " + Globals.version);
 		pack();
@@ -1238,17 +1256,27 @@ public class JMainFrame extends JFrame {
 
 	private void jButton14ActionPerformed(ActionEvent evt) {
 		Object[] options = { "Yes, please", "No, thanks", "No eggs, no ham!" };
-		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				null, options, options[2]);
+		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 	}
 
 	private void jButton15ActionPerformed(ActionEvent evt) {
 		Object[] possibilities = { "ham", "spam", "yam" };
-		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
+		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null,
+				possibilities, "ham");
 	}
 
 	private void jDropDownButton2ActionPerformed(ActionEvent evt) {
-		JOptionPane.showMessageDialog(this, "jDropDownButton2.actionPerformed, event=" + evt.toString().replace(',', '\n'));
+		// JOptionPane.showMessageDialog(this, "jDropDownButton2.actionPerformed, event=" + evt.toString().replace(',', '\n'));
+		if (jDropDownButton2.getEventSource() != null) {
+			if (jDropDownButton2.getEventSource() == jMenuItem1) {
+				System.out.println("jMenuItem1");
+			} else if (jDropDownButton2.getEventSource() == jMenuItem2) {
+				System.out.println("jMenuItem2");
+			}
+		} else {
+			System.out.println("button clicked");
+		}
 	}
 
 	private void jDropDownButton1ActionPerformed(ActionEvent evt) {
