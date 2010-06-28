@@ -1,34 +1,34 @@
 package com.petersoft.advancedswing.jdropdownbutton;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
- * Builder, which is free for non-commercial use. If Jigloo is being used
- * commercially (ie, by a corporation, company or business for any purpose
- * whatever) then you should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details. Use of Jigloo implies
- * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
- * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
- * ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
+ * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
+ * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
+ * CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class JDropDownButton extends JButton {
+public class JDropDownButton extends JButton implements ActionListener {
 	private JButton jDropDownButton;
 	private JPopupMenu jPopupMenu = new JPopupMenu();
+	private Object eventSource;
 
-	public JPopupMenu getjPopupMenu() {
-		return jPopupMenu;
+	public Object getEventSource() {
+		return eventSource;
 	}
 
-	public void setjPopupMenu(JPopupMenu jPopupMenu) {
-		this.jPopupMenu = jPopupMenu;
+	public void setEventSource(Object eventSource) {
+		this.eventSource = eventSource;
 	}
 
 	public JDropDownButton() {
@@ -41,13 +41,51 @@ public class JDropDownButton extends JButton {
 		initGUI();
 	}
 
-	public void add(JMenuItem jMenuItem) {
+	public JDropDownButton(Action a) {
+		super(a);
+		initGUI();
+	}
+
+	public JDropDownButton(Icon icon) {
+		super(icon);
+		initGUI();
+	}
+
+	public JDropDownButton(String text, Icon icon) {
+		super(text, icon);
+		initGUI();
+	}
+
+	public JPopupMenu getjPopupMenu() {
+		return jPopupMenu;
+	}
+
+	public void setjPopupMenu(JPopupMenu jPopupMenu) {
+		this.jPopupMenu = jPopupMenu;
+	}
+
+	public void add(final JMenuItem jMenuItem) {
 		jPopupMenu.add(jMenuItem);
 		jMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+				eventSource = jMenuItem;
 				jButtonActionPerformed(evt);
 			}
 		});
+	}
+
+	public void insert(final JMenuItem jMenuItem, int index) {
+		jPopupMenu.insert(jMenuItem, index);
+		jMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				eventSource = jMenuItem;
+				jButtonActionPerformed(evt);
+			}
+		});
+	}
+
+	public void removeAll() {
+		jPopupMenu.removeAll();
 	}
 
 	public void remove(JMenuItem jMenuItem) {
@@ -69,6 +107,7 @@ public class JDropDownButton extends JButton {
 					}
 				});
 			}
+			this.addActionListener(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,4 +121,8 @@ public class JDropDownButton extends JButton {
 		this.fireActionPerformed(evt);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		eventSource = null;
+	}
 }

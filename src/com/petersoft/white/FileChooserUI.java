@@ -20,6 +20,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -74,7 +75,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.plaf.ActionMapUIResource;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicFileChooserUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -82,9 +82,11 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
 
-public class FileChooserUI extends BasicFileChooserUI {
+import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
+
+public class FileChooserUI extends MyBasicFileChooserUI {
 	private static final Dimension hstrut5 = new Dimension(5, 1);
-	private static final Dimension hstrut11 = new Dimension(11, 1);
+	// private static final Dimension hstrut11 = new Dimension(11, 1);
 	private static final Dimension vstrut5 = new Dimension(1, 5);
 	private static final Insets shrinkwrap = new Insets(2, 2, 2, 2);
 
@@ -111,7 +113,6 @@ public class FileChooserUI extends BasicFileChooserUI {
 	// icons, etc. We are planning a complete rewrite, and hence we've
 	// made most things in this class private.
 	private JPanel centerPanel;
-	private JLabel lookInLabel;
 	private JComboBox directoryComboBox;
 	private DirectoryComboBoxModel directoryComboBoxModel;
 	private Action directoryComboBoxAction = new DirectoryComboBoxAction();
@@ -142,8 +143,6 @@ public class FileChooserUI extends BasicFileChooserUI {
 	private int[] COLUMN_WIDTHS = { 150, 75, 130, 130, 40 };
 
 	// Labels, mnemonics, and tooltips (oh my!)
-	private int lookInLabelMnemonic = 0;
-	private String lookInLabelText = null;
 	private String saveInLabelText = null;
 	private int fileNameLabelMnemonic = 0;
 	private String fileNameLabelText = null;
@@ -168,6 +167,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	File editFile = null;
 	int editX = 20;
 	JTextField editCell = null;
+	// FilterBasicDirectoryModel model;
+	JSearchTextField searchTextField = new JSearchTextField();
 
 	public FileChooserUI(JFileChooser filechooser) {
 		super(filechooser);
@@ -208,17 +209,11 @@ public class FileChooserUI extends BasicFileChooserUI {
 		// Add the top panel to the fileChooser
 		fc.add(topPanel, BorderLayout.NORTH);
 
-		// ComboBox Label
-		lookInLabel = new JLabel(lookInLabelText);
-		lookInLabel.setDisplayedMnemonic(lookInLabelMnemonic);
-		topPanel.add(lookInLabel, BorderLayout.BEFORE_LINE_BEGINS);
-
 		// CurrentDir ComboBox
 		directoryComboBox = new JComboBox();
 		// directoryComboBox.putClientProperty("JComboBox.lightweightKeyboardNavigation",
 		// "Lightweight");
 		directoryComboBox.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
-		lookInLabel.setLabelFor(directoryComboBox);
 		directoryComboBoxModel = createDirectoryComboBoxModel(fc);
 		directoryComboBox.setModel(directoryComboBoxModel);
 		directoryComboBox.addActionListener(directoryComboBoxAction);
@@ -252,30 +247,29 @@ public class FileChooserUI extends BasicFileChooserUI {
 			// "Desktop".
 		}
 
-		JButton b = new JButton(homeFolderIcon);
-		b.putClientProperty("JToolBar.isToolbarButton", Boolean.TRUE);
-		b.setToolTipText(toolTipText);
-		b.getAccessibleContext().setAccessibleName(homeFolderAccessibleName);
+		JButton newFolderButton = new JButton(homeFolderIcon);
+		newFolderButton.putClientProperty("JToolBar.isToolbarButton", Boolean.TRUE);
+		newFolderButton.setToolTipText(toolTipText);
+		newFolderButton.getAccessibleContext().setAccessibleName(homeFolderAccessibleName);
 		// b.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 		// b.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 		// b.setMargin(new Insets(5, 5, 5, 5));
 
-		b.addActionListener(getGoHomeAction());
-		topButtonPanel.add(b);
+		newFolderButton.addActionListener(getGoHomeAction());
+		topButtonPanel.add(newFolderButton);
 		topButtonPanel.add(Box.createRigidArea(hstrut5));
 
 		// New Directory Button
-		b = new JButton(getNewFolderAction());
-		b.putClientProperty("JToolBar.isToolbarButton", Boolean.TRUE);
-		b.setText(null);
-		b.setIcon(newFolderIcon);
-		b.setToolTipText(newFolderToolTipText);
-		b.getAccessibleContext().setAccessibleName(newFolderAccessibleName);
-		b.setAlignmentX(JComponent.LEFT_ALIGNMENT);
-		b.setAlignmentY(JComponent.CENTER_ALIGNMENT);
-		b.setMargin(new Insets(5, 5, 5, 5));
+		newFolderButton = new JButton(getNewFolderAction());
+		newFolderButton.putClientProperty("JToolBar.isToolbarButton", Boolean.TRUE);
+		newFolderButton.setText(null);
+		newFolderButton.setIcon(newFolderIcon);
+		newFolderButton.setToolTipText(newFolderToolTipText);
+		newFolderButton.getAccessibleContext().setAccessibleName(newFolderAccessibleName);
+		newFolderButton.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+		newFolderButton.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 
-		topButtonPanel.add(b);
+		topButtonPanel.add(newFolderButton);
 		topButtonPanel.add(Box.createRigidArea(hstrut5));
 
 		// View button group
@@ -337,8 +331,19 @@ public class FileChooserUI extends BasicFileChooserUI {
 		detailsViewButton.setAlignmentY(JComponent.CENTER_ALIGNMENT);
 		detailsViewButton.setMargin(shrinkwrap);
 		detailsViewButton.addActionListener(viewButtonListener);
+
 		topButtonPanel.add(detailsViewButton);
+		topButtonPanel.add(Box.createRigidArea(hstrut5));
 		viewButtonGroup.add(detailsViewButton);
+
+		// Search Textfield
+		searchTextField.setPreferredSize(new Dimension(100, 1));
+		searchTextField.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent evt) {
+				searchTextFieldKeyReleased(evt);
+			}
+		});
+		topButtonPanel.add(searchTextField);
 
 		updateUseShellFolder();
 
@@ -437,6 +442,10 @@ public class FileChooserUI extends BasicFileChooserUI {
 		groupLabels(new AlignedLabel[] { fileNameLabel, filesOfTypeLabel });
 	}
 
+	private void searchTextFieldKeyReleased(KeyEvent evt) {
+		getModel().setFilterText(searchTextField.getText());
+	}
+
 	private void updateUseShellFolder() {
 		// Decide whether to use the ShellFolder class to populate shortcut
 		// panel and combobox.
@@ -482,8 +491,6 @@ public class FileChooserUI extends BasicFileChooserUI {
 
 		Locale l = fc.getLocale();
 
-		lookInLabelMnemonic = UIManager.getInt("FileChooser.lookInLabelMnemonic");
-		lookInLabelText = UIManager.getString("FileChooser.lookInLabelText", l);
 		saveInLabelText = UIManager.getString("FileChooser.saveInLabelText", l);
 
 		fileNameLabelMnemonic = UIManager.getInt("FileChooser.fileNameLabelMnemonic");
@@ -516,9 +523,9 @@ public class FileChooserUI extends BasicFileChooserUI {
 
 	protected void installListeners(JFileChooser fc) {
 		super.installListeners(fc);
-
-		ActionMap actionMap = getActionMap();
-		SwingUtilities.replaceUIActionMap(fc, actionMap);
+		// fc.addPropertyChangeListener(model);
+		// ActionMap actionMap = getActionMap();
+		// SwingUtilities.replaceUIActionMap(fc, actionMap);
 	}
 
 	protected ActionMap getActionMap() {
@@ -553,8 +560,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 		final JFileChooser fileChooser = fc;
 		list = new JList() {
 			public int getNextMatch(String prefix, int startIndex, Position.Bias bias) {
-				ListModel model = getModel();
-				int max = model.getSize();
+				// ListModel model = model;
+				int max = getModel().getSize();
 
 				if ((prefix == null) || (startIndex < 0) || (startIndex >= max)) {
 					throw new IllegalArgumentException();
@@ -565,7 +572,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 				boolean backwards = (bias == Position.Bias.Backward);
 
 				for (int i = startIndex; backwards ? (i >= 0) : (i < max); i += (backwards ? (-1) : 1)) {
-					String filename = fileChooser.getName((File) model.getElementAt(i));
+					String filename = fileChooser.getName((File) getModel().getElementAt(i));
 
 					if (filename.regionMatches(true, 0, prefix, 0, prefix.length())) {
 						return i;
@@ -586,6 +593,18 @@ public class FileChooserUI extends BasicFileChooserUI {
 		}
 
 		list.setModel(getModel());
+		getModel().addListDataListener(new ListDataListener() {
+
+			public void contentsChanged(ListDataEvent e) {
+			}
+
+			public void intervalAdded(ListDataEvent e) {
+			}
+
+			public void intervalRemoved(ListDataEvent e) {
+			}
+
+		});
 		list.addListSelectionListener(createListSelectionListener(fc));
 		list.addMouseListener(createDoubleClickListener(fc, list));
 		list.addMouseListener(createSingleClickListener(fc, list));
@@ -978,12 +997,14 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * Returns the preferred size of the specified <code>JFileChooser</code>. The preferred size is at least as large, in both height and width, as the preferred size recommended
-	 * by the file chooser's layout manager.
+	 * Returns the preferred size of the specified <code>JFileChooser</code>.
+	 * The preferred size is at least as large, in both height and width, as the
+	 * preferred size recommended by the file chooser's layout manager.
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the preferred width and height of the file chooser
+	 * @return a <code>Dimension</code> specifying the preferred width and
+	 *         height of the file chooser
 	 */
 	public Dimension getPreferredSize(JComponent c) {
 		int prefWidth = PREF_SIZE.width;
@@ -1001,7 +1022,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the minimum width and height of the file chooser
+	 * @return a <code>Dimension</code> specifying the minimum width and height
+	 *         of the file chooser
 	 */
 	public Dimension getMinimumSize(JComponent c) {
 		return MIN_SIZE;
@@ -1012,7 +1034,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the maximum width and height of the file chooser
+	 * @return a <code>Dimension</code> specifying the maximum width and height
+	 *         of the file chooser
 	 */
 	public Dimension getMaximumSize(JComponent c) {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -1037,7 +1060,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 		// }
 		// }
 		// if (!found) {
-		// int index = getModel().indexOf(selectedObjects[j]);
+		// int index = model.indexOf(selectedObjects[j]);
 		// if (index >= 0) {
 		// listSelectionModel.removeSelectionInterval(index, index);
 		// }
@@ -1053,7 +1076,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 		// }
 		// }
 		// if (!found) {
-		// int index = getModel().indexOf(files[i]);
+		// int index = model.indexOf(files[i]);
 		// if (index >= 0) {
 		// listSelectionModel.addSelectionInterval(index, index);
 		// }
@@ -1076,11 +1099,11 @@ public class FileChooserUI extends BasicFileChooserUI {
 		// int comparison =
 		// files[shouldIndex].compareTo(selectedObjects[actuallyIndex]);
 		// if (comparison < 0) {
-		// int index = getModel().indexOf(files[shouldIndex]);
+		// int index = model.indexOf(files[shouldIndex]);
 		// listSelectionModel.addSelectionInterval(index, index);
 		// shouldIndex++;
 		// } else if (comparison > 0) {
-		// int index = getModel().indexOf(selectedObjects[actuallyIndex]);
+		// int index = model.indexOf(selectedObjects[actuallyIndex]);
 		// listSelectionModel.removeSelectionInterval(index, index);
 		// actuallyIndex++;
 		// } else {
@@ -1092,13 +1115,13 @@ public class FileChooserUI extends BasicFileChooserUI {
 		// }
 		//
 		// while (shouldIndex < files.length) {
-		// int index = getModel().indexOf(files[shouldIndex]);
+		// int index = model.indexOf(files[shouldIndex]);
 		// listSelectionModel.addSelectionInterval(index, index);
 		// shouldIndex++;
 		// }
 		//
 		// while (actuallyIndex < selectedObjects.length) {
-		// int index = getModel().indexOf(selectedObjects[actuallyIndex]);
+		// int index = model.indexOf(selectedObjects[actuallyIndex]);
 		// listSelectionModel.removeSelectionInterval(index, index);
 		// actuallyIndex++;
 		// }
@@ -1118,7 +1141,7 @@ public class FileChooserUI extends BasicFileChooserUI {
 		//
 		// int i;
 		//
-		// if ((f != null) && ((i = getModel().indexOf(f)) >= 0)) {
+		// if ((f != null) && ((i = model.indexOf(f)) >= 0)) {
 		// listSelectionModel.setSelectionInterval(i, i);
 		// ensureIndexIsVisible(i);
 		// } else {
@@ -1272,12 +1295,6 @@ public class FileChooserUI extends BasicFileChooserUI {
 		JFileChooser chooser = getFileChooser();
 		approveButton.setText(getApproveButtonText(chooser));
 		approveButton.setToolTipText(getApproveButtonToolTipText(chooser));
-
-		if (chooser.getDialogType() == JFileChooser.SAVE_DIALOG) {
-			lookInLabel.setText(saveInLabelText);
-		} else {
-			lookInLabel.setText(lookInLabelText);
-		}
 	}
 
 	private void doApproveButtonMnemonicChanged(PropertyChangeEvent e) {
@@ -1293,7 +1310,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/*
-	 * Listen for filechooser property changes, such as the selected file changing, or the type of the dialog changing.
+	 * Listen for filechooser property changes, such as the selected file
+	 * changing, or the type of the dialog changing.
 	 */
 	public PropertyChangeListener createPropertyChangeListener(JFileChooser fc) {
 		return new PropertyChangeListener() {
@@ -1391,7 +1409,8 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * Property to remember whether a directory is currently selected in the UI. This is normally called by the UI on a selection event.
+	 * Property to remember whether a directory is currently selected in the UI.
+	 * This is normally called by the UI on a selection event.
 	 * 
 	 * @param directorySelected
 	 *            if a directory is currently selected.
@@ -1828,7 +1847,9 @@ public class FileChooserUI extends BasicFileChooserUI {
 		}
 
 		/**
-		 * Adds the directory to the model and sets it to be selected, additionally clears out the previous selected directory and the paths leading up to it, if any.
+		 * Adds the directory to the model and sets it to be selected,
+		 * additionally clears out the previous selected directory and the paths
+		 * leading up to it, if any.
 		 */
 		private void addItem(File directory) {
 
@@ -2018,8 +2039,10 @@ public class FileChooserUI extends BasicFileChooserUI {
 	}
 
 	/**
-	 * <code>ButtonAreaLayout</code> behaves in a similar manner to <code>FlowLayout</code>. It lays out all components from left to right, flushed right. The widths of all
-	 * components will be set to the largest preferred size width.
+	 * <code>ButtonAreaLayout</code> behaves in a similar manner to
+	 * <code>FlowLayout</code>. It lays out all components from left to right,
+	 * flushed right. The widths of all components will be set to the largest
+	 * preferred size width.
 	 */
 	private static class ButtonAreaLayout implements LayoutManager {
 		private int hGap = 5;

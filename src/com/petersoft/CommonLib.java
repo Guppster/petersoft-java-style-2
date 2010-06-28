@@ -469,7 +469,7 @@ public class CommonLib {
 	}
 
 	public static String runCommand(String command) {
-		String str = "";
+		StringBuffer sb = new StringBuffer(4096);
 		try {
 			String s;
 			Process p = Runtime.getRuntime().exec(command);
@@ -481,7 +481,8 @@ public class CommonLib {
 
 			// read the output from the command
 			while ((s = stdInput.readLine()) != null) {
-				str += s + System.getProperty("line.separator");
+				sb.append(s);
+				sb.append(System.getProperty("line.separator"));
 			}
 
 			// read any errors from the attempted command
@@ -492,6 +493,6 @@ public class CommonLib {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return str;
+		return sb.toString();
 	}
 }
