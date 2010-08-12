@@ -146,8 +146,8 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	// }
 
 	public void paint(Graphics g, JComponent c) {
-		// g.setColor(Color.red);
-		// g.fillRect(0, 0, c.getWidth(), c.getHeight());
+		 g.setColor(Color.white);
+		 g.fillRect(0, 0, c.getWidth(), c.getHeight());
 		super.paint(g, c);
 	}
 

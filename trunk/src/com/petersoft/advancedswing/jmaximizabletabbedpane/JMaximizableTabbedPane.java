@@ -221,7 +221,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 					JMaximizableTabbedPane_BasePanel basePanel = (JMaximizableTabbedPane_BasePanel) obj;
 					JMaximizableTabbedPane tabbedPane = (JMaximizableTabbedPane) e.getSource();
 					// tabbedPane.setUI(new JMaximizableTabbedPaneUI());
-					System.out.println(tabbedPane.getUI());
+//					System.out.println(tabbedPane.getUI());
 					int selectedIndex = tabbedPane.getSelectedIndex();
 					if (!tabbedPane.isMaximized) {
 						JMaximizableTabbedPane newTabbedPane = new JMaximizableTabbedPane(true);
@@ -360,7 +360,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						for (int x = 0; x < components.length; x++) {
 							tabbedPane.getOriginalClosableTabbedPane().addTab(componentsName[x], componentsIcon[x], components[x]);
 						}
-						System.out.println("aa=" + closableTabIndex);
+//						System.out.println("aa=" + closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setClosableTabIndex(closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setSelectedIndex(selectedIndex);
 						CardLayout cardLayout = (CardLayout) basePanel.getLayout();
