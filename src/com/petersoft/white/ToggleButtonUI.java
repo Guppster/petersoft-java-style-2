@@ -42,6 +42,11 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 	Image disableMiddleRight = new ImageIcon(ToggleButtonUI.class.getResource("images/PButton/disable/PButton_disable_middleRight.png")).getImage();
 	Image disableLowerRight = new ImageIcon(ToggleButtonUI.class.getResource("images/PButton/disable/PButton_disable_lowerRight.png")).getImage();
 
+	Image selectedBackgroundImage = new ImageIcon(ToggleButtonUI.class.getResource("images/ToggleButton/selectedBackground.png")).getImage();
+
+	Color selectedBorder = new Color(43, 71, 103);
+	Color selectedBackground = new Color(200, 200, 200);
+
 	public static ComponentUI createUI(final JComponent c) {
 		return new ToggleButtonUI();
 	}
@@ -55,6 +60,11 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
 		if (c.getParent() instanceof JToolBar) {
+			if (button.isSelected()) {
+				g.setColor(selectedBorder);
+				g.fillRect(0, 0, button.getWidth(), button.getHeight());
+				g.drawImage(selectedBackgroundImage, 1, 1, button.getWidth() - 2, button.getHeight() - 2, null, null);
+			}
 			if (button.getModel().isRollover()) {
 				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
 				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
@@ -68,10 +78,6 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 				g.drawImage(mouseOverLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
 			}
 		} else {
-			if (button.isSelected()) {
-				g.setColor(new Color(200, 200, 200));
-				g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
-			}
 			// g.setColor(internalBGColor);
 			// g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 			// }
