@@ -8,8 +8,6 @@ import java.awt.Rectangle;
 import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
@@ -24,7 +22,6 @@ public class ComboBoxUI extends BasicComboBoxUI {
 
 	public void installUI(JComponent c) {
 		super.installUI(c);
-		// addKeyboardActions((JComboBox) c);
 	}
 
 	public void uninstallUI(JComponent c) {
@@ -40,19 +37,22 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	}
 
 	protected ComboPopup createPopup() {
-		ComboBox_ComboPopup pComboBox_ComboPopup = new ComboBox_ComboPopup(comboBox) {
-			protected JScrollPane createScroller() {
-				return new JScrollPane(list, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			}
-		};
+		// ComboBox_ComboPopup pComboBox_ComboPopup = new ComboBox_ComboPopup(comboBox) {
+		// protected JScrollPane createScroller() {
+		// return new JScrollPane(list, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+		// ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		// }
+		// };
+		//
+		// return pComboBox_ComboPopup;
 
-		return pComboBox_ComboPopup;
+		return super.createPopup();
 	}
 
 	public void paint(Graphics g, JComponent c) {
 		super.paint(g, c);
-//		g.setColor(Color.RED);
-//		g.fillRect(0,0,500,500);
+		// g.setColor(Color.RED);
+		// g.fillRect(0,0,500,500);
 	}
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
@@ -91,6 +91,22 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	// public void setArrowButtonOpaque(boolean isOpaque) {
 	// arrowButton.setOpaque(false);
 	// }
+
+	public Dimension getMinimumSize(JComponent c) {
+		if (!isMinimumSizeDirty) {
+			return new Dimension(cachedMinimumSize);
+		}
+		Dimension size = getDisplaySize();
+		Insets insets = getInsets();
+		size.height += insets.top + insets.bottom + 5;
+		int buttonSize = size.height - (insets.top + insets.bottom);
+		size.width += insets.left + insets.right + buttonSize;
+
+		cachedMinimumSize.setSize(size.width, size.height);
+		isMinimumSizeDirty = false;
+
+		return new Dimension(size);
+	}
 
 	// public Dimension getMinimumSize(JComponent c) {
 	// // if (!isMinimumSizeDirty) {

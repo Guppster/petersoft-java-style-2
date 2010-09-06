@@ -55,7 +55,6 @@ import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
-import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
@@ -983,9 +982,9 @@ public class JMainFrame extends JFrame {
 				jPanel2.add(jScrollPane1);
 				jScrollPane1.setBounds(130, 176, 292, 151);
 				{
-					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
+					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" } }, new String[] {
+							"Column 1", "Column 2" });
 					jTable1 = new JTable();
 					jScrollPane1.setViewportView(jTable1);
 					jTable1.setModel(jTable1Model);
@@ -1181,10 +1180,8 @@ public class JMainFrame extends JFrame {
 		{
 			jFileChooser1 = new JFileChooser();
 		}
-		pFileChooserPanelLayout.setVerticalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 322, Short.MAX_VALUE)
-				.addContainerGap());
-		pFileChooserPanelLayout.setHorizontalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 655, Short.MAX_VALUE)
-				.addContainerGap());
+		pFileChooserPanelLayout.setVerticalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 322, Short.MAX_VALUE).addContainerGap());
+		pFileChooserPanelLayout.setHorizontalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 655, Short.MAX_VALUE).addContainerGap());
 		pVersionLabel.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
 		pVersionLabel.setText("version : " + Globals.version);
 		pack();
@@ -1256,18 +1253,19 @@ public class JMainFrame extends JFrame {
 
 	private void jButton14ActionPerformed(ActionEvent evt) {
 		Object[] options = { "Yes, please", "No, thanks", "No eggs, no ham!" };
-		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null, options, options[2]);
 	}
 
 	private void jButton15ActionPerformed(ActionEvent evt) {
 		Object[] possibilities = { "ham", "spam", "yam" };
-		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null,
-				possibilities, "ham");
+		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
 	}
 
 	private void jDropDownButton2ActionPerformed(ActionEvent evt) {
-		// JOptionPane.showMessageDialog(this, "jDropDownButton2.actionPerformed, event=" + evt.toString().replace(',', '\n'));
+		// JOptionPane.showMessageDialog(this,
+		// "jDropDownButton2.actionPerformed, event=" +
+		// evt.toString().replace(',', '\n'));
 		if (jDropDownButton2.getEventSource() != null) {
 			if (jDropDownButton2.getEventSource() == jMenuItem1) {
 				System.out.println("jMenuItem1");

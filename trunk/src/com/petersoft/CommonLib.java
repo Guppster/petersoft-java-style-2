@@ -1,14 +1,17 @@
 package com.petersoft;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -494,5 +498,11 @@ public class CommonLib {
 			ex.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	public static void captureComponentToJpeg(Component c, File destFile) throws IOException {
+		BufferedImage image = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
+		c.paint(image.createGraphics());
+		ImageIO.write(image, "JPEG", destFile);
 	}
 }
