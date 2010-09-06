@@ -50,7 +50,9 @@ public class JSearchTextField extends JTextField implements MouseListener, Mouse
 
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.drawImage(cross, getWidth() - crossWidth - 1, (getHeight() - crossHeight) / 2, null);
+		if (this.getText().length() > 0) {
+			g.drawImage(cross, getWidth() - crossWidth - 1, (getHeight() - crossHeight) / 2, null);
+		}
 	}
 
 	@Override

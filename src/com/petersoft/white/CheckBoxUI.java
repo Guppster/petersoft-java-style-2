@@ -77,12 +77,30 @@ public class CheckBoxUI extends BasicCheckBoxUI {
 		g.setFont(f);
 		FontMetrics fm = SwingUtilities2.getFontMetrics(c, g, f);
 
-		String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(), altIcon != null ? altIcon : getDefaultIcon(), b.getVerticalAlignment(), b.getHorizontalAlignment(), b
-				.getVerticalTextPosition(), b.getHorizontalTextPosition(), viewRect, iconRect, textRect, b.getIconTextGap());
+		String text = SwingUtilities.layoutCompoundLabel(c, fm, b.getText(), altIcon != null ? altIcon : getDefaultIcon(), b.getVerticalAlignment(), b.getHorizontalAlignment(),
+				b.getVerticalTextPosition(), b.getHorizontalTextPosition(), viewRect, iconRect, textRect, b.getIconTextGap());
 
 		if (c.isOpaque()) {
 			g.setColor(Color.white);
 			g.fillRect(0, 0, size.width, size.height);
+		}
+
+		if (text != null) {
+			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
+			if (v != null) {
+				v.paint(g, textRect);
+			} else {
+				int mnemIndex = b.getDisplayedMnemonicIndex();
+				if (model.isEnabled()) {
+					g.setColor(b.getForeground());
+				} else {
+					// g.setColor(getDisabledTextColor());
+				}
+				SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+			}
+			if (b.hasFocus() && b.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
+				paintFocus(g, textRect, size);
+			}
 		}
 
 		if (altIcon != null) {
@@ -119,42 +137,24 @@ public class CheckBoxUI extends BasicCheckBoxUI {
 			if (b.isEnabled()) {
 				if (b.isSelected()) {
 					if (b.getModel().isRollover() || c.hasFocus()) {
-						g.drawImage(PCheckBox_box_mouseOver_checked, 4, (b.getHeight() - 13) / 2, null);
+						g.drawImage(PCheckBox_box_mouseOver_checked, iconRect.x, (b.getHeight() - 13) / 2, null);
 					} else {
-						g.drawImage(PCheckBox_box_checked, 4, (b.getHeight() - 13) / 2, null);
+						g.drawImage(PCheckBox_box_checked, iconRect.x, (b.getHeight() - 13) / 2, null);
 					}
 				} else {
 					if (b.getModel().isRollover() || c.hasFocus()) {
-						g.drawImage(PCheckBox_box_mouseOver, 4, (b.getHeight() - 13) / 2, null);
+						g.drawImage(PCheckBox_box_mouseOver, iconRect.x, (b.getHeight() - 13) / 2, null);
 					} else {
-						g.drawImage(PCheckBox_box_normal, 4, (b.getHeight() - 13) / 2, null);
+						g.drawImage(PCheckBox_box_normal, iconRect.x, (b.getHeight() - 13) / 2, null);
 					}
 				}
 			} else {
 				if (b.isSelected()) {
-					g.drawImage(PCheckBox_box_disableChecked, 4, (b.getHeight() - 13) / 2, null);
+					g.drawImage(PCheckBox_box_disableChecked, iconRect.x, (b.getHeight() - 13) / 2, null);
 				} else {
-					g.drawImage(PCheckBox_box_disableNormal, 4, (b.getHeight() - 13) / 2, null);
+					g.drawImage(PCheckBox_box_disableNormal, iconRect.x, (b.getHeight() - 13) / 2, null);
 
 				}
-			}
-		}
-
-		if (text != null) {
-			View v = (View) c.getClientProperty(BasicHTML.propertyKey);
-			if (v != null) {
-				v.paint(g, textRect);
-			} else {
-				int mnemIndex = b.getDisplayedMnemonicIndex();
-				if (model.isEnabled()) {
-					g.setColor(b.getForeground());
-				} else {
-					// g.setColor(getDisabledTextColor());
-				}
-				SwingUtilities2.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
-			}
-			if (b.hasFocus() && b.isFocusPainted() && textRect.width > 0 && textRect.height > 0) {
-				paintFocus(g, textRect, size);
 			}
 		}
 

@@ -71,6 +71,7 @@ public class DiskPanel extends JPanel {
 				{
 					jTable1 = new JTable();
 					jTable1.setRowSelectionAllowed(false);
+					jTable1.getTableHeader().setReorderingAllowed(false);
 					jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					jScrollPane1.setViewportView(jTable1);
 					jTable1.setModel(model);
