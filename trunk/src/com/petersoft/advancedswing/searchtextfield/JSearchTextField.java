@@ -3,6 +3,7 @@ package com.petersoft.advancedswing.searchtextfield;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -59,12 +60,16 @@ public class JSearchTextField extends JTextField implements MouseListener, Mouse
 	public void mouseClicked(MouseEvent e) {
 		if (e.getX() >= getWidth() - crossWidth) {
 			this.setText("");
+			for (KeyListener l : this.getKeyListeners()) {
+				l.keyPressed(null);
+				l.keyReleased(null);
+				l.keyTyped(null);
+			}
 		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-
 	}
 
 	@Override

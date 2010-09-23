@@ -71,21 +71,22 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	}
 
 	public void paintCurrentValueBackground(Graphics g, Rectangle bounds, boolean hasFocus) {
+		super.paintCurrentValueBackground(g, bounds, hasFocus);
 		// This is really only called if we're using ocean.
 		g.setColor(MetalLookAndFeel.getControlDarkShadow());
 		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height - 1);
 		g.setColor(MetalLookAndFeel.getControlShadow());
 		g.drawRect(bounds.x + 1, bounds.y + 1, bounds.width - 2, bounds.height - 3);
-		if (hasFocus && !isPopupVisible(comboBox) && arrowButton != null) {
-			g.setColor(listBox.getSelectionBackground());
-			Insets buttonInsets = arrowButton.getInsets();
-			if (buttonInsets.top > 2) {
-				g.fillRect(bounds.x + 2, bounds.y + 2, bounds.width - 3, buttonInsets.top - 2);
-			}
-			if (buttonInsets.bottom > 2) {
-				g.fillRect(bounds.x + 2, bounds.y + bounds.height - buttonInsets.bottom, bounds.width - 3, buttonInsets.bottom - 2);
-			}
-		}
+//		if (hasFocus && !isPopupVisible(comboBox) && arrowButton != null) {
+//			g.setColor(listBox.getSelectionBackground());
+//			Insets buttonInsets = arrowButton.getInsets();
+//			if (buttonInsets.top > 2) {
+//				g.fillRect(bounds.x + 2, bounds.y + 2, bounds.width - 3, buttonInsets.top - 2);
+//			}
+//			if (buttonInsets.bottom > 2) {
+//				g.fillRect(bounds.x + 2, bounds.y + bounds.height - buttonInsets.bottom, bounds.width - 3, buttonInsets.bottom - 2);
+//			}
+//		}
 	}
 
 	// public void setArrowButtonOpaque(boolean isOpaque) {
@@ -93,19 +94,20 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	// }
 
 	public Dimension getMinimumSize(JComponent c) {
-		if (!isMinimumSizeDirty) {
-			return new Dimension(cachedMinimumSize);
-		}
-		Dimension size = getDisplaySize();
-		Insets insets = getInsets();
-		size.height += insets.top + insets.bottom + 5;
-		int buttonSize = size.height - (insets.top + insets.bottom);
-		size.width += insets.left + insets.right + buttonSize;
-
-		cachedMinimumSize.setSize(size.width, size.height);
-		isMinimumSizeDirty = false;
-
-		return new Dimension(size);
+		return super.getMinimumSize(c);
+//		if (!isMinimumSizeDirty) {
+//			return new Dimension(cachedMinimumSize);
+//		}
+//		Dimension size = getDisplaySize();
+//		Insets insets = getInsets();
+//		size.height += insets.top + insets.bottom + 5;
+//		int buttonSize = size.height - (insets.top + insets.bottom);
+//		size.width += insets.left + insets.right + buttonSize;
+//
+//		cachedMinimumSize.setSize(size.width, size.height);
+//		isMinimumSizeDirty = false;
+//
+//		return new Dimension(size);
 	}
 
 	// public Dimension getMinimumSize(JComponent c) {

@@ -412,7 +412,7 @@ public class JMainFrame extends JFrame {
 		JButton3.setText("JButton3");
 		jTabbedPane1.add(JTextAreaPanel, "JTextArea");
 		pIntroductionTextArea.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
-		pIntroductionTextArea.setText("Petersoft Java Style 2");
+		pIntroductionTextArea.setText("<html>Petersoft Java Style 2<br>" + Globals.version + "</html>");
 		pIntroductionPanel.setLayout(borderLayout3);
 		jTabbedPane1.addTab("JToggleButton", null, pTogglePanel, null);
 		{
