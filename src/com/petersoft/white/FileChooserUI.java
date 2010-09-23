@@ -440,6 +440,8 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		}
 
 		groupLabels(new AlignedLabel[] { fileNameLabel, filesOfTypeLabel });
+		
+		searchTextField.requestFocus();
 	}
 
 	private void searchTextFieldKeyReleased(KeyEvent evt) {
