@@ -1,6 +1,7 @@
 #summary A better JFileChooser
 
 - A directory tree on the left
+
 - A filter textbox on the upper-right corner
 
 To use this dialog, just change your look and feel to :
