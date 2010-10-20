@@ -4,7 +4,7 @@
 
 - A filter textbox on the upper-right corner
 
-To use this dialog, just change your look and feel to :
+To use this dialog, just change your look and feel :
 {{{
 try {
     UIManager.setLookAndFeel("com.petersoft.white.PetersoftWhiteLookAndFeel");
