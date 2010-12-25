@@ -2,6 +2,11 @@
 
 = Introduction =
 
-[code]
-				onOffButton1 = new OnOffButton();
-				onOffButton1.setSelected(true);
+{{{
+import com.petersoft.advancedswing.onoffbutton;
+
+OnOffButton onOffButton1 = new OnOffButton();
+onOffButton1.setSelected(true);
+}}}
+
+== Source ==
