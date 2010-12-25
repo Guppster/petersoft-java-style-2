@@ -430,8 +430,6 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 		}
 
 		public void mouseClicked(MouseEvent evt) {
-			// Note: we can't depend on evt.getSource() because of backward
-			// compatability
 			if (list != null && SwingUtilities.isLeftMouseButton(evt) && (evt.getClickCount() % 2 == 0)) {
 
 				int index = SwingUtilities2.loc2IndexFileList(list, evt.getPoint());

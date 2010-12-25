@@ -8,7 +8,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Point;
@@ -22,6 +21,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,18 +47,20 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.JTree;
 import javax.swing.KeyStroke;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -75,13 +77,17 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.plaf.ActionMapUIResource;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.TreeUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
+import javax.swing.tree.TreePath;
 
+import com.petersoft.CommonLib;
+import com.petersoft.FilterBasicDirectoryModel;
+import com.petersoft.TableSelectByKeyAdaptor;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
 
 public class FileChooserUI extends MyBasicFileChooserUI {
@@ -169,6 +175,9 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	JTextField editCell = null;
 	// FilterBasicDirectoryModel model;
 	JSearchTextField searchTextField = new JSearchTextField();
+	JTree jTree;
+
+	private JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
 	public FileChooserUI(JFileChooser filechooser) {
 		super(filechooser);
@@ -187,7 +196,6 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 
 	public void uninstallComponents(JFileChooser fc) {
 		fc.removeAll();
-		bottomPanel = null;
 		buttonPanel = null;
 	}
 
@@ -298,10 +306,11 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 				}
 
 				if (currentViewPanel != oldViewPanel) {
-					centerPanel.remove(oldViewPanel);
-					centerPanel.add(currentViewPanel, BorderLayout.CENTER);
-					centerPanel.revalidate();
-					centerPanel.repaint();
+					// centerPanel.remove(oldViewPanel);
+					// centerPanel.add(currentViewPanel, BorderLayout.CENTER);
+					// centerPanel.revalidate();
+					// centerPanel.repaint();
+					mainSplitPane.add(currentViewPanel, JSplitPane.RIGHT);
 				}
 			}
 		}
@@ -354,7 +363,13 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		listViewPanel = createList(fc);
 		listSelectionModel = list.getSelectionModel();
 		listViewPanel.setPreferredSize(LIST_PREF_SIZE);
-		centerPanel.add(listViewPanel, BorderLayout.CENTER);
+		// centerPanel.add(listViewPanel, BorderLayout.CENTER);
+		// centerPanel.add(createRecentPanel(), BorderLayout.WEST);
+
+		mainSplitPane.add(listViewPanel, JSplitPane.RIGHT);
+		mainSplitPane.add(createRecentPanel(), JSplitPane.LEFT);
+		mainSplitPane.setDividerLocation(200);
+		centerPanel.add(mainSplitPane, BorderLayout.CENTER);
 		currentViewPanel = listViewPanel;
 		centerPanel.add(getAccessoryPanel(), BorderLayout.AFTER_LINE_ENDS);
 
@@ -440,8 +455,59 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		}
 
 		groupLabels(new AlignedLabel[] { fileNameLabel, filesOfTypeLabel });
-		
+
 		searchTextField.requestFocus();
+
+	}
+
+	private JPanel createRecentPanel() {
+		JPanel panel = new JPanel(new BorderLayout());
+		JScrollPane jscrollpane = new JScrollPane();
+		panel.add(jscrollpane, BorderLayout.CENTER);
+		FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("fuck", new File("root---"), false));
+		jTree = new JTree(model);
+		jTree.setRootVisible(false);
+		jTree.setCellRenderer(new FileChooserTreeRenderer());
+
+		jTree.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TreePath[] paths = jTree.getSelectionPaths();
+				if (paths != null && paths.length > 0) {
+					FileChooserTreeNode node = (FileChooserTreeNode) paths[0].getLastPathComponent();
+					getFileChooser().setCurrentDirectory(node.getFile());
+					getModel().validateFileCache();
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
+		jscrollpane.getViewport().add(jTree);
+		return panel;
 	}
 
 	private void searchTextFieldKeyReleased(KeyEvent evt) {
@@ -509,6 +575,12 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 
 		newFolderToolTipText = UIManager.getString("FileChooser.newFolderToolTipText", l);
 		newFolderAccessibleName = UIManager.getString("FileChooser.newFolderAccessibleName", l);
+
+		fileNameHeaderText = UIManager.getString("FileChooser.fileNameHeaderText", l);
+		fileSizeHeaderText = UIManager.getString("FileChooser.fileSizeHeaderText", l);
+		fileTypeHeaderText = UIManager.getString("FileChooser.fileTypeHeaderText", l);
+		fileDateHeaderText = UIManager.getString("FileChooser.fileDateHeaderText", l);
+		fileAttrHeaderText = UIManager.getString("FileChooser.fileAttrHeaderText", l);
 
 		listViewButtonToolTipText = UIManager.getString("FileChooser.listViewButtonToolTipText", l);
 		listViewButtonAccessibleName = UIManager.getString("FileChooser.listViewButtonAccessibleName", l);
@@ -584,9 +656,45 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 				return -1;
 			}
 		};
+
 		list.setCellRenderer(new FileRenderer());
 		list.setLayoutOrientation(JList.VERTICAL_WRAP);
 		list.setVisibleRowCount(-1);
+		list.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (list.getSelectedValues().length > 0) {
+					if (e.getKeyChar() == KeyEvent.VK_DELETE) {
+						Object objects[] = list.getSelectedValues();
+						String text = "";
+						for (Object obj : objects) {
+							File file = (File) obj;
+							text += "\n" + file.getName();
+						}
+						int n = JOptionPane.showConfirmDialog(null, "Sure to delete ?" + text, "Please confirm", JOptionPane.YES_NO_OPTION);
+						if (n == 0) {
+							for (Object obj : objects) {
+								File file = (File) obj;
+								CommonLib.deleteDirectory(file);
+							}
+							((FilterBasicDirectoryModel) list.getModel()).validateFileCache();
+						}
+					}
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+		});
 
 		if (fc.isMultiSelectionEnabled()) {
 			list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -609,7 +717,6 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		});
 		list.addListSelectionListener(createListSelectionListener(fc));
 		list.addMouseListener(createDoubleClickListener(fc, list));
-		list.addMouseListener(createSingleClickListener(fc, list));
 
 		getModel().addListDataListener(new ListDataListener() {
 			public void contentsChanged(ListDataEvent e) {
@@ -650,10 +757,9 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 				return super.processKeyBinding(ks, e, condition, pressed);
 			}
 		};
-
+		detailsTable.addKeyListener(new TableSelectByKeyAdaptor(detailsTable, true));
 		detailsTable.setComponentOrientation(chooser.getComponentOrientation());
 		detailsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		detailsTable.setShowGrid(false);
 		detailsTable.setSelectionModel(listSelectionModel);
 		detailsTable.putClientProperty("JTable.autoStartsEdit", Boolean.FALSE);
 
@@ -673,7 +779,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 			columnModel.removeColumn(columns[COLUMN_FILEATTR]);
 		}
 
-		TableCellRenderer cellRenderer = new DetailsTableCellRenderer(chooser);
+		DetailsTableCellRenderer cellRenderer = new DetailsTableCellRenderer(chooser);
 		detailsTable.setDefaultRenderer(File.class, cellRenderer);
 		detailsTable.setDefaultRenderer(Date.class, cellRenderer);
 		detailsTable.setDefaultRenderer(Object.class, cellRenderer);
@@ -1312,8 +1418,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	}
 
 	/*
-	 * Listen for filechooser property changes, such as the selected file
-	 * changing, or the type of the dialog changing.
+	 * Listen for filechooser property changes, such as the selected file changing, or the type of the dialog changing.
 	 */
 	public PropertyChangeListener createPropertyChangeListener(JFileChooser fc) {
 		return new PropertyChangeListener() {
@@ -1658,18 +1763,18 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		}
 
 		public void setValue(Object value) {
-			setIcon(null);
-
 			if (value instanceof File) {
 				File file = (File) value;
 				String fileName = chooser.getName(file);
 				setText(fileName);
 
-				Icon icon = chooser.getIcon(file);
+				Icon icon = FileSystemView.getFileSystemView().getSystemIcon(file);// chooser.getIcon(file);
 				setIcon(icon);
 			} else if (value instanceof Date) {
 				setText((value == null) ? "" : df.format((Date) value));
+				setIcon(null);
 			} else {
+				setIcon(null);
 				super.setValue(value);
 			}
 		}
@@ -1740,18 +1845,22 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 			if (file.isDirectory()) {
 				icon = getFileChooser().getIcon(file);
 			} else {
-				try {
-					icon = FileSystemView.getFileSystemView().getSystemIcon(file);
-					if (getFileChooser().getIcon(file) == icon) {
-						ImageIcon icon2 = new ImageIcon(this.getClass().getResource(
-								"images/PFileChooser/fileTypeIcons/" + file.getName().substring(file.getName().lastIndexOf(".") + 1) + ".gif"));
-						Image img = icon2.getImage();
-						Image newimg = img.getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH);
-						icon = new ImageIcon(newimg);
-					}
-				} catch (Exception ex) {
-					icon = getFileChooser().getIcon(file);
-				}
+				// try {
+				icon = FileSystemView.getFileSystemView().getSystemIcon(file);
+
+				// if (getFileChooser().getIcon(file) == icon) {
+				// ImageIcon icon2 = new ImageIcon(this.getClass().getResource(
+				// "images/PFileChooser/fileTypeIcons/" +
+				// file.getName().substring(file.getName().lastIndexOf(".") + 1)
+				// + ".gif"));
+				// Image img = icon2.getImage();
+				// Image newimg = img.getScaledInstance(15, 15,
+				// java.awt.Image.SCALE_SMOOTH);
+				// icon = new ImageIcon(newimg);
+				// }
+				// } catch (Exception ex) {
+				// icon = getFileChooser().getIcon(file);
+				// }
 			}
 			setIcon(icon);
 

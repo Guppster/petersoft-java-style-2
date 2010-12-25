@@ -217,7 +217,6 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 		public void run0() {
 			try {
 				FileSystemView fileSystem = filechooser.getFileSystemView();
-
 				File[] list = fileSystem.getFiles(currentDirectory, filechooser.isFileHidingEnabled());
 
 				if (isInterrupted()) {
