@@ -1,4 +1,5 @@
-#summary A iphone-like toggle button
+#summary A iphone style toggle button
+#labels iphonebutton
 
 = Introduction =
 
@@ -12,4 +13,4 @@ onOffButton1.setSelected(true);
 == Source ==
 
 
-<wiki:video url="http://petersoft-java-style-2.googlecode.com/files/onOffButton.swf"/>
+<wiki:video url="http://www.youtube.com/watch?v=rrqAyRFKoBI"/>
