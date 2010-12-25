@@ -1,0 +1,7 @@
+#summary A iphone-like toggle button
+
+= Introduction =
+
+[code]
+				onOffButton1 = new OnOffButton();
+				onOffButton1.setSelected(true);
