@@ -55,25 +55,34 @@ import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.petersoft.advancedswing.diskpanel.DiskPanel;
+import com.petersoft.advancedswing.enhancedtextarea.EnhancedTextArea;
 import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
+import com.petersoft.advancedswing.onoffbutton.OnOffButton;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
+import com.petersoft.white.FileChooserTreeNode;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
- * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
- * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
- * CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
+ * Builder, which is free for non-commercial use. If Jigloo is being used
+ * commercially (ie, by a corporation, company or business for any purpose
+ * whatever) then you should purchase a license for each developer using Jigloo.
+ * Please visit www.cloudgarden.com for details. Use of Jigloo implies
+ * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
+ * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
+ * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class JMainFrame extends JFrame {
 	JTabbedPane jTabbedPane1 = new JTabbedPane();
@@ -126,6 +135,17 @@ public class JMainFrame extends JFrame {
 	private JButton jButton1;
 	private JPanel jPanel20;
 	private JPanel jPanel22;
+	private JPanel jPanel24;
+	private JButton jButton20;
+	private OnOffButton onOffButton1;
+	private JPanel jOnOffButtonPanel;
+	private EnhancedTextArea enhancedTextArea1;
+	private JPanel jPanel25;
+	private JScrollPane jScrollPane2;
+	private JTree jTree2;
+	private JMenuItem jMenuItem5;
+	private JMenuItem jMenuItem4;
+	private JDropDownButton jDropDownButton3;
 	private JSearchTextField jSearchTextField1;
 	private JPanel jPanel23;
 	private JToolBar jToolBar3;
@@ -464,6 +484,77 @@ public class JMainFrame extends JFrame {
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		{
+			jOnOffButtonPanel = new JPanel();
+			GroupLayout jOnOffButtonPanelLayout = new GroupLayout((JComponent)jOnOffButtonPanel);
+			jOnOffButtonPanel.setLayout(jOnOffButtonPanelLayout);
+			jTabbedPane1.addTab("OnOffButton", null, jOnOffButtonPanel, null);
+			{
+				onOffButton1 = new OnOffButton();
+				onOffButton1.setText("onOffButton1");
+				onOffButton1.setSelected(true);
+			}
+			{
+				jButton20 = new JButton();
+				jButton20.setText("Set toggle");
+				jButton20.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton20ActionPerformed(evt);
+					}
+				});
+			}
+			jOnOffButtonPanelLayout.setHorizontalGroup(jOnOffButtonPanelLayout.createSequentialGroup()
+				.addContainerGap(258, 258)
+				.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap(238, Short.MAX_VALUE));
+			jOnOffButtonPanelLayout.setVerticalGroup(jOnOffButtonPanelLayout.createSequentialGroup()
+				.addContainerGap(75, 75)
+				.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+				.addGap(50)
+				.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap(165, Short.MAX_VALUE));
+		}
+		{
+			jPanel25 = new JPanel();
+			GroupLayout jPanel25Layout = new GroupLayout((JComponent) jPanel25);
+			jPanel25.setLayout(jPanel25Layout);
+			jTabbedPane1.addTab("EnhancedTextArea", null, jPanel25, null);
+			{
+				enhancedTextArea1 = new EnhancedTextArea();
+			}
+//			enhancedTextArea1.setText(CommonLib.getWebpage("www.google.com"));
+			jPanel25Layout.setHorizontalGroup(jPanel25Layout.createSequentialGroup().addContainerGap(81, 81)
+					.addComponent(enhancedTextArea1, GroupLayout.PREFERRED_SIZE, 532, GroupLayout.PREFERRED_SIZE).addContainerGap(72, Short.MAX_VALUE));
+			jPanel25Layout.setVerticalGroup(jPanel25Layout.createSequentialGroup().addContainerGap(44, 44).addComponent(enhancedTextArea1, 0, 290, Short.MAX_VALUE).addContainerGap());
+		}
+		{
+			jPanel24 = new JPanel();
+			GroupLayout jPanel24Layout = new GroupLayout((JComponent) jPanel24);
+			jPanel24.setLayout(jPanel24Layout);
+			jTabbedPane1.addTab("JTree", null, jPanel24, null);
+			{
+				jScrollPane2 = new JScrollPane();
+				{
+					DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+					DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("node 1");
+					root.add(node1);
+					for (int x = 2; x <= 100; x++) {
+						root.add(new DefaultMutableTreeNode("node " + x));
+					}
+					for (int x = 1; x <= 100; x++) {
+						node1.add(new DefaultMutableTreeNode("sub node " + x));
+					}
+					jTree2 = new JTree(new FileChooserTreeNode(null, new File("c:\\"), true, true));
+					jScrollPane2.setViewportView(jTree2);
+				}
+			}
+			jPanel24Layout.setVerticalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(18, 18).addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(32, 32));
+			jPanel24Layout.setHorizontalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(58, 58).addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 535, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(86, 86));
+		}
+		{
 			jPanel23 = new JPanel();
 			jTabbedPane1.addTab("JSearchTextField", null, jPanel23, null);
 			jPanel23.setLayout(null);
@@ -509,6 +600,28 @@ public class JMainFrame extends JFrame {
 							jDropDownButton2ActionPerformed(evt);
 						}
 					});
+				}
+			}
+			{
+				jDropDownButton3 = new JDropDownButton();
+				jPanel21.add(jDropDownButton3);
+				jDropDownButton3.setText("Analyst");
+				jDropDownButton3.setBounds(103, 114, 100, 39);
+				jDropDownButton3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/white/images/PFileChooser/dirSmall.png")));
+				jDropDownButton3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jDropDownButton3ActionPerformed(evt);
+					}
+				});
+				{
+					jMenuItem4 = new JMenuItem();
+					jDropDownButton3.add(jMenuItem4);
+					jMenuItem4.setText("jMenuItem1");
+				}
+				{
+					jMenuItem5 = new JMenuItem("jMenuItem2");
+					jDropDownButton3.add(jMenuItem5);
+					jMenuItem5.setText("jMenuItem5");
 				}
 			}
 		}
@@ -1210,6 +1323,7 @@ public class JMainFrame extends JFrame {
 
 	private void pOpenPFileChooserDialogButtonActionPerformed(ActionEvent evt) {
 		JFileChooser jFileChooser = new JFileChooser();
+		jFileChooser.setPreferredSize(new Dimension(700, 400));
 		jFileChooser.showOpenDialog(this);
 	}
 
@@ -1279,6 +1393,15 @@ public class JMainFrame extends JFrame {
 
 	private void jDropDownButton1ActionPerformed(ActionEvent evt) {
 		JOptionPane.showMessageDialog(this, "jDropDownButton1.actionPerformed, event=" + evt.toString().replace(',', '\n'));
+	}
+
+	private void jDropDownButton3ActionPerformed(ActionEvent evt) {
+		System.out.println("jDropDownButton3.actionPerformed, event=" + evt);
+		// TODO add your code for jDropDownButton3.actionPerformed
+	}
+	
+	private void jButton20ActionPerformed(ActionEvent evt) {
+		onOffButton1.setSelected(!onOffButton1.isSelected());
 	}
 
 }

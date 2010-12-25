@@ -1,7 +1,6 @@
 package com.petersoft.advancedswing.jdropdownbutton;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -107,6 +106,7 @@ public class JDropDownButton extends JButton implements ActionListener {
 					}
 				});
 			}
+			// this.setMargin(new Insets(0, 0, 0, 0));
 			this.addActionListener(this);
 		} catch (Exception e) {
 			e.printStackTrace();

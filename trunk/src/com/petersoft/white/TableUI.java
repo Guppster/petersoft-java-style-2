@@ -82,7 +82,6 @@ public class TableUI extends BasicTableUI {
 	 */
 	private void paintGrid(Graphics g, int rMin, int rMax, int cMin, int cMax) {
 		g.setColor(table.getGridColor());
-
 		Rectangle minCell = table.getCellRect(rMin, cMin, true);
 		Rectangle maxCell = table.getCellRect(rMax, cMax, true);
 		Rectangle damagedArea = minCell.union(maxCell);
@@ -93,7 +92,7 @@ public class TableUI extends BasicTableUI {
 
 			for (int row = rMin; row <= rMax; row++) {
 				y += table.getRowHeight(row);
-				g.drawLine(damagedArea.x, y - 1, tableWidth - 1, y - 1);
+//				g.drawLine(damagedArea.x, y - 1, tableWidth - 1, y - 1);
 			}
 		}
 

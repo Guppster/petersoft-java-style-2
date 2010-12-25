@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JToolBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicButtonListener;
 import javax.swing.plaf.basic.BasicToggleButtonUI;
 
 public class ToggleButtonUI extends BasicToggleButtonUI {
@@ -46,6 +47,7 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 
 	Color selectedBorder = new Color(43, 71, 103);
 	Color selectedBackground = new Color(200, 200, 200);
+	Color buttonRollOverColor = new Color(145, 145, 145);
 
 	public static ComponentUI createUI(final JComponent c) {
 		return new ToggleButtonUI();
@@ -57,8 +59,23 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 		c.setOpaque(false);
 	}
 
+	public void installDefaults(AbstractButton button) {
+		super.installDefaults(button);
+		button.setRolloverEnabled(true);
+	}
+
+	public void uninstallDefaults(AbstractButton button) {
+		super.uninstallDefaults(button);
+		button.setRolloverEnabled(false);
+	}
+
+	protected BasicButtonListener createButtonListener(AbstractButton button) {
+		return new ButtonListener(button);
+	}
+
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
+
 		if (c.getParent() instanceof JToolBar) {
 			if (button.isSelected()) {
 				g.setColor(selectedBorder);
@@ -66,16 +83,25 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 				g.drawImage(selectedBackgroundImage, 1, 1, button.getWidth() - 2, button.getHeight() - 2, null, null);
 			}
 			if (button.getModel().isRollover()) {
-				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
-
-				g.drawImage(mouseOverMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
-				g.drawImage(mouseOverMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
-
-				g.drawImage(mouseOverUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+				g.setColor(buttonRollOverColor);
+				g.drawRect(1, 1, button.getWidth() - 3, button.getHeight() - 3);
+				// g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
+				// g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight()
+				// - 10, null, null);
+				// g.drawImage(mouseOverLowerLeft, 0, button.getHeight() - 5, 5,
+				// 5, null, null);
+				//
+				// g.drawImage(mouseOverMiddleUpper, 5, 0, button.getWidth() -
+				// 11, 4, null, null);
+				// g.drawImage(mouseOverMiddleLower, 5, button.getHeight() - 4,
+				// button.getWidth() - 11, 4, null, null);
+				//
+				// g.drawImage(mouseOverUpperRight, button.getWidth() - 6, 0, 5,
+				// 5, null, null);
+				// g.drawImage(mouseOverMiddleRight, button.getWidth() - 5, 5,
+				// 4, button.getHeight() - 10, null, null);
+				// g.drawImage(mouseOverLowerRight, button.getWidth() - 6,
+				// button.getHeight() - 5, 5, 5, null, null);
 			}
 		} else {
 			// g.setColor(internalBGColor);
@@ -86,6 +112,10 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 			// g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 			// }
 			// if (button.isEnabled()) {
+			if (button.isSelected()) {
+				g.setColor(selectedBackground);
+				g.fillRect(5, 5, button.getWidth() - 10, button.getHeight() - 10);
+			}
 			if (button.getModel().isRollover()) {
 				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
 				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);

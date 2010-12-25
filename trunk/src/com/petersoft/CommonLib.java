@@ -14,6 +14,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -504,5 +506,29 @@ public class CommonLib {
 		BufferedImage image = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_RGB);
 		c.paint(image.createGraphics());
 		ImageIO.write(image, "JPEG", destFile);
+	}
+
+	public static String getWebpage(String url) {
+		String content = "";
+		if (!url.trim().toLowerCase().startsWith("http://")) {
+			url = "http://" + url;
+		}
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+				content += line + "\n";
+			}
+
+			reader.close();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		return content;
 	}
 }
