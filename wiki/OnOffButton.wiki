@@ -12,6 +12,9 @@ onOffButton1.setSelected(true);
 
 == Source ==
 
+[http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/advancedswing/onoffbutton/OnOffButton.java?r=56]
+
+== Demo ==
 
 <wiki:video url="http://www.youtube.com/watch?v=Q5ZfbTaHS54" />
 
