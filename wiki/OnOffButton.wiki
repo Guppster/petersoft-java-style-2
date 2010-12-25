@@ -14,3 +14,15 @@ onOffButton1.setSelected(true);
 
 
 <wiki:video url="http://www.youtube.com/watch?v=Q5ZfbTaHS54" />
+
+
+<table border="0"><tr><td>
+[http://www.kingofcoders.com http://www.kingofcoders.com/images/KOC_logo2.jpg]
+</td>
+<td>
+</td>
+<td>
+[http://www.rmit.edu.au/compsci http://peter-bochs.googlecode.com/files/rmit.gif]
+</td>
+</tr>
+</table>
