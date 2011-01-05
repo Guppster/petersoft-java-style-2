@@ -136,6 +136,9 @@ public class JMainFrame extends JFrame {
 	private JPanel jPanel20;
 	private JPanel jPanel22;
 	private JPanel jPanel24;
+	private JPanel jPanel26;
+	private JDropDownButton jDropDownButton4;
+	private JButton jButton21;
 	private JButton jButton20;
 	private OnOffButton onOffButton1;
 	private JPanel jOnOffButtonPanel;
@@ -571,13 +574,14 @@ public class JMainFrame extends JFrame {
 			jPanel21.setLayout(null);
 			{
 				jDropDownButton1 = new JDropDownButton();
-				jDropDownButton1.setText("jDropDownButton 1");
+				jDropDownButton1.setText("Load");
 				JMenuItem m = new JMenuItem("jMenuItem1");
 				jDropDownButton1.add(m);
 				jDropDownButton1.add(new JMenuItem("jMenuItem2"));
 				jDropDownButton1.remove(m);
 				jPanel21.add(jDropDownButton1);
-				jDropDownButton1.setBounds(103, 74, 181, 35);
+				jDropDownButton1.setBounds(103, 74, 60, 35);
+				jDropDownButton1.setHorizontalAlignment(SwingConstants.LEFT);
 				jDropDownButton1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						jDropDownButton1ActionPerformed(evt);
@@ -622,6 +626,24 @@ public class JMainFrame extends JFrame {
 					jMenuItem5 = new JMenuItem("jMenuItem2");
 					jDropDownButton3.add(jMenuItem5);
 					jMenuItem5.setText("jMenuItem5");
+				}
+			}
+			{
+				jPanel26 = new JPanel();
+				FlowLayout jPanel26Layout = new FlowLayout();
+				jPanel26Layout.setAlignment(FlowLayout.LEFT);
+				jPanel26.setLayout(jPanel26Layout);
+				jPanel21.add(jPanel26);
+				jPanel26.setBounds(163, 158, 346, 57);
+				{
+					jButton21 = new JButton();
+					jPanel26.add(jButton21);
+					jButton21.setText("jButton21");
+				}
+				{
+					jDropDownButton4 = new JDropDownButton();
+					jPanel26.add(jDropDownButton4);
+					jDropDownButton4.setText("Load");
 				}
 			}
 		}
@@ -1147,6 +1169,7 @@ public class JMainFrame extends JFrame {
 					jComboBox3.setModel(jComboBox3Model);
 					jComboBox3.setEditable(true);
 					jComboBox3.setEditor(new ComboBoxEditorExample(new HashMap()));
+					jComboBox3.setPreferredSize(new java.awt.Dimension(215, 22));
 				}
 				{
 					ComboBoxModel JComboBox1Model = new DefaultComboBoxModel(new String[] { "Item One12345678", "Item Two" });
@@ -1155,7 +1178,7 @@ public class JMainFrame extends JFrame {
 					JComboBox1.setModel(JComboBox1Model);
 				}
 				{
-					ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "Item One12345678", "Item Two" });
+					ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "1234", "5678" });
 					jComboBox1 = new JComboBox();
 					JPanel1.add(jComboBox1);
 					jComboBox1.setModel(jComboBox1Model);
@@ -1397,7 +1420,6 @@ public class JMainFrame extends JFrame {
 
 	private void jDropDownButton3ActionPerformed(ActionEvent evt) {
 		System.out.println("jDropDownButton3.actionPerformed, event=" + evt);
-		// TODO add your code for jDropDownButton3.actionPerformed
 	}
 	
 	private void jButton20ActionPerformed(ActionEvent evt) {

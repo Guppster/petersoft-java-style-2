@@ -63,7 +63,7 @@ public class OnOffButton extends JToggleButton implements ActionListener,
 		// while (true) {
 		// if (threadStop) {
 		if (this.isSelected()) {
-			for (; buttonX < this.getWidth() / 2; buttonX++) {
+			for (; buttonX <= this.getWidth() / 2; buttonX++) {
 				this.repaint();
 				try {
 					Thread.sleep(5);
