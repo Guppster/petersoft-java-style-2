@@ -11,11 +11,6 @@ public class ComboBox_ComboBoxEditor implements ComboBoxEditor {
 
 	public ComboBox_ComboBoxEditor() {
 		super();
-		try {
-			jbInit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	public Component getEditorComponent() {
@@ -43,9 +38,6 @@ public class ComboBox_ComboBoxEditor implements ComboBoxEditor {
 
 	public void removeActionListener(ActionListener l) {
 		pTextField.removeActionListener(l);
-	}
-
-	private void jbInit() throws Exception {
 	}
 
 }

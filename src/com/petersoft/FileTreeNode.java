@@ -45,7 +45,6 @@ public class FileTreeNode implements TreeNode {
 
 	@Override
 	public boolean getAllowsChildren() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -60,7 +59,6 @@ public class FileTreeNode implements TreeNode {
 
 	@Override
 	public Enumeration children() {
-		// TODO Auto-generated method stub
 		return new Vector(Arrays.asList(file.listFiles())).elements();
 	}
 
