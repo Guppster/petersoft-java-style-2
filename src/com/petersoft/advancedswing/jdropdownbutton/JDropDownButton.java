@@ -112,6 +112,7 @@ public class JDropDownButton extends JButton implements ActionListener {
 						jDropDownButtonActionPerformed(evt);
 					}
 				});
+				jDropDownButton.setPreferredSize(new Dimension(18, 0));
 			}
 			// this.setMargin(new Insets(0, 0, 0, 0));
 			this.addActionListener(this);

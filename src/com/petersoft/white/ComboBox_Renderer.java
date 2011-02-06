@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
