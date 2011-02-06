@@ -482,20 +482,12 @@ public class CommonLib {
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-			// BufferedReader stdError = new BufferedReader(new
-			// InputStreamReader(p.getErrorStream()));
-
 			// read the output from the command
 			while ((s = stdInput.readLine()) != null) {
 				sb.append(s);
 				sb.append(System.getProperty("line.separator"));
 			}
-
-			// read any errors from the attempted command
-			// System.out.println("Here is the standard error of the command (if any):\n");
-			// while ((s = stdError.readLine()) != null) {
-			// System.out.println(s);
-			// }
+			stdInput.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
