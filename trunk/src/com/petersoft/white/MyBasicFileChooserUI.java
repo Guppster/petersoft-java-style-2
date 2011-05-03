@@ -1096,7 +1096,8 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 	private void changeDirectory(File dir) {
 		JFileChooser fc = getFileChooser();
 		// Traverse shortcuts on Windows
-		if (dir != null && FilePane.usesShellFolder(fc)) {
+
+		if (dir != null /*&& FilePane.usesShellFolder(fc)*/) {
 			try {
 				ShellFolder shellFolder = ShellFolder.getShellFolder(dir);
 				if (shellFolder.isLink()) {

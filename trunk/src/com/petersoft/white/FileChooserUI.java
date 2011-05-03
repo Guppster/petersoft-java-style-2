@@ -173,7 +173,6 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	File editFile = null;
 	int editX = 20;
 	JTextField editCell = null;
-	// FilterBasicDirectoryModel model;
 	JSearchTextField searchTextField = new JSearchTextField();
 	JTree jTree;
 
@@ -464,9 +463,9 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		JPanel panel = new JPanel(new BorderLayout());
 		JScrollPane jscrollpane = new JScrollPane();
 		panel.add(jscrollpane, BorderLayout.CENTER);
-		FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("fuck", new File("root---"), false));
+		FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("Computer", null, false));
 		jTree = new JTree(model);
-		jTree.setRootVisible(false);
+		jTree.setRootVisible(true);
 		jTree.setCellRenderer(new FileChooserTreeRenderer());
 
 		jTree.addMouseListener(new MouseListener() {
