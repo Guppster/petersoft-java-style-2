@@ -3,6 +3,7 @@ package com.petersoft.white;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -54,7 +55,14 @@ public class FileChooserTreeNode implements TreeNode {
 	@Override
 	public TreeNode getChildAt(int childIndex) {
 		if (isDirectory && file.listFiles(new DirectoryFilter()) != null) {
-			File child = file.listFiles(new DirectoryFilter())[childIndex];
+			File files[] = file.listFiles(new DirectoryFilter());
+			Arrays.sort(files, new Comparator() {
+				public int compare(final Object o1, final Object o2) {
+					return ((File) o1).getName().toLowerCase().compareTo(((File) o2).getName().toLowerCase());
+				}
+			});
+
+			File child = files[childIndex];
 			return new FileChooserTreeNode(child.getName(), child, true, true, this);
 		} else {
 			return childNodes.get(childIndex);

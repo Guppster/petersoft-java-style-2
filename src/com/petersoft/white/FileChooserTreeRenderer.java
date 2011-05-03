@@ -17,7 +17,9 @@ public class FileChooserTreeRenderer extends DefaultTreeCellRenderer implements 
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 		FileChooserTreeNode node = (FileChooserTreeNode) value;
-		if (node.isDirectory) {
+		if (tree.getModel().getRoot() == node) {
+			this.setIcon(null);
+		} else if (node.isDirectory) {
 			this.setIcon(filechooser.getIcon(node.file));
 		} else {
 			if (node.getIcon() != null) {
