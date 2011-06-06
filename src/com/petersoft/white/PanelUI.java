@@ -24,7 +24,7 @@ public class PanelUI extends BasicPanelUI {
 		JPanel p = (JPanel) c;
 		// p.setBorder(null);
 		// p.setOpaque(true);
-		p.setBackground(Color.white);
+//		p.setBackground(Color.white);
 	}
 
 	public void uninstallUI(JComponent c) {

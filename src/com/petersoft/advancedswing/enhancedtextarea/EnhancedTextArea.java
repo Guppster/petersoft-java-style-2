@@ -190,6 +190,10 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 		jTextArea1.setText(text);
 	}
 
+	public String getText() {
+		return jTextArea1.getText();
+	}
+
 	private void updateStatus() {
 		jStatusLabel.setText("Line:" + jTextArea1.getText().split("\n").length + ", Char:" + jTextArea1.getText().length());
 	}
@@ -248,7 +252,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 				}
 			}
 		}
-		
+
 		if (searchPattern.length() > 0) {
 			Highlighter h = jTextArea1.getHighlighter();
 			DefaultHighlightPainter painter = new DefaultHighlightPainter(Color.YELLOW);

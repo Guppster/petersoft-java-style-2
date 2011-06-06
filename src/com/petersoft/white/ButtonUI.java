@@ -122,6 +122,8 @@ public class ButtonUI extends BasicButtonUI {
 				g.drawImage(normalMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
 				g.drawImage(normalLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
 			}
+			g.setColor(Color.white);
+			g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 		}
 
 		super.paint(g, c);
