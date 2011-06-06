@@ -157,6 +157,8 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("List.selectionBackground", table.get("textHighlight"));
 		table.put("List.focusCellHighlightBorder", new EmptyBorder(new Insets(0, 0, 0, 0)));
 
+		table.put("Panel.background", Color.white);
+		
 		table.put("TabbedPane.background", Color.white);
 		table.put("TabbedPane.tabAreaBackground", Color.white);
 		table.put("TabbedPane.shadow", new Color(169, 209, 255));

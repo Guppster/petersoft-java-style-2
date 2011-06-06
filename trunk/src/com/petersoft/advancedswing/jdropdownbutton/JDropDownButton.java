@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
@@ -95,6 +96,15 @@ public class JDropDownButton extends JButton implements ActionListener {
 
 	public void remove(JMenuItem jMenuItem) {
 		jPopupMenu.remove(jMenuItem);
+	}
+
+	public void setEnabled(boolean b) {
+		super.setEnabled(b);
+		for (MenuElement menu : jPopupMenu.getSubElements()) {
+			if (menu instanceof JMenuItem) {
+				((JMenuItem) menu).setEnabled(b);
+			}
+		}
 	}
 
 	private void initGUI() {
