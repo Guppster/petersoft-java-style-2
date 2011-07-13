@@ -1,5 +1,3 @@
 #summary Feature Request
 
-= Introduction =
-
-If you want some new features, please write it here. I will look at it seriously. Thanks you!
+= If you want some new features, please write it here. I will look at it seriously. Thanks you! =
