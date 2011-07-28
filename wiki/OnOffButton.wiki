@@ -15,20 +15,20 @@ onOffButton1.setSelected(true);
 {{{
 
 onOffButton1.addItemListener(new ItemListener() {
-					public void itemStateChanged(ItemEvent evt) {
-						onOffButton1ItemStateChanged(evt);
-					}
-				});
+	public void itemStateChanged(ItemEvent evt) {
+		onOffButton1ItemStateChanged(evt);
+	}
+});
 
 
 private void onOffButton1ItemStateChanged(ItemEvent evt) {
-		int state = evt.getStateChange();
-		if (state == ItemEvent.SELECTED) {
-			System.out.println("true");
-		} else {
-			System.out.println("false");
-		}
+	int state = evt.getStateChange();
+	if (state == ItemEvent.SELECTED) {
+		System.out.println("true");
+	} else {
+		System.out.println("false");
 	}
+}
 }}}
 
 == Source ==
