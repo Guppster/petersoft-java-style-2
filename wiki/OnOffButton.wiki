@@ -10,6 +10,8 @@ OnOffButton onOffButton1 = new OnOffButton();
 onOffButton1.setSelected(true);
 }}}
 
+OnOffButton is drived from JToggleButton, so the usage is the same. You can find the JToggleButton tutorial here [http://www.java2s.com/Tutorial/Java/0240__Swing/0140__JToggleButton.htm]
+
 = Toggle Event =
 
 {{{
