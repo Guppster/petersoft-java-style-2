@@ -34,41 +34,45 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 	protected Toolkit awtToolkit = Toolkit.getDefaultToolkit();
 	private HashMap colorMap = new HashMap();
 
-	Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X", DefaultEditorKit.cutAction, "COPY",
-			DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT", DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT",
-			DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction, "shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT",
-			DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction, "ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
-			"ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT",
-			DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME",
-			DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction, "shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction,
-			"typed \010", DefaultEditorKit.deletePrevCharAction, "DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT", DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction,
-			"KP_RIGHT", DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "ENTER", JTextField.notifyAction, "ctrl BACK_SLASH", "unselect", "control shift O",
+	Object fieldInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X",
+			DefaultEditorKit.cutAction, "COPY", DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT",
+			DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT", DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction,
+			"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT", DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+			"ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction, "ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+			"ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT",
+			DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME", DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction,
+			"shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction, "typed \010", DefaultEditorKit.deletePrevCharAction,
+			"DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT", DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction, "KP_RIGHT",
+			DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "ENTER", JTextField.notifyAction, "ctrl BACK_SLASH", "unselect", "control shift O",
 			"toggle-componentOrientation" });
-	Object multilineInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X", DefaultEditorKit.cutAction, "COPY",
-			DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT", DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT",
-			DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction, "shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT",
-			DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction, "ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
-			"ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT",
-			DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME",
-			DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction, "shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction,
+	Object multilineInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X",
+			DefaultEditorKit.cutAction, "COPY", DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT",
+			DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT", DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction,
+			"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT", DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+			"ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction, "ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+			"ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT",
+			DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME", DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction,
+			"shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction,
 
-			"UP", DefaultEditorKit.upAction, "KP_UP", DefaultEditorKit.upAction, "DOWN", DefaultEditorKit.downAction, "KP_DOWN", DefaultEditorKit.downAction, "PAGE_UP", DefaultEditorKit.pageUpAction,
-			"PAGE_DOWN", DefaultEditorKit.pageDownAction, "shift PAGE_UP", "selection-page-up", "shift PAGE_DOWN", "selection-page-down", "ctrl shift PAGE_UP", "selection-page-left",
-			"ctrl shift PAGE_DOWN", "selection-page-right", "shift UP", DefaultEditorKit.selectionUpAction, "shift KP_UP", DefaultEditorKit.selectionUpAction, "shift DOWN",
-			DefaultEditorKit.selectionDownAction, "shift KP_DOWN", DefaultEditorKit.selectionDownAction, "ENTER", DefaultEditorKit.insertBreakAction, "typed \010",
-			DefaultEditorKit.deletePrevCharAction, "DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT", DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction, "KP_RIGHT",
-			DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "TAB", DefaultEditorKit.insertTabAction, "ctrl BACK_SLASH", "unselect", "ctrl HOME",
-			DefaultEditorKit.beginAction, "ctrl END", DefaultEditorKit.endAction, "ctrl shift HOME", DefaultEditorKit.selectionBeginAction, "ctrl shift END", DefaultEditorKit.selectionEndAction,
-			"ctrl T", "next-link-action", "ctrl shift T", "previous-link-action", "ctrl SPACE", "activate-link-action", "control shift O", "toggle-componentOrientation" });
-	Object formattedInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X", DefaultEditorKit.cutAction, "COPY",
-			DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT", DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT",
-			DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction, "shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT",
-			DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction, "ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction,
-			"ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT",
-			DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME",
-			DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction, "shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction,
-			"typed \010", DefaultEditorKit.deletePrevCharAction, "DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT", DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction,
-			"KP_RIGHT", DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "ENTER", JTextField.notifyAction, "ctrl BACK_SLASH", "unselect", "control shift O",
+			"UP", DefaultEditorKit.upAction, "KP_UP", DefaultEditorKit.upAction, "DOWN", DefaultEditorKit.downAction, "KP_DOWN", DefaultEditorKit.downAction, "PAGE_UP",
+			DefaultEditorKit.pageUpAction, "PAGE_DOWN", DefaultEditorKit.pageDownAction, "shift PAGE_UP", "selection-page-up", "shift PAGE_DOWN", "selection-page-down",
+			"ctrl shift PAGE_UP", "selection-page-left", "ctrl shift PAGE_DOWN", "selection-page-right", "shift UP", DefaultEditorKit.selectionUpAction, "shift KP_UP",
+			DefaultEditorKit.selectionUpAction, "shift DOWN", DefaultEditorKit.selectionDownAction, "shift KP_DOWN", DefaultEditorKit.selectionDownAction, "ENTER",
+			DefaultEditorKit.insertBreakAction, "typed \010", DefaultEditorKit.deletePrevCharAction, "DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT",
+			DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction, "KP_RIGHT", DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "TAB",
+			DefaultEditorKit.insertTabAction, "ctrl BACK_SLASH", "unselect", "ctrl HOME", DefaultEditorKit.beginAction, "ctrl END", DefaultEditorKit.endAction, "ctrl shift HOME",
+			DefaultEditorKit.selectionBeginAction, "ctrl shift END", DefaultEditorKit.selectionEndAction, "ctrl T", "next-link-action", "ctrl shift T", "previous-link-action",
+			"ctrl SPACE", "activate-link-action", "control shift O", "toggle-componentOrientation" });
+	Object formattedInputMap = new UIDefaults.LazyInputMap(new Object[] { "ctrl C", DefaultEditorKit.copyAction, "ctrl V", DefaultEditorKit.pasteAction, "ctrl X",
+			DefaultEditorKit.cutAction, "COPY", DefaultEditorKit.copyAction, "PASTE", DefaultEditorKit.pasteAction, "CUT", DefaultEditorKit.cutAction, "shift LEFT",
+			DefaultEditorKit.selectionBackwardAction, "shift KP_LEFT", DefaultEditorKit.selectionBackwardAction, "shift RIGHT", DefaultEditorKit.selectionForwardAction,
+			"shift KP_RIGHT", DefaultEditorKit.selectionForwardAction, "ctrl LEFT", DefaultEditorKit.previousWordAction, "ctrl KP_LEFT", DefaultEditorKit.previousWordAction,
+			"ctrl RIGHT", DefaultEditorKit.nextWordAction, "ctrl KP_RIGHT", DefaultEditorKit.nextWordAction, "ctrl shift LEFT", DefaultEditorKit.selectionPreviousWordAction,
+			"ctrl shift KP_LEFT", DefaultEditorKit.selectionPreviousWordAction, "ctrl shift RIGHT", DefaultEditorKit.selectionNextWordAction, "ctrl shift KP_RIGHT",
+			DefaultEditorKit.selectionNextWordAction, "ctrl A", DefaultEditorKit.selectAllAction, "HOME", DefaultEditorKit.beginLineAction, "END", DefaultEditorKit.endLineAction,
+			"shift HOME", DefaultEditorKit.selectionBeginLineAction, "shift END", DefaultEditorKit.selectionEndLineAction, "typed \010", DefaultEditorKit.deletePrevCharAction,
+			"DELETE", DefaultEditorKit.deleteNextCharAction, "RIGHT", DefaultEditorKit.forwardAction, "LEFT", DefaultEditorKit.backwardAction, "KP_RIGHT",
+			DefaultEditorKit.forwardAction, "KP_LEFT", DefaultEditorKit.backwardAction, "ENTER", JTextField.notifyAction, "ctrl BACK_SLASH", "unselect", "control shift O",
 			"toggle-componentOrientation", "ESCAPE", "reset-field-edit", "UP", "increment", "KP_UP", "increment", "DOWN", "decrement", "KP_DOWN", "decrement", });
 
 	public PetersoftWhiteLookAndFeel() {
@@ -117,19 +121,21 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		uiDefaults = table;
 		super.initClassDefaults(table);
 
-		table.putDefaults(new Object[] { "PanelUI", "com.petersoft.white.PanelUI", "ButtonUI", "com.petersoft.white.ButtonUI", "ToggleButtonUI", "com.petersoft.white.ToggleButtonUI", "TabbedPaneUI",
-				"com.petersoft.white.TabbedPaneUI", "ScrollPaneUI", "com.petersoft.white.ScrollPaneUI", "ScrollBarUI", "com.petersoft.white.ScrollBarUI", "TextFieldUI",
-				"com.petersoft.white.TextFieldUI", "FormattedTextFieldUI", "com.petersoft.white.TextFieldUI", "LabelUI", "com.petersoft.white.LabelUI", "CheckBoxUI", "com.petersoft.white.CheckBoxUI",
-				"RadioButtonUI", "com.petersoft.white.RadioButtonUI", "ComboBoxUI", "com.petersoft.white.ComboBoxUI", "ToolBarUI", "com.petersoft.white.ToolBarUI", "FileChooserUI",
-				"com.petersoft.white.FileChooserUI", "TableUI", "com.petersoft.white.TableUI", "TableHeaderUI", "com.petersoft.white.TableHeaderUI", "ProgressBarUI",
-				"com.petersoft.white.ProgressBarUI", "SliderUI", "com.petersoft.white.SliderUI", "SplitPaneUI", "com.petersoft.white.SplitPaneUI", "MenuBarUI", "com.petersoft.white.MenuBarUI",
-				"MenuUI", "com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI" });
+		table.putDefaults(new Object[] { "PanelUI", "com.petersoft.white.PanelUI", "ButtonUI", "com.petersoft.white.ButtonUI", "ToggleButtonUI",
+				"com.petersoft.white.ToggleButtonUI", "TabbedPaneUI", "com.petersoft.white.TabbedPaneUI", "ScrollPaneUI", "com.petersoft.white.ScrollPaneUI", "ScrollBarUI",
+				"com.petersoft.white.ScrollBarUI", "TextFieldUI", "com.petersoft.white.TextFieldUI", "FormattedTextFieldUI", "com.petersoft.white.TextFieldUI", "LabelUI",
+				"com.petersoft.white.LabelUI", "CheckBoxUI", "com.petersoft.white.CheckBoxUI", "RadioButtonUI", "com.petersoft.white.RadioButtonUI", "ComboBoxUI",
+				"com.petersoft.white.ComboBoxUI", "ToolBarUI", "com.petersoft.white.ToolBarUI", "FileChooserUI", "com.petersoft.white.FileChooserUI", "TableUI",
+				"com.petersoft.white.TableUI", "TableHeaderUI", "com.petersoft.white.TableHeaderUI", "ProgressBarUI", "com.petersoft.white.ProgressBarUI", "SliderUI",
+				"com.petersoft.white.SliderUI", "SplitPaneUI", "com.petersoft.white.SplitPaneUI", "MenuBarUI", "com.petersoft.white.MenuBarUI", "MenuUI",
+				"com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI" });
 	}
 
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
 		table.put("TextArea.background", Color.white);
+		table.put("TextArea.border", new LineBorder(Color.gray));
 
 		table.put("TextField.focusInputMap", fieldInputMap);
 		table.put("PasswordField.focusInputMap", fieldInputMap);
@@ -158,7 +164,7 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("List.focusCellHighlightBorder", new EmptyBorder(new Insets(0, 0, 0, 0)));
 
 		table.put("Panel.background", Color.white);
-		
+
 		table.put("TabbedPane.background", Color.white);
 		table.put("TabbedPane.tabAreaBackground", Color.white);
 		table.put("TabbedPane.shadow", new Color(169, 209, 255));
@@ -192,7 +198,7 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 
 		table.put("Table.background", table.get("text"));
 		table.put("Table.foreground", table.get("controlText"));
-		table.put("Table.gridColor", new Color(240, 240, 240));
+		table.put("Table.gridColor", new Color(230, 230, 230));
 		table.put("Table.selectionBackground", table.get("textHighlight"));
 		table.put("Table.selectionForeground", table.get("textHighlightText"));
 		table.put("Table.focusCellBackground", table.get("textHighlight"));
@@ -281,9 +287,10 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("Separator.background", Color.white);
 		table.put("Separator.foreground", Color.lightGray);
 
-		table.put("ComboBox.ancestorInputMap", new UIDefaults.LazyInputMap(new Object[] { "ESCAPE", "hidePopup", "PAGE_UP", "pageUpPassThrough", "PAGE_DOWN", "pageDownPassThrough", "HOME",
-				"homePassThrough", "END", "endPassThrough", "DOWN", "selectNext", "KP_DOWN", "selectNext", "alt DOWN", "togglePopup", "alt KP_DOWN", "togglePopup", "alt UP", "togglePopup",
-				"alt KP_UP", "togglePopup", "SPACE", "spacePopup", "ENTER", "enterPressed", "UP", "selectPrevious", "KP_UP", "selectPrevious" }));
+		table.put("ComboBox.ancestorInputMap", new UIDefaults.LazyInputMap(new Object[] { "ESCAPE", "hidePopup", "PAGE_UP", "pageUpPassThrough", "PAGE_DOWN",
+				"pageDownPassThrough", "HOME", "homePassThrough", "END", "endPassThrough", "DOWN", "selectNext", "KP_DOWN", "selectNext", "alt DOWN", "togglePopup", "alt KP_DOWN",
+				"togglePopup", "alt UP", "togglePopup", "alt KP_UP", "togglePopup", "SPACE", "spacePopup", "ENTER", "enterPressed", "UP", "selectPrevious", "KP_UP",
+				"selectPrevious" }));
 
 		// toolbar
 		table.put("ToolBar.rolloverBorder", new LineBorder(Color.gray));
@@ -324,14 +331,15 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		colorMap.put("windowForeground", "#000000");
 
 		String[] defaultSystemColors = { "desktop", (String) colorMap.get("alternateBackground"), "activeCaption", (String) colorMap.get("activeBackground"), "activeCaptionText",
-				(String) colorMap.get("activeForeground"), "activeCaptionBorder", (String) colorMap.get("activeBackground"), "inactiveCaption", (String) colorMap.get("inactiveBackground"),
-				"inactiveCaptionText", (String) colorMap.get("inactiveForeground"), "inactiveCaptionBorder", (String) colorMap.get("inactiveBackground"), "window",
-				(String) colorMap.get("background"), "windowBorder", (String) colorMap.get("windowBackground"), "windowText", (String) colorMap.get("windowForeground"), "menu",
-				(String) colorMap.get("background"), "menuText", (String) colorMap.get("foreground"), "text", (String) colorMap.get("windowBackground"), "textText",
-				(String) colorMap.get("windowForeground"), "textHighlight", (String) colorMap.get("selectBackground"), "textHighlightText", (String) colorMap.get("selectForeground"),
-				"textInactiveText", "#A7A5A3", "control", (String) colorMap.get("background"), "controlText", (String) colorMap.get("buttonForeground"), "controlHighlight",
-				(String) colorMap.get("buttonBackground"), "controlLtHighlight", (String) colorMap.get("selectBackground"), "controlShadow", "#BBBBBB", "controlLightShadow", "#000000",
-				"controlDkShadow", "#000000", "scrollbar", "#000000", "info", (String) "#ffffff", "infoText", (String) colorMap.get("foreground") };
+				(String) colorMap.get("activeForeground"), "activeCaptionBorder", (String) colorMap.get("activeBackground"), "inactiveCaption",
+				(String) colorMap.get("inactiveBackground"), "inactiveCaptionText", (String) colorMap.get("inactiveForeground"), "inactiveCaptionBorder",
+				(String) colorMap.get("inactiveBackground"), "window", (String) colorMap.get("background"), "windowBorder", (String) colorMap.get("windowBackground"),
+				"windowText", (String) colorMap.get("windowForeground"), "menu", (String) colorMap.get("background"), "menuText", (String) colorMap.get("foreground"), "text",
+				(String) colorMap.get("windowBackground"), "textText", (String) colorMap.get("windowForeground"), "textHighlight", (String) colorMap.get("selectBackground"),
+				"textHighlightText", (String) colorMap.get("selectForeground"), "textInactiveText", "#A7A5A3", "control", (String) colorMap.get("background"), "controlText",
+				(String) colorMap.get("buttonForeground"), "controlHighlight", (String) colorMap.get("buttonBackground"), "controlLtHighlight",
+				(String) colorMap.get("selectBackground"), "controlShadow", "#BBBBBB", "controlLightShadow", "#000000", "controlDkShadow", "#000000", "scrollbar", "#000000",
+				"info", (String) "#ffffff", "infoText", (String) colorMap.get("foreground") };
 		loadSystemColors(table, defaultSystemColors, false);
 
 	}

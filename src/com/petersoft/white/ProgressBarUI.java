@@ -4,16 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class ProgressBarUI extends BasicProgressBarUI {
-	Image bg = new ImageIcon(ButtonUI.class
-			.getResource("images/PProgressBar/bg.png")).getImage();
+	Image bg = new ImageIcon(ButtonUI.class.getResource("images/PProgressBar/bg.png")).getImage();
 
 	public static ComponentUI createUI(JComponent c) {
 		return new ProgressBarUI();
@@ -22,10 +26,8 @@ public class ProgressBarUI extends BasicProgressBarUI {
 	public void paintDeterminate(Graphics g, JComponent c) {
 		try {
 			JProgressBar jProgressBar = (JProgressBar) c;
-			g.drawImage(bg, 0, 0, c.getWidth()
-					* (jProgressBar.getValue() - jProgressBar.getMinimum())
-					/ (jProgressBar.getMaximum() - jProgressBar.getMinimum()),
-					c.getHeight(), null, null);
+			g.drawImage(bg, 0, 0, c.getWidth() * (jProgressBar.getValue() - jProgressBar.getMinimum()) / (jProgressBar.getMaximum() - jProgressBar.getMinimum()), c.getHeight(),
+					null, null);
 
 			Insets b = progressBar.getInsets(); // area for border
 			int barRectWidth = progressBar.getWidth() - (b.right + b.left);
@@ -33,12 +35,117 @@ public class ProgressBarUI extends BasicProgressBarUI {
 			int amountFull = getAmountFull(b, barRectWidth * 2, barRectHeight);
 
 			g.setColor(Color.black);
-			paintString(g, b.left, b.top, barRectWidth, barRectHeight,
-					amountFull, b);
+			paintString(g, b.left, b.top, barRectWidth, barRectHeight, amountFull, b);
 		} catch (Exception ex) {
 
 		}
 	}
+
+	int in_x = 0;
+
+	public void paintIndeterminate(Graphics g, JComponent c) {
+		// super.paintIndeterminate(g, c);
+		try {
+			// JProgressBar jProgressBar = (JProgressBar) c;
+			//
+			// g.drawImage(bg, 0, 0, c.getWidth() * (jProgressBar.getValue() - jProgressBar.getMinimum()) / (jProgressBar.getMaximum() - jProgressBar.getMinimum()), c.getHeight(),
+			// null, null);
+
+			g.drawImage(bg, in_x, 0, 100, c.getHeight(), null, null);
+			//
+			Insets b = progressBar.getInsets(); // area for border
+			int barRectWidth = progressBar.getWidth() - (b.right + b.left);
+			int barRectHeight = progressBar.getHeight() - (b.top + b.bottom);
+			int amountFull = getAmountFull(b, barRectWidth * 2, barRectHeight);
+
+			paintString(g, b.left, b.top, barRectWidth, barRectHeight, amountFull, b);
+			// paintString(g, "peter", 0, 0, barRectWidth, barRectHeight, amountFull, b);
+		} catch (Exception ex) {
+
+		}
+	}
+
+	public void installUI(JComponent c) {
+		super.installUI(c);
+		progressBar = (JProgressBar) c;
+		if (progressBar.isIndeterminate()) {
+			initIndeterminateValues();
+		}
+	}
+
+	public void uninstallUI(JComponent c) {
+		super.uninstallUI(c);
+		progressBar = (JProgressBar) c;
+		if (progressBar.isIndeterminate()) {
+			cleanUpIndeterminateValues();
+		}
+		progressBar = null;
+	}
+
+	private void initIndeterminateValues() {
+		if (progressBar.isDisplayable()) {
+			startAnimationTimer();
+		}
+	}
+
+	private void cleanUpIndeterminateValues() {
+		// stop the animation thread if necessary
+		if (progressBar.isDisplayable()) {
+			stopAnimationTimer();
+		}
+	}
+
+	public void propertyChange(PropertyChangeEvent e) {
+		String prop = e.getPropertyName();
+		if ("indeterminate" == prop) {
+			if (progressBar.isIndeterminate()) {
+				initIndeterminateValues();
+			} else {
+				// clean up
+				cleanUpIndeterminateValues();
+			}
+			progressBar.repaint();
+		}
+	}
+
+	Thread thread;
+	boolean toggle;
+
+	public void startAnimationTimer() {
+		thread = new Thread() {
+			public void run() {
+				while (true) {
+					if (!toggle) {
+						in_x++;
+					} else {
+						in_x--;
+					}
+					progressBar.repaint();
+
+					if (in_x >= progressBar.getWidth() - 100) {
+						toggle = true;
+					}
+					if (in_x <= 0) {
+						toggle = false;
+					}
+
+					try {
+						this.sleep(2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		thread.start();
+	}
+
+	public void stopAnimationTimer() {
+		if (thread != null) {
+			thread.stop();
+		}
+	}
+
 	// public void paintIndeterminate(Graphics g, JComponent c) {
 	// super.paintIndeterminate(g, c);
 	//

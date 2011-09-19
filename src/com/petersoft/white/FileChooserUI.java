@@ -77,7 +77,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.plaf.ActionMapUIResource;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.TreeUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -456,7 +455,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		groupLabels(new AlignedLabel[] { fileNameLabel, filesOfTypeLabel });
 
 		searchTextField.requestFocus();
-
+		fc.setPreferredSize(new Dimension(800, 600));
 	}
 
 	private JPanel createRecentPanel() {
@@ -1096,14 +1095,12 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	}
 
 	/**
-	 * Returns the preferred size of the specified <code>JFileChooser</code>.
-	 * The preferred size is at least as large, in both height and width, as the
-	 * preferred size recommended by the file chooser's layout manager.
+	 * Returns the preferred size of the specified <code>JFileChooser</code>. The preferred size is at least as large, in both height and width, as the preferred size recommended
+	 * by the file chooser's layout manager.
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the preferred width and
-	 *         height of the file chooser
+	 * @return a <code>Dimension</code> specifying the preferred width and height of the file chooser
 	 */
 	public Dimension getPreferredSize(JComponent c) {
 		int prefWidth = PREF_SIZE.width;
@@ -1121,8 +1118,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the minimum width and height
-	 *         of the file chooser
+	 * @return a <code>Dimension</code> specifying the minimum width and height of the file chooser
 	 */
 	public Dimension getMinimumSize(JComponent c) {
 		return MIN_SIZE;
@@ -1133,8 +1129,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	 * 
 	 * @param c
 	 *            a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the maximum width and height
-	 *         of the file chooser
+	 * @return a <code>Dimension</code> specifying the maximum width and height of the file chooser
 	 */
 	public Dimension getMaximumSize(JComponent c) {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -1507,8 +1502,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	}
 
 	/**
-	 * Property to remember whether a directory is currently selected in the UI.
-	 * This is normally called by the UI on a selection event.
+	 * Property to remember whether a directory is currently selected in the UI. This is normally called by the UI on a selection event.
 	 * 
 	 * @param directorySelected
 	 *            if a directory is currently selected.
@@ -1949,9 +1943,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		}
 
 		/**
-		 * Adds the directory to the model and sets it to be selected,
-		 * additionally clears out the previous selected directory and the paths
-		 * leading up to it, if any.
+		 * Adds the directory to the model and sets it to be selected, additionally clears out the previous selected directory and the paths leading up to it, if any.
 		 */
 		private void addItem(File directory) {
 
@@ -2141,10 +2133,8 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	}
 
 	/**
-	 * <code>ButtonAreaLayout</code> behaves in a similar manner to
-	 * <code>FlowLayout</code>. It lays out all components from left to right,
-	 * flushed right. The widths of all components will be set to the largest
-	 * preferred size width.
+	 * <code>ButtonAreaLayout</code> behaves in a similar manner to <code>FlowLayout</code>. It lays out all components from left to right, flushed right. The widths of all
+	 * components will be set to the largest preferred size width.
 	 */
 	private static class ButtonAreaLayout implements LayoutManager {
 		private int hGap = 5;

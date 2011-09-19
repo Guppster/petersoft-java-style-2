@@ -1,5 +1,6 @@
 package com.petersoft.white;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -75,10 +76,8 @@ public class TableUI extends BasicTableUI {
 	}
 
 	/*
-	 * Paints the grid lines within <I>aRect</I>, using the grid color set with
-	 * <I>setGridColor</I>. Paints vertical lines if
-	 * <code>getShowVerticalLines()</code> returns true and paints horizontal
-	 * lines if <code>getShowHorizontalLines()</code> returns true.
+	 * Paints the grid lines within <I>aRect</I>, using the grid color set with <I>setGridColor</I>. Paints vertical lines if <code>getShowVerticalLines()</code> returns true and
+	 * paints horizontal lines if <code>getShowHorizontalLines()</code> returns true.
 	 */
 	private void paintGrid(Graphics g, int rMin, int rMax, int cMin, int cMax) {
 		g.setColor(table.getGridColor());
@@ -92,7 +91,7 @@ public class TableUI extends BasicTableUI {
 
 			for (int row = rMin; row <= rMax; row++) {
 				y += table.getRowHeight(row);
-//				g.drawLine(damagedArea.x, y - 1, tableWidth - 1, y - 1);
+				g.drawLine(damagedArea.x, y - 1, tableWidth - 1, y - 1);
 			}
 		}
 
@@ -256,23 +255,23 @@ public class TableUI extends BasicTableUI {
 	}
 
 	private void paintCell(Graphics g, Rectangle cellRect, int row, int column) {
-		try {
-			if (table.isEditing() && (table.getEditingRow() == row) && (table.getEditingColumn() == column)) {
-				Component component = table.getEditorComponent();
-				component.setBounds(cellRect);
-				component.validate();
-			} else {
-				TableCellRenderer renderer = table.getCellRenderer(row, column);
-				if (table != null && renderer != null) {
-					Component component = table.prepareRenderer(renderer, row, column);
+		// try {
+		if (table.isEditing() && (table.getEditingRow() == row) && (table.getEditingColumn() == column)) {
+			Component component = table.getEditorComponent();
+			component.setBounds(cellRect);
+			component.validate();
+		} else {
+			TableCellRenderer renderer = table.getCellRenderer(row, column);
+			if (table != null && renderer != null) {
+				Component component = table.prepareRenderer(renderer, row, column);
 
-					if (rendererPane != null) {
-						rendererPane.paintComponent(g, component, table, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
-					}
+				if (rendererPane != null) {
+					rendererPane.paintComponent(g, component, table, cellRect.x, cellRect.y, cellRect.width, cellRect.height, true);
 				}
-
 			}
-		} catch (Exception ex) {
+
 		}
+		// } catch (Exception ex) {
+		// }
 	}
 }

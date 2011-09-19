@@ -59,6 +59,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.ListModel;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -71,6 +72,7 @@ import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
 import com.petersoft.advancedswing.onoffbutton.OnOffButton;
+import com.petersoft.advancedswing.resizabletextfield.JResizableTextField;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
 import com.petersoft.white.FileChooserTreeNode;
 
@@ -137,6 +139,9 @@ public class JMainFrame extends JFrame {
 	private JPanel jPanel22;
 	private JPanel jPanel24;
 	private JPanel jPanel26;
+	private JProgressBar jProgressBar3;
+	private JResizableTextField jResizableTextField1;
+	private JPanel jPanel27;
 	private JDropDownButton jDropDownButton4;
 	private JButton jButton21;
 	private JButton jButton20;
@@ -321,6 +326,7 @@ public class JMainFrame extends JFrame {
 		JScrollBar2.setVisibleAmount(1);
 		JScrollBar3.setVisibleAmount(1);
 		this.setTitle("PetersoftJavaStyle Demo " + Globals.version);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		{
 			jMenuBar1 = new JMenuBar();
 			setJMenuBar(jMenuBar1);
@@ -486,6 +492,25 @@ public class JMainFrame extends JFrame {
 		JCheckBox5.setBounds(136, 157, 150, 29);
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
+		{
+			jPanel27 = new JPanel();
+			GroupLayout jPanel27Layout = new GroupLayout((JComponent)jPanel27);
+			jTabbedPane1.addTab("JResizableTextField", null, jPanel27, null);
+			jPanel27.setLayout(jPanel27Layout);
+			{
+				jResizableTextField1 = new JResizableTextField();
+				jResizableTextField1.setText("jResizableTextField1\n123456789\nabcdefghi");
+				jResizableTextField1.setBounds(206, 21, 176, 22);
+			}
+			jPanel27Layout.setHorizontalGroup(jPanel27Layout.createSequentialGroup()
+				.addContainerGap(189, 189)
+				.addComponent(jResizableTextField1, 0, 176, Short.MAX_VALUE)
+				.addContainerGap(314, 314));
+			jPanel27Layout.setVerticalGroup(jPanel27Layout.createSequentialGroup()
+				.addContainerGap(30, 30)
+				.addComponent(jResizableTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap(273, Short.MAX_VALUE));
+		}
 		{
 			jOnOffButtonPanel = new JPanel();
 			GroupLayout jOnOffButtonPanelLayout = new GroupLayout((JComponent)jOnOffButtonPanel);
@@ -917,10 +942,18 @@ public class JMainFrame extends JFrame {
 			{
 				jProgressBar2 = new JProgressBar();
 				jPanel13.add(jProgressBar2);
-				jProgressBar2.setBounds(143, 192, 11, 221);
+				jProgressBar2.setBounds(43, 21, 18, 234);
 				jProgressBar2.setOrientation(SwingConstants.VERTICAL);
 				jProgressBar2.setValue(50);
 				jProgressBar2.setString("50%");
+			}
+			{
+				jProgressBar3 = new JProgressBar();
+				jPanel13.add(jProgressBar3);
+				jProgressBar3.setBounds(104, 155, 356, 14);
+				jProgressBar3.setIndeterminate(true);
+				jProgressBar3.setString("Peter");
+				jProgressBar3.setStringPainted(true);
 			}
 		}
 		{
