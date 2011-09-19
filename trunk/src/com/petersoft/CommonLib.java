@@ -51,11 +51,15 @@ public class CommonLib {
 	}
 
 	public static Long string2decimal(String s) {
-		s = s.trim().toLowerCase();
-		if (s.startsWith("0x")) {
-			return Long.parseLong(s.substring(2), 16);
+		if (s == null) {
+			return 0L;
 		} else {
-			return Long.parseLong(s, 10);
+			s = s.trim().toLowerCase();
+			if (s.startsWith("0x")) {
+				return Long.parseLong(s.substring(2), 16);
+			} else {
+				return Long.parseLong(s, 10);
+			}
 		}
 	}
 

@@ -4,9 +4,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -134,10 +135,8 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	 * @param oldFile
 	 *            a <code>File</code> object representing the existing file
 	 * @param newFile
-	 *            a <code>File</code> object representing the desired new file
-	 *            name
-	 * @return <code>true</code> if rename succeeded, otherwise
-	 *         <code>false</code>
+	 *            a <code>File</code> object representing the desired new file name
+	 * @return <code>true</code> if rename succeeded, otherwise <code>false</code>
 	 * @since 1.4
 	 */
 	public boolean renameFile(File oldFile, File newFile) {
@@ -183,7 +182,15 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	}
 
 	protected void sort(Vector<? extends File> v) {
-		ShellFolder.sortFiles(v);
+		// ShellFolder.sortFiles(v);
+		// ShellFolder.sort(v);
+
+		Collections.sort(v, new Comparator<File>() {
+			public int compare(File f1, File f2) {
+				// return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+				return f1.compareTo(f2);
+			}
+		});
 	}
 
 	// Obsolete - not used
@@ -355,11 +362,9 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	}
 
 	/**
-	 * Adds a PropertyChangeListener to the listener list. The listener is
-	 * registered for all bound properties of this class.
+	 * Adds a PropertyChangeListener to the listener list. The listener is registered for all bound properties of this class.
 	 * <p>
-	 * If <code>listener</code> is <code>null</code>, no exception is thrown and
-	 * no action is performed.
+	 * If <code>listener</code> is <code>null</code>, no exception is thrown and no action is performed.
 	 * 
 	 * @param listener
 	 *            the property change listener to be added
@@ -396,12 +401,9 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	}
 
 	/**
-	 * Returns an array of all the property change listeners registered on this
-	 * component.
+	 * Returns an array of all the property change listeners registered on this component.
 	 * 
-	 * @return all of this component's <code>PropertyChangeListener</code>s or
-	 *         an empty array if no property change listeners are currently
-	 *         registered
+	 * @return all of this component's <code>PropertyChangeListener</code>s or an empty array if no property change listeners are currently registered
 	 * 
 	 * @see #addPropertyChangeListener
 	 * @see #removePropertyChangeListener
@@ -417,10 +419,8 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	}
 
 	/**
-	 * Support for reporting bound property changes for boolean properties. This
-	 * method can be called when a bound property has changed and it will send
-	 * the appropriate PropertyChangeEvent to any registered
-	 * PropertyChangeListeners.
+	 * Support for reporting bound property changes for boolean properties. This method can be called when a bound property has changed and it will send the appropriate
+	 * PropertyChangeEvent to any registered PropertyChangeListeners.
 	 * 
 	 * @param propertyName
 	 *            the property whose value has changed
@@ -438,9 +438,7 @@ public class FilterBasicDirectoryModel extends AbstractListModel implements Prop
 	}
 
 	/**
-	 * Set the busy state for the model. The model is considered busy when it is
-	 * running a separate (interruptable) thread in order to load the contents
-	 * of a directory.
+	 * Set the busy state for the model. The model is considered busy when it is running a separate (interruptable) thread in order to load the contents of a directory.
 	 */
 	private synchronized void setBusy(final boolean busy, int fid) {
 		if (fid == fetchID) {

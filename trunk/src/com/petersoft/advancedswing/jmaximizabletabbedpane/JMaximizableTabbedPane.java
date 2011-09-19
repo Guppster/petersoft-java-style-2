@@ -218,10 +218,11 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 			Component obj = this.getParent();
 			while (obj != null) {
 				if (obj instanceof JMaximizableTabbedPane_BasePanel) {
+					System.out.println(obj);
 					JMaximizableTabbedPane_BasePanel basePanel = (JMaximizableTabbedPane_BasePanel) obj;
 					JMaximizableTabbedPane tabbedPane = (JMaximizableTabbedPane) e.getSource();
 					// tabbedPane.setUI(new JMaximizableTabbedPaneUI());
-//					System.out.println(tabbedPane.getUI());
+					// System.out.println(tabbedPane.getUI());
 					int selectedIndex = tabbedPane.getSelectedIndex();
 					if (!tabbedPane.isMaximized) {
 						JMaximizableTabbedPane newTabbedPane = new JMaximizableTabbedPane(true);
@@ -265,10 +266,8 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						panel1.add(westPanel, BorderLayout.WEST);
 						panel1.add(northPanel, BorderLayout.NORTH);
 
-						// get all the tabs
-						/*
-						 * at this monent, all the tabs in current tabbedpane is moved to the newtab, so getAllTabs will not able to get them
-						 */
+						// get all the tabs at this moment, all the tabs in current tabbedpane is moved to the newtab, so getAllTabs will not able to get them
+
 						HashSet<Component> allComponents = new HashSet<Component>();
 						getAllTabs(this, allComponents);
 						deleteExceptTabbedPane(allComponents);
@@ -283,39 +282,44 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 								SwingUtilities.convertPointToScreen(currentPoint, this);
 
 								for (int x = 0; x < jTabbedPane.getTabCount(); x++) {
+									// if (jTabbedPane.getIconAt(x) != null) {
+									JButton jButton;
 									if (jTabbedPane.getIconAt(x) != null) {
-										JButton jButton = new JButton(jTabbedPane.getIconAt(x));
-										jButton.setToolTipText(jTabbedPane.getTitleAt(x));
+										jButton = new JButton(jTabbedPane.getIconAt(x));
+									} else {
+										jButton = new JButton(jTabbedPane.getTitleAt(x));
+									}
+									jButton.setToolTipText(jTabbedPane.getTitleAt(x));
 
-										class MyActionListener implements ActionListener {
-											JTabbedPane jMaximizedTabbedPane;
-											int selectedIndex;
+									class MyActionListener implements ActionListener {
+										JTabbedPane jMaximizedTabbedPane;
+										int selectedIndex;
 
-											public MyActionListener(JTabbedPane jTabbedPane, int selectedIndex) {
-												this.jMaximizedTabbedPane = jTabbedPane;
-												this.selectedIndex = selectedIndex;
-											}
-
-											public void actionPerformed(ActionEvent e) {
-												// MouseEvent mouseEvent = new
-												// MouseEvent(jMaximizedTabbedPane,
-												// 0, 0, 0, 0, 0, 2, false);
-												// mouseClicked(mouseEvent);
-												detachTab(jTabbedPane, selectedIndex);
-											}
+										public MyActionListener(JTabbedPane jTabbedPane, int selectedIndex) {
+											this.jMaximizedTabbedPane = jTabbedPane;
+											this.selectedIndex = selectedIndex;
 										}
 
-										jButton.addActionListener(new MyActionListener(newTabbedPane, x));
-										if (p.x < currentPoint.x) {
-											westPanel.add(jButton);
-										} else if (p.x > currentPoint.x) {
-											eastPanel.add(jButton);
-										} else if (p.y < currentPoint.y) {
-											northPanel.add(jButton);
-										} else {
-											southPanel.add(jButton);
+										public void actionPerformed(ActionEvent e) {
+											// MouseEvent mouseEvent = new
+											// MouseEvent(jMaximizedTabbedPane,
+											// 0, 0, 0, 0, 0, 2, false);
+											// mouseClicked(mouseEvent);
+											detachTab(jTabbedPane, selectedIndex);
 										}
 									}
+
+									jButton.addActionListener(new MyActionListener(newTabbedPane, x));
+									if (p.x < currentPoint.x) {
+										westPanel.add(jButton);
+									} else if (p.x > currentPoint.x) {
+										eastPanel.add(jButton);
+									} else if (p.y < currentPoint.y) {
+										northPanel.add(jButton);
+									} else {
+										southPanel.add(jButton);
+									}
+									// }
 								}
 							}
 						}
@@ -347,7 +351,6 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						cardLayout.show(basePanel, "newtab");
 						return;
 					} else {
-
 						Component components[] = new Component[tabbedPane.getTabCount()];
 						String componentsName[] = new String[tabbedPane.getTabCount()];
 						Icon componentsIcon[] = new Icon[tabbedPane.getTabCount()];
@@ -360,7 +363,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 						for (int x = 0; x < components.length; x++) {
 							tabbedPane.getOriginalClosableTabbedPane().addTab(componentsName[x], componentsIcon[x], components[x]);
 						}
-//						System.out.println("aa=" + closableTabIndex);
+						// System.out.println("aa=" + closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setClosableTabIndex(closableTabIndex);
 						tabbedPane.getOriginalClosableTabbedPane().setSelectedIndex(selectedIndex);
 						CardLayout cardLayout = (CardLayout) basePanel.getLayout();

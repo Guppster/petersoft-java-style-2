@@ -4,15 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,18 +34,16 @@ import javax.swing.text.Highlighter;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
- * Builder, which is free for non-commercial use. If Jigloo is being used
- * commercially (ie, by a corporation, company or business for any purpose
- * whatever) then you should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details. Use of Jigloo implies
- * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
- * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
- * ANY CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
+ * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
+ * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
+ * CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTailerListener, DocumentListener {
+public class EnhancedTextArea extends JPanel implements LogFileTailerListener, DocumentListener {
 	private JToolBar jToolBar1;
 	private JScrollPane jScrollPane1;
+	private JLabel jLabel1;
+	private JComboBox jFontComboBox;
 	private JLabel jSearchLabel;
 	private JPanel jStatusPanel;
 	private JSearchTextField jSearchTextField;
@@ -50,8 +51,9 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 	private JButton jFontBiggerButton;
 	private JButton jFontSmallerButton;
 	private JToggleButton jLineWrapButton;
-	private JTextArea jTextArea1;
+	public JTextArea jTextArea;
 	private JTextArea lines;
+	private int maxRow = -1;
 
 	/**
 	 * Auto-generated main method to display this JPanel inside a new JFrame.
@@ -113,6 +115,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 					jToolBar1.add(jSearchTextField);
 					jSearchTextField.setMaximumSize(new java.awt.Dimension(100, 22));
 					jSearchTextField.setPreferredSize(new java.awt.Dimension(100, 22));
+					jSearchTextField.setSize(new java.awt.Dimension(100, 22));
 					jSearchTextField.addKeyListener(new KeyAdapter() {
 						public void keyReleased(KeyEvent evt) {
 							jSearchTextFieldKeyReleased(evt);
@@ -120,25 +123,49 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 					});
 
 				}
+				{
+					jLabel1 = new JLabel();
+					jToolBar1.add(jLabel1);
+					jLabel1.setMaximumSize(new java.awt.Dimension(5, 10));
+				}
+				{
+					GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+					Font[] fonts = e.getAllFonts();
+					String fontNames[] = new String[fonts.length];
+					int x = 0;
+					for (Font f : fonts) {
+						fontNames[x++] = f.getFontName();
+					}
+					ComboBoxModel jFontComboBoxModel = new DefaultComboBoxModel(fontNames);
+					jFontComboBox = new JComboBox();
+					jToolBar1.add(jFontComboBox);
+					jFontComboBox.setModel(jFontComboBoxModel);
+					jFontComboBox.setMaximumSize(new java.awt.Dimension(150, 22));
+					jFontComboBox.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jFontComboBoxActionPerformed(evt);
+						}
+					});
+				}
 			}
 			{
 				jScrollPane1 = new JScrollPane();
 				this.add(jScrollPane1, BorderLayout.CENTER);
 				{
-					jTextArea1 = new JTextArea();
-					jTextArea1.getDocument().addDocumentListener(this);
-					lines = new JTextArea("1");
+					jTextArea = new JTextArea(10, 10000);
+					jTextArea.getDocument().addDocumentListener(this);
+					lines = new JTextArea(" 1 ");
 					lines.setBackground(new Color(200, 230, 245));
 					lines.setEditable(false);
 					jScrollPane1.setRowHeaderView(lines);
 
-					jTextArea1.getDocument().addDocumentListener(new DocumentListener() {
+					jTextArea.getDocument().addDocumentListener(new DocumentListener() {
 						public String getText() {
-							int caretPosition = jTextArea1.getDocument().getLength();
-							Element root = jTextArea1.getDocument().getDefaultRootElement();
-							String text = "1" + System.getProperty("line.separator");
+							int caretPosition = jTextArea.getDocument().getLength();
+							Element root = jTextArea.getDocument().getDefaultRootElement();
+							String text = " 1 " + System.getProperty("line.separator");
 							for (int i = 2; i < root.getElementIndex(caretPosition) + 2; i++) {
-								text += i + System.getProperty("line.separator");
+								text += " " + i + " " + System.getProperty("line.separator");
 							}
 							return text;
 						}
@@ -159,7 +186,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 						}
 
 					});
-					jScrollPane1.setViewportView(jTextArea1);
+					jScrollPane1.setViewportView(jTextArea);
 				}
 			}
 			{
@@ -183,36 +210,36 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 	}
 
 	public JTextArea getTextArea() {
-		return jTextArea1;
+		return jTextArea;
 	}
 
 	public void setText(String text) {
-		jTextArea1.setText(text);
+		jTextArea.setText(text);
 	}
 
 	public String getText() {
-		return jTextArea1.getText();
+		return jTextArea.getText();
 	}
 
 	private void updateStatus() {
-		jStatusLabel.setText("Line:" + jTextArea1.getText().split("\n").length + ", Char:" + jTextArea1.getText().length());
+		jStatusLabel.setText("Line:" + jTextArea.getText().split("\n").length + ", Char:" + jTextArea.getText().length());
 	}
 
 	private void jLineWrapButtonActionPerformed(ActionEvent evt) {
-		jTextArea1.setLineWrap(jLineWrapButton.isSelected());
+		jTextArea.setLineWrap(jLineWrapButton.isSelected());
 	}
 
 	private void jFontSmallerButtonActionPerformed(ActionEvent evt) {
-		Font f = jTextArea1.getFont();
+		Font f = jTextArea.getFont();
 		Font newFont = new Font(f.getFontName(), f.getStyle(), f.getSize() - 1);
-		jTextArea1.setFont(newFont);
+		jTextArea.setFont(newFont);
 		lines.setFont(newFont);
 	}
 
 	private void jFontBiggerButtonActionPerformed(ActionEvent evt) {
-		Font f = jTextArea1.getFont();
+		Font f = jTextArea.getFont();
 		Font newFont = new Font(f.getFontName(), f.getStyle(), f.getSize() + 1);
-		jTextArea1.setFont(newFont);
+		jTextArea.setFont(newFont);
 		lines.setFont(newFont);
 	}
 
@@ -224,21 +251,33 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 
 	@Override
 	public void newLogFileLine(String line) {
-		jTextArea1.append(line + System.getProperty("line.separator"));
-		jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+		if (maxRow == -1) {
+			jTextArea.append(line + System.getProperty("line.separator"));
+		} else {
+			if (jTextArea.getLineCount() > maxRow) {
+				for (int x = 0; x <= jTextArea.getLineCount() - maxRow; x++) {
+					try {
+						jTextArea.replaceRange("", jTextArea.getLineStartOffset(0), jTextArea.getLineEndOffset(0));
+					} catch (BadLocationException e) {
+					}
+				}
+			}
+			jTextArea.append(line + System.getProperty("line.separator"));
+		}
+		jTextArea.setCaretPosition(jTextArea.getDocument().getLength());
 		updateStatus();
 	}
 
 	private void jSearchTextFieldKeyReleased(KeyEvent evt) {
-		String text = jTextArea1.getText().toLowerCase();
+		String text = jTextArea.getText().toLowerCase();
 		String searchPattern = jSearchTextField.getText().toLowerCase();
 
-		if (evt.getKeyCode() == 10) {
-			int caretPosition = jTextArea1.getCaretPosition();
+		if (evt != null && evt.getKeyCode() == 10) {
+			int caretPosition = jTextArea.getCaretPosition();
 			boolean found = false;
 			for (int j = caretPosition + 1; j < text.length() - searchPattern.length(); j += 1) {
 				if (searchPattern.equals(text.substring(j, j + searchPattern.length()))) {
-					jTextArea1.setCaretPosition(j);
+					jTextArea.setCaretPosition(j);
 					found = true;
 					break;
 				}
@@ -246,7 +285,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 			if (!found) {
 				for (int j = 0; j < caretPosition; j++) {
 					if (searchPattern.equals(text.substring(j, j + searchPattern.length()))) {
-						jTextArea1.setCaretPosition(j);
+						jTextArea.setCaretPosition(j);
 						break;
 					}
 				}
@@ -254,7 +293,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 		}
 
 		if (searchPattern.length() > 0) {
-			Highlighter h = jTextArea1.getHighlighter();
+			Highlighter h = jTextArea.getHighlighter();
 			DefaultHighlightPainter painter = new DefaultHighlightPainter(Color.YELLOW);
 			DefaultHighlightPainter painter2 = new DefaultHighlightPainter(Color.RED);
 			h.removeAllHighlights();
@@ -265,7 +304,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 				if (j < text.length() - searchPattern.length() && searchPattern.equals(text.substring(j, j + searchPattern.length()))) {
 					count++;
 					try {
-						if (j >= jTextArea1.getCaretPosition() && isCurrent == false) {
+						if (j >= jTextArea.getCaretPosition() && isCurrent == false) {
 							h.addHighlight(j, j + searchPattern.length(), painter2);
 							isCurrent = true;
 						} else {
@@ -278,7 +317,7 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 			jSearchLabel.setText("Match:" + count);
 		} else {
 			jSearchLabel.setText("");
-			Highlighter h = jTextArea1.getHighlighter();
+			Highlighter h = jTextArea.getHighlighter();
 			h.removeAllHighlights();
 		}
 	}
@@ -296,6 +335,18 @@ public class EnhancedTextArea extends javax.swing.JPanel implements LogFileTaile
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		updateStatus();
+	}
+
+	public int getMaxRow() {
+		return maxRow;
+	}
+
+	public void setMaxRow(int maxRow) {
+		this.maxRow = maxRow;
+	}
+
+	private void jFontComboBoxActionPerformed(ActionEvent evt) {
+		jTextArea.setFont(new Font(jFontComboBox.getSelectedItem().toString(), jTextArea.getFont().getStyle(), jTextArea.getFont().getSize()));
 	}
 
 }
