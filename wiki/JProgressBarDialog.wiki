@@ -1,0 +1,5 @@
+#summary A JDialog with a JProgressBar
+
+= Details =
+
+JProgressBarDialog
