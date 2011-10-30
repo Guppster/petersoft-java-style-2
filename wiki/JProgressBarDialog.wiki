@@ -1,5 +1,7 @@
 #summary A JDialog with a JProgressBar
 
+[http://petersoft-java-style-2.googlecode.com/files/JProgressBarDialog.png]
+
 = Example =
 
 {{{
