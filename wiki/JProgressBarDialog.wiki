@@ -1,5 +1,22 @@
 #summary A JDialog with a JProgressBar
 
-= Details =
+= Example =
 
-JProgressBarDialog
+{{{
+final JProgressBarDialog d = new JProgressBarDialog(this, "JProgressBarDialog", true);
+
+d.jProgressBar.setIndeterminate(true);
+d.jProgressBar.setStringPainted(true);
+
+Thread longRunningThread = new Thread() {
+	public void run() {
+		int x = 0;
+		while (true) {
+			d.jProgressBar.setString("processing " + x);
+			x++;
+		}
+	}
+};
+d.thread = longRunningThread;
+d.setVisible(true);
+}}}
