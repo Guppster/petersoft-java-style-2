@@ -5,10 +5,14 @@
 = Example =
 
 {{{
+class XXX implements JProgressBarDialogEventListener{
+...
+
 final JProgressBarDialog d = new JProgressBarDialog(this, "JProgressBarDialog", true);
 
 d.jProgressBar.setIndeterminate(true);
 d.jProgressBar.setStringPainted(true);
+d.addCancelEventListener(this);
 
 Thread longRunningThread = new Thread() {
 	public void run() {
@@ -21,4 +25,15 @@ Thread longRunningThread = new Thread() {
 };
 d.thread = longRunningThread;
 d.setVisible(true);
+}
+
+
+public void cancelled() {
+    // if user clicked cancel button, jump here
+}
+
+}
+
+
+
 }}}
