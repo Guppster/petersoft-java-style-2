@@ -6,31 +6,30 @@
 
 {{{
 class XXX implements JProgressBarDialogEventListener{
-...
+    ...
+    void function(){
+        final JProgressBarDialog d = new JProgressBarDialog(this,     "JProgressBarDialog", true);
 
-final JProgressBarDialog d = new JProgressBarDialog(this, "JProgressBarDialog", true);
+        d.jProgressBar.setIndeterminate(true);
+        d.jProgressBar.setStringPainted(true);
+        d.addCancelEventListener(this);
 
-d.jProgressBar.setIndeterminate(true);
-d.jProgressBar.setStringPainted(true);
-d.addCancelEventListener(this);
+        Thread longRunningThread = new Thread() {
+        	public void run() {
+        		int x = 0;
+        		while (true) {
+    		            d.jProgressBar.setString("processing " + x);
+    		    	    x++;
+    	        	}
+        	}
+        };
+        d.thread = longRunningThread;
+        d.setVisible(true);
+    }
 
-Thread longRunningThread = new Thread() {
-	public void run() {
-		int x = 0;
-		while (true) {
-			d.jProgressBar.setString("processing " + x);
-			x++;
-		}
-	}
-};
-d.thread = longRunningThread;
-d.setVisible(true);
-}
-
-
-public void cancelled() {
-    // if user clicked cancel button, jump here
-}
+    public void cancelled() {
+        // if user clicked cancel button, jump here
+    }
 
 }
 
