@@ -1,4 +1,5 @@
 package com.petersoft.advancedswing.pager;
+import java.awt.FlowLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,17 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
+ * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
+ * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
+ * CORPORATE OR COMMERCIAL PURPOSE.
+ */
 public class Pager extends JPanel {
 	private JButton jFirstPageButton;
 	private JButton jNextPageButton;
@@ -30,6 +25,7 @@ public class Pager extends JPanel {
 	private JButton jPreviousPageButton;
 	protected EventListenerList listenerList = new EventListenerList();
 	protected EventListenerList textFieldlistenerList = new EventListenerList();
+	public int maxPageNo = 1;
 
 	public Pager() {
 		initGUI();
@@ -37,6 +33,12 @@ public class Pager extends JPanel {
 
 	private void initGUI() {
 		try {
+			{
+				FlowLayout thisLayout = new FlowLayout();
+				thisLayout.setAlignment(FlowLayout.LEFT);
+				this.setLayout(thisLayout);
+				this.setOpaque(false);
+			}
 			{
 				jFirstPageButton = new JButton();
 				this.add(jFirstPageButton);
@@ -108,7 +110,7 @@ public class Pager extends JPanel {
 		textFieldlistenerList.remove(PagerTextFieldEventListener.class, listener);
 	}
 
-	void fireMyEvent(PagerEvent evt) {
+	void firePagerEvent(PagerEvent evt) {
 		Object[] listeners = listenerList.getListenerList();
 
 		for (int i = 0; i < listeners.length; i += 2) {
@@ -129,27 +131,39 @@ public class Pager extends JPanel {
 	}
 
 	private void jNextPageButtonActionPerformed(ActionEvent evt) {
+		int pageNo = Integer.parseInt(jPageNoTextField.getText());
+		pageNo += 1;
+		if (pageNo <= maxPageNo) {
+			jPageNoTextField.setText(String.valueOf(pageNo));
+		}
 		PagerEvent event = new PagerEvent(this);
 		event.setType(2);
-		fireMyEvent(event);
+		firePagerEvent(event);
 	}
 
 	private void jPreviousPageButtonActionPerformed(ActionEvent evt) {
+		int pageNo = Integer.parseInt(jPageNoTextField.getText());
+		pageNo -= 1;
+		if (pageNo >= 1) {
+			jPageNoTextField.setText(String.valueOf(pageNo));
+		}
 		PagerEvent event = new PagerEvent(this);
 		event.setType(1);
-		fireMyEvent(event);
+		firePagerEvent(event);
 	}
 
 	private void jFirstPageButtonActionPerformed(ActionEvent evt) {
+		jPageNoTextField.setText("1");
 		PagerEvent event = new PagerEvent(this);
 		event.setType(0);
-		fireMyEvent(event);
+		firePagerEvent(event);
 	}
 
 	private void jLastPageButtonActionPerformed(ActionEvent evt) {
+		jPageNoTextField.setText(String.valueOf(maxPageNo));
 		PagerEvent event = new PagerEvent(this);
 		event.setType(3);
-		fireMyEvent(event);
+		firePagerEvent(event);
 	}
 
 	public void setPageNo(int pageNo) {
@@ -160,5 +174,9 @@ public class Pager extends JPanel {
 		PagerTextFieldEvent event = new PagerTextFieldEvent(this);
 		event.setValue(jPageNoTextField.getText());
 		fireTextFieldEvent(event);
+	}
+
+	public int getPage() {
+		return Integer.parseInt(jPageNoTextField.getText());
 	}
 }

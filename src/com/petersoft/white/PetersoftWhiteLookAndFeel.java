@@ -123,12 +123,12 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 
 		table.putDefaults(new Object[] { "PanelUI", "com.petersoft.white.PanelUI", "ButtonUI", "com.petersoft.white.ButtonUI", "ToggleButtonUI",
 				"com.petersoft.white.ToggleButtonUI", "TabbedPaneUI", "com.petersoft.white.TabbedPaneUI", "ScrollPaneUI", "com.petersoft.white.ScrollPaneUI", "ScrollBarUI",
-				"com.petersoft.white.ScrollBarUI", "TextFieldUI", "com.petersoft.white.TextFieldUI", "FormattedTextFieldUI", "com.petersoft.white.TextFieldUI", "LabelUI",
-				"com.petersoft.white.LabelUI", "CheckBoxUI", "com.petersoft.white.CheckBoxUI", "RadioButtonUI", "com.petersoft.white.RadioButtonUI", "ComboBoxUI",
-				"com.petersoft.white.ComboBoxUI", "ToolBarUI", "com.petersoft.white.ToolBarUI", "FileChooserUI", "com.petersoft.white.FileChooserUI", "TableUI",
-				"com.petersoft.white.TableUI", "TableHeaderUI", "com.petersoft.white.TableHeaderUI", "ProgressBarUI", "com.petersoft.white.ProgressBarUI", "SliderUI",
-				"com.petersoft.white.SliderUI", "SplitPaneUI", "com.petersoft.white.SplitPaneUI", "MenuBarUI", "com.petersoft.white.MenuBarUI", "MenuUI",
-				"com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI" });
+				"com.petersoft.white.ScrollBarUI", "TextFieldUI", "com.petersoft.white.TextFieldUI", "PasswordFieldUI", "com.petersoft.white.PasswordFieldUI",
+				"FormattedTextFieldUI", "com.petersoft.white.TextFieldUI", "LabelUI", "com.petersoft.white.LabelUI", "CheckBoxUI", "com.petersoft.white.CheckBoxUI",
+				"RadioButtonUI", "com.petersoft.white.RadioButtonUI", "ComboBoxUI", "com.petersoft.white.ComboBoxUI", "ToolBarUI", "com.petersoft.white.ToolBarUI",
+				"FileChooserUI", "com.petersoft.white.FileChooserUI", "TableUI", "com.petersoft.white.TableUI", "TableHeaderUI", "com.petersoft.white.TableHeaderUI",
+				"ProgressBarUI", "com.petersoft.white.ProgressBarUI", "SliderUI", "com.petersoft.white.SliderUI", "SplitPaneUI", "com.petersoft.white.SplitPaneUI", "MenuBarUI",
+				"com.petersoft.white.MenuBarUI", "MenuUI", "com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI" });
 	}
 
 	protected void initComponentDefaults(UIDefaults table) {
@@ -301,6 +301,9 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("ComboBox.foreground", Color.black);
 		// table.put("ComboBox.selectionBackground", Color.red);
 		// table.put("ComboBox.selectionForeground", Color.blue);
+
+		table.put("ScrollPane.border", new EmptyBorder(0, 0, 0, 0));
+		table.put("ScrollPane.viewportBorder", new LineBorder(Color.gray));
 
 		boolean lafCond = SwingUtilities2.isLocalDisplay();
 		Object aaTextInfo = SwingUtilities2.AATextInfo.getAATextInfo(lafCond);

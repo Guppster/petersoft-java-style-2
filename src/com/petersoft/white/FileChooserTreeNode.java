@@ -10,6 +10,8 @@ import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.tree.TreeNode;
 
+import com.petersoft.CommonLib;
+
 public class FileChooserTreeNode implements TreeNode {
 	private Icon icon;
 	File file;
@@ -111,7 +113,18 @@ public class FileChooserTreeNode implements TreeNode {
 
 	@Override
 	public Enumeration children() {
-		return new Vector(Arrays.asList(file.listFiles(new DirectoryFilter()))).elements();
+		// return new Vector(Arrays.asList(file.listFiles(new DirectoryFilter()))).elements();
+		if (file == null) {
+			return CommonLib.makeEnumeration(childNodes.toArray());
+		} else {
+			File files[] = file.listFiles(new DirectoryFilter());
+			FileChooserTreeNode a[] = new FileChooserTreeNode[files.length];
+
+			for (int x = 0; x < a.length; x++) {
+				a[x] = new FileChooserTreeNode(null, files[x], files[x].isDirectory());
+			}
+			return CommonLib.makeEnumeration(a);
+		}
 	}
 
 	public void add(FileChooserTreeNode node) {

@@ -218,7 +218,6 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 			Component obj = this.getParent();
 			while (obj != null) {
 				if (obj instanceof JMaximizableTabbedPane_BasePanel) {
-					System.out.println(obj);
 					JMaximizableTabbedPane_BasePanel basePanel = (JMaximizableTabbedPane_BasePanel) obj;
 					JMaximizableTabbedPane tabbedPane = (JMaximizableTabbedPane) e.getSource();
 					// tabbedPane.setUI(new JMaximizableTabbedPaneUI());
