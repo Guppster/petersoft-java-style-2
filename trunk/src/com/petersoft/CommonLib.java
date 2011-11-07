@@ -14,9 +14,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,11 +27,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JTree;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
 import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 public class CommonLib {
 	public static byte[] readFileByte(File file, long offset, int size) {
@@ -64,65 +69,68 @@ public class CommonLib {
 	}
 
 	public static long convertFilesize(String filesize) {
+		filesize = filesize.trim().toLowerCase();
+
+		if (filesize == null) {
+			return 0;
+		}
+		int isHex = 10;
+		if (filesize.startsWith("0x")) {
+			filesize = filesize.substring(2);
+			isHex = 16;
+		}
+		long returnValue = -1;
 		if (filesize.length() == 0) {
 			return 0;
 		} else if (filesize.length() == 1) {
-			return Long.parseLong(filesize);
+			return Long.parseLong(filesize, isHex);
 		} else if (filesize.substring(filesize.length() - 1).toLowerCase().equals("t")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 1)) * 1024 * 1024 * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 1), isHex) * 1024 * 1024 * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 2).toLowerCase().equals("tb")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 2)) * 1024 * 1024 * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 2), isHex) * 1024 * 1024 * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 1).toLowerCase().equals("g")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 1)) * 1024 * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 1), isHex) * 1024 * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 2).toLowerCase().equals("gb")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 2)) * 1024 * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 2), isHex) * 1024 * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 1).toLowerCase().equals("m")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 1)) * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 1), isHex) * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 2).toLowerCase().equals("mb")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 2)) * 1024 * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 2), isHex) * 1024 * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 1).toLowerCase().equals("k")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 1)) * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 1), isHex) * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else if (filesize.substring(filesize.length() - 2).toLowerCase().equals("kb")) {
 			try {
-				return Long.parseLong(filesize.substring(0, filesize.length() - 2)) * 1024;
+				return Long.parseLong(filesize.substring(0, filesize.length() - 2), isHex) * 1024;
 			} catch (Exception ex) {
-				return -1;
 			}
 		} else {
 			try {
-				return Long.parseLong(filesize);
+				return Long.parseLong(filesize, isHex);
 			} catch (Exception ex) {
-				return -1;
 			}
 		}
+		return returnValue;
 	}
 
 	public static void centerDialog(JFrame dialog) {
@@ -174,6 +182,7 @@ public class CommonLib {
 	}
 
 	private static char numberOfFile_runningChar[] = { '-', '\\', '|', '/' };
+	private static Object obj;
 
 	public static int numberOfFile(File node, boolean isSlient) {
 		int x = 0;
@@ -527,4 +536,67 @@ public class CommonLib {
 		}
 		return content;
 	}
+
+	public static Enumeration makeEnumeration(final Object obj) {
+		Class type = obj.getClass();
+		if (!type.isArray()) {
+			throw new IllegalArgumentException(obj.getClass().toString());
+		} else {
+			return (new Enumeration() {
+				int size = Array.getLength(obj);
+
+				int cursor;
+
+				public boolean hasMoreElements() {
+					return (cursor < size);
+				}
+
+				public Object nextElement() {
+					return Array.get(obj, cursor++);
+				}
+			});
+		}
+	}
+
+	public static void expandAll(JTree tree, boolean expand) {
+		TreeNode root = (TreeNode) tree.getModel().getRoot();
+		if (root != null) {
+			// Traverse tree from root
+			expandAll(tree, new TreePath(root), expand);
+		}
+	}
+
+	private static void expandAll(JTree tree, TreePath parent, boolean expand) {
+		// Traverse children
+		TreeNode node = (TreeNode) parent.getLastPathComponent();
+		if (node.getChildCount() >= 0) {
+			for (Enumeration e = node.children(); e.hasMoreElements();) {
+				TreeNode n = (TreeNode) e.nextElement();
+				TreePath path = parent.pathByAddingChild(n);
+				expandAll(tree, path, expand);
+			}
+		}
+
+		// Expansion or collapse must be done bottom-up
+		if (expand) {
+			tree.expandPath(parent);
+		} else {
+			tree.collapsePath(parent);
+		}
+	}
+
+	public static TreePath findTreeNode(TreeNode node, String pattern, TreePath treePath) {
+		Enumeration e = node.children();
+		while (e.hasMoreElements()) {
+			TreeNode obj = (TreeNode) e.nextElement();
+			if (obj.toString().equals(pattern)) {
+				return treePath.pathByAddingChild(obj);
+			}
+			if (!obj.isLeaf()) {
+				return findTreeNode(obj, pattern, treePath.pathByAddingChild(obj));
+			}
+		}
+		return null;
+	}
+
 }

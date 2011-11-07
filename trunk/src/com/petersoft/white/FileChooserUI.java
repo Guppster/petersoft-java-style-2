@@ -32,7 +32,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.EventObject;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
@@ -82,6 +85,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import com.petersoft.CommonLib;
@@ -464,6 +468,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		panel.add(jscrollpane, BorderLayout.CENTER);
 		FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("Computer", null, false));
 		jTree = new JTree(model);
+
 		jTree.setRootVisible(true);
 		jTree.setCellRenderer(new FileChooserTreeRenderer());
 
@@ -498,10 +503,6 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 
 		jscrollpane.getViewport().add(jTree);
 		return panel;
-	}
-
-	private void searchTextFieldKeyReleased(KeyEvent evt) {
-		getModel().setFilterText(searchTextField.getText());
 	}
 
 	private void updateUseShellFolder() {
@@ -1329,7 +1330,78 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 					setFileName(null);
 				}
 			}
+			// expand jTree to current directory
+			expandAll(jTree, true, currentDirectory);
+			// end expand jTree to current directory
 		}
+
+	}
+
+	public static void expandAll(JTree tree, boolean expand, File currentDirectory) {
+		if (currentDirectory == null) {
+			return;
+		}
+		TreeNode root = (TreeNode) tree.getModel().getRoot();
+		if (root != null) {
+
+			for (Enumeration e = root.children(); e.hasMoreElements();) {
+				FileChooserTreeNode n = (FileChooserTreeNode) e.nextElement();
+
+				List<String> pathArr = new LinkedList<String>(Arrays.asList(currentDirectory.getPath().split(File.separator.replaceAll("\\\\", "\\\\\\\\"))));
+				if (n.toString().startsWith(pathArr.get(0))) {
+
+					if (pathArr.size() > 0) {
+						pathArr.remove(0);
+						expandAll(tree, new TreePath(root).pathByAddingChild(n), expand, pathArr);
+					}
+					return;
+				}
+			}
+		}
+	}
+
+	private static void expandAll(JTree tree, TreePath parent, boolean expand, List pathArr) {
+		if (pathArr.size() == 1 && parent != null) {
+			tree.setSelectionPath(parent);
+			Rectangle rect = tree.getPathBounds(parent);
+			if (rect != null) {
+				rect.y -= 100;
+				rect.x -= 50;
+				tree.scrollRectToVisible(rect);
+			}
+		}
+		// Traverse children
+		TreeNode node = (TreeNode) parent.getLastPathComponent();
+
+		if (node.getChildCount() >= 0 && node.children() != null) {
+			for (Enumeration e = node.children(); e.hasMoreElements();) {
+				FileChooserTreeNode n = (FileChooserTreeNode) e.nextElement();
+
+				if (pathArr.get(0).equals(n.file.getName())) {
+					if (pathArr.size() > 1) {
+						pathArr.remove(0);
+						expandAll(tree, parent.pathByAddingChild(n), expand, pathArr);
+						break;
+					}
+				}
+			}
+		}
+		if (expand) {
+			tree.expandPath(parent);
+		} else {
+			tree.collapsePath(parent);
+		}
+	}
+
+	private void searchTextFieldKeyReleased(KeyEvent evt) {
+		getModel().setFilterText(searchTextField.getText());
+	}
+
+	private static File getFirstDirectory(File f) {
+		while (f.getParentFile() != null) {
+			f = f.getParentFile();
+		}
+		return f;
 	}
 
 	private void doFilterChanged(PropertyChangeEvent e) {

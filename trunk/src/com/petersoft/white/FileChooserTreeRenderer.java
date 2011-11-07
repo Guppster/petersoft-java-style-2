@@ -16,25 +16,31 @@ public class FileChooserTreeRenderer extends DefaultTreeCellRenderer implements 
 	static JFileChooser filechooser = new JFileChooser();
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-		FileChooserTreeNode node = (FileChooserTreeNode) value;
-		if (tree.getModel().getRoot() == node) {
-			this.setIcon(null);
-		} else if (node.isDirectory) {
-			this.setIcon(filechooser.getIcon(node.file));
-		} else {
-			if (node.getIcon() != null) {
-				this.setIcon(node.getIcon());
+		try {
+			if (value != null) {
+				FileChooserTreeNode node = (FileChooserTreeNode) value;
+				if (tree.getModel().getRoot() == node) {
+					this.setIcon(null);
+				} else if (filechooser != null && node.isDirectory && node.file != null) {
+					this.setIcon(filechooser.getIcon(node.file));
+				} else {
+					if (node.getIcon() != null) {
+						this.setIcon(node.getIcon());
+					}
+				}
+				this.setText(node.toString());
+				if (sel) {
+					this.setBackground(selectionBackground);
+					this.setBorder(new LineBorder(selectionBorderColor));
+				} else {
+					this.setBackground(tree.getBackground());
+					this.setBorder(null);
+				}
+				this.setOpaque(true);
 			}
+		} catch (Exception ex) {
+			this.setText(ex.getMessage());
 		}
-		this.setText(node.toString());
-		if (sel) {
-			this.setBackground(selectionBackground);
-			this.setBorder(new LineBorder(selectionBorderColor));
-		} else {
-			this.setBackground(tree.getBackground());
-			this.setBorder(null);
-		}
-		this.setOpaque(true);
 		return this;
 	}
 }

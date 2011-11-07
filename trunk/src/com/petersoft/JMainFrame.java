@@ -71,6 +71,7 @@ import com.petersoft.advancedswing.jclosabletabbedpane.JClosableTabbedPane;
 import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
 import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane_BasePanel;
+import com.petersoft.advancedswing.jprogressbardialog.JProgressBarDialog;
 import com.petersoft.advancedswing.onoffbutton.OnOffButton;
 import com.petersoft.advancedswing.resizabletextfield.JResizableTextField;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
@@ -139,6 +140,8 @@ public class JMainFrame extends JFrame {
 	private JPanel jPanel22;
 	private JPanel jPanel24;
 	private JPanel jPanel26;
+	private JButton jButton22;
+	private JPanel jPanel28;
 	private JProgressBar jProgressBar3;
 	private JResizableTextField jResizableTextField1;
 	private JPanel jPanel27;
@@ -325,7 +328,7 @@ public class JMainFrame extends JFrame {
 		JScrollBar3.addAdjustmentListener(new JMainFrame_JScrollBar3_adjustmentAdapter(this));
 		JScrollBar2.setVisibleAmount(1);
 		JScrollBar3.setVisibleAmount(1);
-		this.setTitle("PetersoftJavaStyle Demo " + Globals.version);
+		this.setTitle("PetersoftJavaStyle Demo " + Global.version);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		{
 			jMenuBar1 = new JMenuBar();
@@ -441,7 +444,7 @@ public class JMainFrame extends JFrame {
 		JButton3.setText("JButton3");
 		jTabbedPane1.add(JTextAreaPanel, "JTextArea");
 		pIntroductionTextArea.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
-		pIntroductionTextArea.setText("<html>Petersoft Java Style 2<br>" + Globals.version + "</html>");
+		pIntroductionTextArea.setText("<html>Petersoft Java Style 2<br>" + Global.version + "</html>");
 		pIntroductionPanel.setLayout(borderLayout3);
 		jTabbedPane1.addTab("JToggleButton", null, pTogglePanel, null);
 		{
@@ -493,8 +496,24 @@ public class JMainFrame extends JFrame {
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		jTabbedPane1.add(JScrollPanel, "JScrollPane");
 		{
+			jPanel28 = new JPanel();
+			jTabbedPane1.addTab("JProgressBarDialog", null, jPanel28, null);
+			jPanel28.setLayout(null);
+			{
+				jButton22 = new JButton();
+				jPanel28.add(jButton22);
+				jButton22.setText("Show JProgressBarDialog");
+				jButton22.setBounds(239, 122, 184, 28);
+				jButton22.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton22ActionPerformed(evt);
+					}
+				});
+			}
+		}
+		{
 			jPanel27 = new JPanel();
-			GroupLayout jPanel27Layout = new GroupLayout((JComponent)jPanel27);
+			GroupLayout jPanel27Layout = new GroupLayout((JComponent) jPanel27);
 			jTabbedPane1.addTab("JResizableTextField", null, jPanel27, null);
 			jPanel27.setLayout(jPanel27Layout);
 			{
@@ -502,18 +521,14 @@ public class JMainFrame extends JFrame {
 				jResizableTextField1.setText("jResizableTextField1\n123456789\nabcdefghi");
 				jResizableTextField1.setBounds(206, 21, 176, 22);
 			}
-			jPanel27Layout.setHorizontalGroup(jPanel27Layout.createSequentialGroup()
-				.addContainerGap(189, 189)
-				.addComponent(jResizableTextField1, 0, 176, Short.MAX_VALUE)
-				.addContainerGap(314, 314));
-			jPanel27Layout.setVerticalGroup(jPanel27Layout.createSequentialGroup()
-				.addContainerGap(30, 30)
-				.addComponent(jResizableTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(273, Short.MAX_VALUE));
+			jPanel27Layout.setHorizontalGroup(jPanel27Layout.createSequentialGroup().addContainerGap(189, 189).addComponent(jResizableTextField1, 0, 176, Short.MAX_VALUE)
+					.addContainerGap(314, 314));
+			jPanel27Layout.setVerticalGroup(jPanel27Layout.createSequentialGroup().addContainerGap(30, 30)
+					.addComponent(jResizableTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE).addContainerGap(273, Short.MAX_VALUE));
 		}
 		{
 			jOnOffButtonPanel = new JPanel();
-			GroupLayout jOnOffButtonPanelLayout = new GroupLayout((JComponent)jOnOffButtonPanel);
+			GroupLayout jOnOffButtonPanelLayout = new GroupLayout((JComponent) jOnOffButtonPanel);
 			jOnOffButtonPanel.setLayout(jOnOffButtonPanelLayout);
 			jTabbedPane1.addTab("OnOffButton", null, jOnOffButtonPanel, null);
 			{
@@ -530,18 +545,12 @@ public class JMainFrame extends JFrame {
 					}
 				});
 			}
-			jOnOffButtonPanelLayout.setHorizontalGroup(jOnOffButtonPanelLayout.createSequentialGroup()
-				.addContainerGap(258, 258)
-				.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(238, Short.MAX_VALUE));
-			jOnOffButtonPanelLayout.setVerticalGroup(jOnOffButtonPanelLayout.createSequentialGroup()
-				.addContainerGap(75, 75)
-				.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-				.addGap(50)
-				.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(165, Short.MAX_VALUE));
+			jOnOffButtonPanelLayout.setHorizontalGroup(jOnOffButtonPanelLayout.createSequentialGroup().addContainerGap(258, 258)
+					.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE).addContainerGap(238, Short.MAX_VALUE));
+			jOnOffButtonPanelLayout.setVerticalGroup(jOnOffButtonPanelLayout.createSequentialGroup().addContainerGap(75, 75)
+					.addComponent(onOffButton1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE).addGap(50)
+					.addComponent(jButton20, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE).addContainerGap(165, Short.MAX_VALUE));
 		}
 		{
 			jPanel25 = new JPanel();
@@ -551,10 +560,11 @@ public class JMainFrame extends JFrame {
 			{
 				enhancedTextArea1 = new EnhancedTextArea();
 			}
-//			enhancedTextArea1.setText(CommonLib.getWebpage("www.google.com"));
+			// enhancedTextArea1.setText(CommonLib.getWebpage("www.google.com"));
 			jPanel25Layout.setHorizontalGroup(jPanel25Layout.createSequentialGroup().addContainerGap(81, 81)
 					.addComponent(enhancedTextArea1, GroupLayout.PREFERRED_SIZE, 532, GroupLayout.PREFERRED_SIZE).addContainerGap(72, Short.MAX_VALUE));
-			jPanel25Layout.setVerticalGroup(jPanel25Layout.createSequentialGroup().addContainerGap(44, 44).addComponent(enhancedTextArea1, 0, 290, Short.MAX_VALUE).addContainerGap());
+			jPanel25Layout.setVerticalGroup(jPanel25Layout.createSequentialGroup().addContainerGap(44, 44).addComponent(enhancedTextArea1, 0, 290, Short.MAX_VALUE)
+					.addContainerGap());
 		}
 		{
 			jPanel24 = new JPanel();
@@ -577,10 +587,10 @@ public class JMainFrame extends JFrame {
 					jScrollPane2.setViewportView(jTree2);
 				}
 			}
-			jPanel24Layout.setVerticalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(18, 18).addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(32, 32));
-			jPanel24Layout.setHorizontalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(58, 58).addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 535, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(86, 86));
+			jPanel24Layout.setVerticalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(18, 18)
+					.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE).addContainerGap(32, 32));
+			jPanel24Layout.setHorizontalGroup(jPanel24Layout.createSequentialGroup().addContainerGap(58, 58)
+					.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 535, GroupLayout.PREFERRED_SIZE).addContainerGap(86, 86));
 		}
 		{
 			jPanel23 = new JPanel();
@@ -1150,9 +1160,9 @@ public class JMainFrame extends JFrame {
 				jPanel2.add(jScrollPane1);
 				jScrollPane1.setBounds(130, 176, 292, 151);
 				{
-					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
-							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" } }, new String[] {
-							"Column 1", "Column 2" });
+					TableModel jTable1Model = new DefaultTableModel(new String[][] { { "One", "Two" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" }, { "Three", "Four" },
+							{ "Three", "Four" } }, new String[] { "Column 1", "Column 2" });
 					jTable1 = new JTable();
 					jScrollPane1.setViewportView(jTable1);
 					jTable1.setModel(jTable1Model);
@@ -1349,10 +1359,12 @@ public class JMainFrame extends JFrame {
 		{
 			jFileChooser1 = new JFileChooser();
 		}
-		pFileChooserPanelLayout.setVerticalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 322, Short.MAX_VALUE).addContainerGap());
-		pFileChooserPanelLayout.setHorizontalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 655, Short.MAX_VALUE).addContainerGap());
+		pFileChooserPanelLayout.setVerticalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 322, Short.MAX_VALUE)
+				.addContainerGap());
+		pFileChooserPanelLayout.setHorizontalGroup(pFileChooserPanelLayout.createSequentialGroup().addContainerGap().addComponent(jFileChooser1, 0, 655, Short.MAX_VALUE)
+				.addContainerGap());
 		pVersionLabel.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
-		pVersionLabel.setText("version : " + Globals.version);
+		pVersionLabel.setText("version : " + Global.version);
 		pack();
 		this.setSize(700, 500);
 	}
@@ -1423,13 +1435,14 @@ public class JMainFrame extends JFrame {
 
 	private void jButton14ActionPerformed(ActionEvent evt) {
 		Object[] options = { "Yes, please", "No, thanks", "No eggs, no ham!" };
-		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				null, options, options[2]);
+		int n = JOptionPane.showOptionDialog(this, "Would you like some green eggs to go " + "with that ham?", "A Silly Question", JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 	}
 
 	private void jButton15ActionPerformed(ActionEvent evt) {
 		Object[] possibilities = { "ham", "spam", "yam" };
-		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, possibilities, "ham");
+		String s = (String) JOptionPane.showInputDialog(this, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null,
+				possibilities, "ham");
 	}
 
 	private void jDropDownButton2ActionPerformed(ActionEvent evt) {
@@ -1454,11 +1467,29 @@ public class JMainFrame extends JFrame {
 	private void jDropDownButton3ActionPerformed(ActionEvent evt) {
 		System.out.println("jDropDownButton3.actionPerformed, event=" + evt);
 	}
-	
+
 	private void jButton20ActionPerformed(ActionEvent evt) {
 		onOffButton1.setSelected(!onOffButton1.isSelected());
 	}
 
+	private void jButton22ActionPerformed(ActionEvent evt) {
+		final JProgressBarDialog d = new JProgressBarDialog(this, "JProgressBarDialog", true);
+
+		d.jProgressBar.setIndeterminate(true);
+		d.jProgressBar.setStringPainted(true);
+
+		Thread longRunningThread = new Thread() {
+			public void run() {
+				int x = 0;
+				while (true) {
+					d.jProgressBar.setString("processing " + x);
+					x++;
+				}
+			}
+		};
+		d.thread = longRunningThread;
+		d.setVisible(true);
+	}
 }
 
 class JMainFrame_JScrollBar3_adjustmentAdapter implements AdjustmentListener {
