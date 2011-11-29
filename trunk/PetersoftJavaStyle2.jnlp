@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp spec="1.0+" codebase="http://kingofcoders.com/" href="PetersoftJavaStyle2.jnlp">
+	<information>
+		<title>petersoft-java-style-2</title>
+		<vendor>Peter</vendor>
+		<homepage href="http://code.google.com/p/petersoft-java-style-2/" />
+		<description>petersoft-java-style-2</description>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.6+" />
+		<jar href="PetersoftJavaStyle2_DemoApplet.jar" />
+	</resources>
+	<application-desc main-class="com.petersoft.Application" />
+</jnlp>
