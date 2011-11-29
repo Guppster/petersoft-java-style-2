@@ -1,5 +1,5 @@
 package com.petersoft;
 
 public class Global {
-	public static String version = "20111101";
+	public static String version = "20111111";
 }

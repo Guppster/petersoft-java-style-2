@@ -33,6 +33,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
@@ -411,8 +412,8 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 		return handler;
 	}
 
-	protected MouseListener createDoubleClickListener(JFileChooser fc, JList list) {
-		return new Handler(list);
+	protected MouseListener createDoubleClickListener(JFileChooser fc, JList list, JTree jTree) {
+		return new Handler(list, jTree);
 	}
 
 	public ListSelectionListener createListSelectionListener(JFileChooser fc) {
@@ -421,12 +422,14 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 
 	private class Handler implements MouseListener, ListSelectionListener {
 		JList list;
+		JTree jTree;
 
 		Handler() {
 		}
 
-		Handler(JList list) {
+		Handler(JList list, JTree jTree) {
 			this.list = list;
+			this.jTree = jTree;
 		}
 
 		public void mouseClicked(MouseEvent evt) {
@@ -447,6 +450,10 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 					} else {
 						getFileChooser().approveSelection();
 					}
+
+					// expand jTree to current directory
+					FileChooserUI.expandAll(jTree, true, f);
+					// end expand jTree to current directory
 				}
 			}
 		}
@@ -533,8 +540,8 @@ public class MyBasicFileChooserUI extends javax.swing.plaf.FileChooserUI {
 		// class calls into the Handler.
 		Handler handler;
 
-		public DoubleClickListener(JList list) {
-			handler = new Handler(list);
+		public DoubleClickListener(JList list, JTree jTree) {
+			handler = new Handler(list, jTree);
 		}
 
 		/**

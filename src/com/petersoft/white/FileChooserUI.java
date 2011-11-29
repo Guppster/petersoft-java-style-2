@@ -177,7 +177,8 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	int editX = 20;
 	JTextField editCell = null;
 	JSearchTextField searchTextField = new JSearchTextField();
-	JTree jTree;
+	FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("Computer", null, false));
+	JTree jTree = new JTree(model);
 
 	private JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
@@ -466,8 +467,6 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		JPanel panel = new JPanel(new BorderLayout());
 		JScrollPane jscrollpane = new JScrollPane();
 		panel.add(jscrollpane, BorderLayout.CENTER);
-		FileChooserTreeModel model = new FileChooserTreeModel(new FileChooserTreeNode("Computer", null, false));
-		jTree = new JTree(model);
 
 		jTree.setRootVisible(true);
 		jTree.setCellRenderer(new FileChooserTreeRenderer());
@@ -707,7 +706,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 
 		});
 		list.addListSelectionListener(createListSelectionListener(fc));
-		list.addMouseListener(createDoubleClickListener(fc, list));
+		list.addMouseListener(createDoubleClickListener(fc, list, jTree));
 
 		getModel().addListDataListener(new ListDataListener() {
 			public void contentsChanged(ListDataEvent e) {
@@ -869,7 +868,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		};
 
 		fakeList.setSelectionModel(listSelectionModel);
-		detailsTable.addMouseListener(createDoubleClickListener(chooser, fakeList));
+		detailsTable.addMouseListener(createDoubleClickListener(chooser, fakeList, jTree));
 
 		// detailsTable.addMouseListener(createSingleClickListener(chooser,
 		// fakeList));
@@ -1331,7 +1330,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 				}
 			}
 			// expand jTree to current directory
-			expandAll(jTree, true, currentDirectory);
+			// expandAll(jTree, true, currentDirectory);
 			// end expand jTree to current directory
 		}
 
@@ -1348,12 +1347,9 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 				FileChooserTreeNode n = (FileChooserTreeNode) e.nextElement();
 
 				List<String> pathArr = new LinkedList<String>(Arrays.asList(currentDirectory.getPath().split(File.separator.replaceAll("\\\\", "\\\\\\\\"))));
-				if (n.toString().startsWith(pathArr.get(0))) {
-
-					if (pathArr.size() > 0) {
-						pathArr.remove(0);
-						expandAll(tree, new TreePath(root).pathByAddingChild(n), expand, pathArr);
-					}
+				if (pathArr != null && pathArr.size() > 0 && n.toString().startsWith(pathArr.get(0))) {
+					pathArr.remove(0);
+					expandAll(tree, new TreePath(root).pathByAddingChild(n), expand, pathArr);
 					return;
 				}
 			}
@@ -1361,15 +1357,16 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 	}
 
 	private static void expandAll(JTree tree, TreePath parent, boolean expand, List pathArr) {
-		if (pathArr.size() == 1 && parent != null) {
-			tree.setSelectionPath(parent);
-			Rectangle rect = tree.getPathBounds(parent);
-			if (rect != null) {
-				rect.y -= 100;
-				rect.x -= 50;
-				tree.scrollRectToVisible(rect);
-			}
-		}
+		// if (pathArr.size() == 1 && parent != null) {
+		// tree.setSelectionPath(parent);
+		// Rectangle rect = tree.getPathBounds(parent);
+		// if (rect != null) {
+		// rect.y -= 100;
+		// rect.x -= 50;
+		// tree.scrollRectToVisible(rect);
+		// }
+		// }
+
 		// Traverse children
 		TreeNode node = (TreeNode) parent.getLastPathComponent();
 
@@ -1377,7 +1374,7 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 			for (Enumeration e = node.children(); e.hasMoreElements();) {
 				FileChooserTreeNode n = (FileChooserTreeNode) e.nextElement();
 
-				if (pathArr.get(0).equals(n.file.getName())) {
+				if (pathArr != null && pathArr.get(0).equals(n.file.getName())) {
 					if (pathArr.size() > 1) {
 						pathArr.remove(0);
 						expandAll(tree, parent.pathByAddingChild(n), expand, pathArr);
@@ -1388,8 +1385,10 @@ public class FileChooserUI extends MyBasicFileChooserUI {
 		}
 		if (expand) {
 			tree.expandPath(parent);
+			tree.fireTreeExpanded(parent);
 		} else {
 			tree.collapsePath(parent);
+			tree.fireTreeCollapsed(parent);
 		}
 	}
 
