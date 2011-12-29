@@ -23,15 +23,15 @@ public class ComboBox_Renderer extends JLabel implements ListCellRenderer {
 	private static final Border SAFE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
 
 	// ////////////////////////////////////////////////////////////////
-//	Image normalUpperLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftTop.png")).getImage();
-//	Image normalMiddleLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftMiddle.png")).getImage();
-//	Image normalLowerLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftBottom.png")).getImage();
-//	Image normalMiddleUpper = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_MiddleTop.png")).getImage();
-//	Image normalMiddleLower = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_MiddleBottom.png")).getImage();
-//	Image normalUpperRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightTop.png")).getImage();
-//	Image normalMiddleRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightMiddle.png")).getImage();
-//	Image normalLowerRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightBottom.png")).getImage();
-//	Image arrow = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_Arrow.png")).getImage();
+	//	Image normalUpperLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftTop.png")).getImage();
+	//	Image normalMiddleLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftMiddle.png")).getImage();
+	//	Image normalLowerLeft = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_LeftBottom.png")).getImage();
+	//	Image normalMiddleUpper = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_MiddleTop.png")).getImage();
+	//	Image normalMiddleLower = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_MiddleBottom.png")).getImage();
+	//	Image normalUpperRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightTop.png")).getImage();
+	//	Image normalMiddleRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightMiddle.png")).getImage();
+	//	Image normalLowerRight = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_RightBottom.png")).getImage();
+	//	Image arrow = new ImageIcon(ComboBox_Renderer.class.getResource("images/PComboBox/PComboBox_ArrowButton/normal/PComboBox_ArrowButton_Arrow.png")).getImage();
 
 	public ComboBox_Renderer() {
 		super();
@@ -49,6 +49,9 @@ public class ComboBox_Renderer extends JLabel implements ListCellRenderer {
 	}
 
 	public void paint(Graphics g) {
+		if (1<2){
+			return;
+		}
 		if (index == -1) {
 			// Color bgColor;
 			//

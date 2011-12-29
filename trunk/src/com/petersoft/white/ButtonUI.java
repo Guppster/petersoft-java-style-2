@@ -18,6 +18,7 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
 import com.petersoft.advancedswing.jdropdownbutton.JDropDownButton;
+import com.toedter.calendar.JDayChooser;
 
 public class ButtonUI extends BasicButtonUI {
 	private final static ButtonUI buttonUI = new ButtonUI();
@@ -92,6 +93,7 @@ public class ButtonUI extends BasicButtonUI {
 
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton button = (AbstractButton) c;
+
 		if (c.getParent() instanceof BasicInternalFrameTitlePane) {
 		} else if (c.getParent() instanceof JToolBar || c.getParent() instanceof JDropDownButton) {
 			if (button.getModel().isRollover()) {
@@ -99,31 +101,48 @@ public class ButtonUI extends BasicButtonUI {
 				g.drawRect(1, 1, button.getWidth() - 3, button.getHeight() - 3);
 			}
 		} else {
-			if (button.getModel().isRollover()) {
-				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
-
-				g.drawImage(mouseOverMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
-				g.drawImage(mouseOverMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
-
-				g.drawImage(mouseOverUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
-				g.drawImage(mouseOverMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(mouseOverLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+			if (button.getParent() != null && button.getParent().getParent() instanceof JDayChooser) {
+//				if (button.getModel().isRollover()) {
+//					g.setColor(internalPressingBGColor);
+//					g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
+//				} else {
+//					g.setColor(Color.white);
+//					g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
+//				}
+//
+//				if (button.isSelected()){
+//					g.setColor(internalPressingBGColor);
+//					g.drawRect(1, 1, button.getWidth() - 3, button.getHeight() - 3);
+//				}
+				g.setColor(button.getBackground());
+				g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 			} else {
-				g.drawImage(normalUpperLeft, 0, 0, 5, 5, null, null);
-				g.drawImage(normalMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(normalLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
+				if (button.getModel().isRollover()) {
+					g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
+					g.drawImage(mouseOverMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
+					g.drawImage(mouseOverLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
 
-				g.drawImage(normalMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
-				g.drawImage(normalMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
+					g.drawImage(mouseOverMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
+					g.drawImage(mouseOverMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
 
-				g.drawImage(normalUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
-				g.drawImage(normalMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
-				g.drawImage(normalLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+					g.drawImage(mouseOverUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
+					g.drawImage(mouseOverMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
+					g.drawImage(mouseOverLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+				} else {
+					g.drawImage(normalUpperLeft, 0, 0, 5, 5, null, null);
+					g.drawImage(normalMiddleLeft, 0, 5, 4, button.getHeight() - 10, null, null);
+					g.drawImage(normalLowerLeft, 0, button.getHeight() - 5, 5, 5, null, null);
+
+					g.drawImage(normalMiddleUpper, 5, 0, button.getWidth() - 11, 4, null, null);
+					g.drawImage(normalMiddleLower, 5, button.getHeight() - 4, button.getWidth() - 11, 4, null, null);
+
+					g.drawImage(normalUpperRight, button.getWidth() - 6, 0, 5, 5, null, null);
+					g.drawImage(normalMiddleRight, button.getWidth() - 5, 5, 4, button.getHeight() - 10, null, null);
+					g.drawImage(normalLowerRight, button.getWidth() - 6, button.getHeight() - 5, 5, 5, null, null);
+				}
+				g.setColor(Color.white);
+				g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 			}
-			g.setColor(Color.white);
-			g.fillRect(4, 4, button.getWidth() - 8, button.getHeight() - 8);
 		}
 
 		super.paint(g, c);

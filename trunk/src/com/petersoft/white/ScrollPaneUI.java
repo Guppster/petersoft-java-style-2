@@ -1,5 +1,8 @@
 package com.petersoft.white;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -8,7 +11,10 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.BasicScrollPaneUI;
 
 public class ScrollPaneUI extends BasicScrollPaneUI implements PropertyChangeListener {
@@ -64,5 +70,21 @@ public class ScrollPaneUI extends BasicScrollPaneUI implements PropertyChangeLis
 				}
 			}
 		}
+	}
+
+	public void paint(Graphics g, JComponent c) {
+		Border vpBorder;
+		if (c.getParent() instanceof BasicComboPopup) {
+			vpBorder = new EmptyBorder(0, 0, 0, 0);
+			Rectangle r = scrollpane.getViewportBorderBounds();
+			vpBorder.paintBorder(scrollpane, g, r.x, r.y, r.width, r.height);
+		} else {
+			vpBorder = scrollpane.getViewportBorder();
+			if (vpBorder != null) {
+				Rectangle r = scrollpane.getViewportBorderBounds();
+				vpBorder.paintBorder(scrollpane, g, r.x, r.y, r.width, r.height);
+			}
+		}
+		scrollpane.setViewportBorder(vpBorder);
 	}
 }

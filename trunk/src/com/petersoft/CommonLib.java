@@ -5,13 +5,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Array;
@@ -37,6 +40,15 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 public class CommonLib {
+	public static boolean isNumeric(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			if (!(s.charAt(i) >= '0' && s.charAt(i) <= '9')) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static byte[] readFileByte(File file, long offset, int size) {
 		return readFileByte(file.getAbsolutePath(), offset, size);
 	}
@@ -257,6 +269,10 @@ public class CommonLib {
 		}
 	}
 
+	public static byte[] readFile(File file) {
+		return readFile(file.getAbsolutePath(), 0, (int) file.length());
+	}
+
 	public static byte readFileByte(File file, long offset) {
 		return readFileByte(file.getAbsolutePath(), offset);
 	}
@@ -318,6 +334,38 @@ public class CommonLib {
 			ex.printStackTrace();
 			return null;
 		}
+	}
+
+	public static int[] readFileUnsigned(File file, long offset, int size) {
+		return readFileUnsigned(file.getAbsolutePath(), offset, size);
+	}
+
+	public static int[] readFileUnsigned(String filepath, long offset, int size) {
+		try {
+			RandomAccessFile br = new RandomAccessFile(filepath, "r");
+			int data[] = new int[size];
+			br.seek(offset);
+			for (int x = 0; x < size; x++) {
+				data[x] = br.readUnsignedByte();
+			}
+			br.close();
+			return data;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public static long readLongFromInputStream(DataInputStream in) throws IOException {
+		long l = in.readUnsignedByte() + (in.readUnsignedByte() << 8) + (in.readUnsignedByte() << 16) + (in.readUnsignedByte() << 24);
+		l &= 0xffffffffL;
+		return l;
+	}
+
+	public static long readShortFromInputStream(DataInputStream in) throws IOException {
+		long l = in.readUnsignedByte() + (in.readUnsignedByte() << 8);
+		l &= 0xffffffffL;
+		return l;
 	}
 
 	public static Object[] reverseArray(Object objects[]) {
@@ -599,4 +647,173 @@ public class CommonLib {
 		return null;
 	}
 
+	public static void saveFile(String str, File file) {
+		try {
+			// Create file 
+			FileWriter fstream = new FileWriter(file);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(str);
+			//Close the output stream
+			out.close();
+		} catch (Exception e) {//Catch exception if any
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeFile(InputStream is, File file) {
+		BufferedOutputStream fOut = null;
+		try {
+			fOut = new BufferedOutputStream(new FileOutputStream(file));
+			byte[] buffer = new byte[32 * 1024];
+			int bytesRead = 0;
+			while ((bytesRead = is.read(buffer)) != -1) {
+				fOut.write(buffer, 0, bytesRead);
+			}
+			fOut.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public static Long hex2decimal(String s) {
+		s = s.trim().toLowerCase();
+		if (s.startsWith("0x")) {
+			return Long.parseLong(s.substring(2), 16);
+		} else {
+			return Long.parseLong(s, 16);
+		}
+	}
+
+	public static int[] hexStringToByteArray(String s) {
+		if (s.length() % 2 == 1) {
+			s = "0" + s;
+		}
+		int len = s.length();
+		int[] data = new int[len / 2];
+		for (int i = 0; i < len; i += 2) {
+			data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
+		}
+		return data;
+	}
+
+	public static int[] integerStringToByteArray(String s) {
+		if (s.length() % 2 == 1) {
+			s = "0" + s;
+		}
+		int len = s.length();
+		int[] data = new int[len / 2];
+		for (int i = 0; i < len; i += 2) {
+			data[i / 2] = (byte) ((Character.digit(s.charAt(i), 10) * 10) + Character.digit(s.charAt(i + 1), 10));
+		}
+		return data;
+	}
+
+	public static int[] stringToByteArray(String s) {
+		int len = s.length();
+		int[] data = new int[len];
+		for (int i = 0; i < len; i++) {
+			data[i] = (byte) s.charAt(i);
+		}
+		return data;
+	}
+
+	public static void putShort(int b[], short s, int index) {
+		b[index] = (byte) (s >> 0);
+		b[index + 1] = (byte) (s >> 8);
+	}
+
+	public static long getShort(int b0, int b1) {
+		return (long) ((b0 & 0xff << 0) | (b1 & 0xff) << 8);
+	}
+
+	public static long getShort(int[] bb, int index) {
+		return (long) (((bb[index + 0] & 0xff) << 0) | ((bb[index + 1] & 0xff) << 8));
+	}
+
+	// ///////////////////////////////////////////////////////
+	public static void putInt(int[] bb, int x, int index) {
+		bb[index + 0] = (byte) (x >> 0);
+		bb[index + 1] = (byte) (x >> 8);
+		bb[index + 2] = (byte) (x >> 16);
+		bb[index + 3] = (byte) (x >> 24);
+	}
+
+	public static long getInt(byte[] bb, int index) {
+		return (long) ((((bb[index + 0] & 0xff) << 0) | ((bb[index + 1] & 0xff) << 8) | ((bb[index + 2] & 0xff) << 16) | ((bb[index + 3] & 0xff) << 24)));
+	}
+
+	public static long getInt(byte b0, byte b1, byte b2, byte b3) {
+		return (long) ((((b0 & 0xff) << 0) | ((b1 & 0xff) << 8) | ((b2 & 0xff) << 16) | ((b3 & 0xff) << 24)));
+	}
+
+	public static long getInt(int[] bb, int index) {
+		return (long) ((((bb[index + 0] & 0xff) << 0) | ((bb[index + 1] & 0xff) << 8) | ((bb[index + 2] & 0xff) << 16) | ((bb[index + 3] & 0xff) << 24)));
+	}
+
+	public static long getInt(int b0, int b1, int b2, int b3) {
+		return (long) ((((b0 & 0xff) << 0) | ((b1 & 0xff) << 8) | ((b2 & 0xff) << 16) | ((b3 & 0xff) << 24)));
+	}
+
+	public static void putLong(int[] bb, long x, int index) {
+		bb[index + 0] = (byte) (x >> 0);
+		bb[index + 1] = (byte) (x >> 8);
+		bb[index + 2] = (byte) (x >> 16);
+		bb[index + 3] = (byte) (x >> 24);
+		bb[index + 4] = (byte) (x >> 32);
+		bb[index + 5] = (byte) (x >> 40);
+		bb[index + 6] = (byte) (x >> 48);
+		bb[index + 7] = (byte) (x >> 56);
+	}
+
+	public static long getLong(int b0, byte b1) {
+		return (long) (b0 & 0xff) | (long) (b1 & 0xff) << 8;
+	}
+
+	public static long getLong(int[] bb, int index) {
+		return ((((long) bb[index + 0] & 0xff) << 0) | (((long) bb[index + 1] & 0xff) << 8) | (((long) bb[index + 2] & 0xff) << 16) | (((long) bb[index + 3] & 0xff) << 24)
+				| (((long) bb[index + 4] & 0xff) << 32) | (((long) bb[index + 5] & 0xff) << 40) | (((long) bb[index + 6] & 0xff) << 48) | (((long) bb[index + 7] & 0xff) << 56));
+	}
+
+	public static long getLong(int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7) {
+		return ((((long) b0 & 0xff) << 0) | (((long) b1 & 0xff) << 8) | (((long) b2 & 0xff) << 16) | (((long) b3 & 0xff) << 24) | (((long) b4 & 0xff) << 32)
+				| (((long) b5 & 0xff) << 40) | (((long) b6 & 0xff) << 48) | (((long) b7 & 0xff) << 56));
+	}
+
+	public static long getBit(long value, int bitNo) {
+		return value >> bitNo & 1;
+	}
+
+	public static long getValue(long l, int startBit, int endBit) {
+		if (startBit > endBit) {
+			int temp = startBit;
+			startBit = endBit;
+			endBit = temp;
+		}
+		l = l >> startBit;
+		return l & new Double(Math.pow(2, (endBit - startBit + 1)) - 1).longValue();
+	}
+
+	public static int[] byteArrayToIntArray(byte[] b) {
+		int i[] = new int[b.length];
+		for (int x = 0; x < i.length; x++) {
+			i[x] = b[x];
+		}
+		return i;
+	}
+
+	public static byte[] intArrayToByteArray(int[] b) {
+		byte i[] = new byte[b.length];
+		for (int x = 0; x < i.length; x++) {
+			i[x] = (byte) b[x];
+		}
+		return i;
+	}
+
+	public static int[] getBytes(long value) {
+		int b[] = new int[8];
+		for (int x = 0; x < 8; x++) {
+			b[x] = (int) ((value >> (x * 8)) & 0xff);
+		}
+		return b;
+	}
 }

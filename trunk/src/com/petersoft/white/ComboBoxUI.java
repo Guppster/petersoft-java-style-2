@@ -8,18 +8,21 @@ import java.awt.Rectangle;
 
 import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 
 public class ComboBoxUI extends BasicComboBoxUI {
+	JComboBox comboBox;
+
 	public static ComponentUI createUI(final JComponent c) {
 		return new ComboBoxUI();
 	}
 
 	public void installUI(JComponent c) {
+		comboBox = (JComboBox) c;
 		super.installUI(c);
 	}
 
@@ -36,54 +39,27 @@ public class ComboBoxUI extends BasicComboBoxUI {
 	}
 
 	protected ComboPopup createPopup() {
-		// ComboBox_ComboPopup pComboBox_ComboPopup = new
-		// ComboBox_ComboPopup(comboBox) {
-		// protected JScrollPane createScroller() {
-		// return new JScrollPane(list,
-		// ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-		// ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		// }
-		// };
-		//
-		// return pComboBox_ComboPopup;
-
 		return super.createPopup();
 	}
 
 	public void paint(Graphics g, JComponent c) {
 		super.paint(g, c);
-		// g.setColor(Color.RED);
-		// g.fillRect(0,0,500,500);
 	}
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
-		// This is really only called if we're using ocean.
-		//		bounds.x += 2;
-		//		bounds.width -= 3;
-		//		if (arrowButton != null) {
-		//			Insets buttonInsets = arrowButton.getInsets();
-		//			bounds.y += 1;
-		//			bounds.y += buttonInsets.top;
-		//			bounds.height -= (buttonInsets.top + buttonInsets.bottom);
-		//		} else {
-		//			bounds.y += 2;
-		//			bounds.height -= 2;
-		//		}
-		bounds.x += 2;
-		bounds.width -= 2;
-		bounds.y += 2;
-		bounds.height -= 4;
+		bounds.x += 1;
+		//		bounds.width -= 2;
+		bounds.y += 1;
+		bounds.height -= 2;
 		super.paintCurrentValue(g, bounds, hasFocus);
 	}
 
 	public void paintCurrentValueBackground(Graphics g, Rectangle bounds, boolean hasFocus) {
 		super.paintCurrentValueBackground(g, bounds, hasFocus);
-		g.setColor(MetalLookAndFeel.getControlDarkShadow());
+		g.setColor(Color.LIGHT_GRAY);
 		g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height - 1);
-		g.setColor(MetalLookAndFeel.getControlShadow());
-		g.drawRect(bounds.x + 1, bounds.y + 1, bounds.width, bounds.height - 3);
-		//		g.setColor(Color.red);
-		//		g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		//		g.setColor(MetalLookAndFeel.getControlShadow());
+		//		g.drawRect(bounds.x + 1, bounds.y + 1, bounds.width, bounds.height - 3);
 	}
 
 	public Dimension getMinimumSize(JComponent c) {
@@ -112,7 +88,7 @@ public class ComboBoxUI extends BasicComboBoxUI {
 			size = super.getMinimumSize(c);
 		}
 
-		cachedMinimumSize.setSize(size.width, size.height);
+		cachedMinimumSize.setSize(size.width + 20, size.height);
 		isMinimumSizeDirty = false;
 
 		return new Dimension(cachedMinimumSize);

@@ -53,8 +53,7 @@ import javax.swing.UIManager;
  * @version $LastChangedRevision: 147 $
  * @version $LastChangedDate: 2011-06-06 20:36:53 +0200 (Mo, 06 Jun 2011) $
  */
-public class JDayChooser extends JPanel implements ActionListener, KeyListener,
-		FocusListener {
+public class JDayChooser extends JPanel implements ActionListener, KeyListener, FocusListener {
 	private static final long serialVersionUID = 5876398337018781820L;
 
 	protected JButton[] days;
@@ -102,7 +101,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 	protected int maxDayCharacters;
 
 	protected List dateEvaluators;
-	
+
 	protected MinMaxDateEvaluator minMaxDateEvaluator;
 
 	/**
@@ -153,14 +152,14 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 					// Create a button that doesn't react on clicks or focus
 					// changes.
 					// Thanks to Thomas Schaefer for the focus hint :)
-					days[index] = new DecoratorButton();
+					days[index] = new JButton();//new DecoratorButton();
+					days[index].setBackground(Color.white);
 				} else {
 					days[index] = new JButton("x") {
 						private static final long serialVersionUID = -7433645992591669725L;
 
 						public void paint(Graphics g) {
-							if ("Windows".equals(UIManager.getLookAndFeel()
-									.getID())) {
+							if ("Windows".equals(UIManager.getLookAndFeel().getID())) {
 								// this is a hack to get the background painted
 								// when using Windows Look & Feel
 								if (selectedDay == this) {
@@ -188,8 +187,9 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 		weeks = new JButton[7];
 
 		for (int i = 0; i < 7; i++) {
-			weeks[i] = new DecoratorButton();
+			weeks[i] = new JButton();//DecoratorButton();
 			weeks[i].setMargin(new Insets(0, 0, 0, 0));
+			weeks[i].setBackground(Color.white);
 			weeks[i].setFocusPainted(false);
 			weeks[i].setForeground(new Color(100, 100, 100));
 
@@ -218,8 +218,8 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 	 */
 	protected void init() {
 		JButton testButton = new JButton();
-		oldDayBackgroundColor = testButton.getBackground();
-		selectedColor = new Color(160, 160, 160);
+		oldDayBackgroundColor = Color.white;// testButton.getBackground();
+		selectedColor = new Color(226, 239, 241);
 
 		Date date = calendar.getTime();
 		calendar = Calendar.getInstance(locale);
@@ -242,8 +242,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 		for (int i = 0; i < 7; i++) {
 			if (maxDayCharacters > 0 && maxDayCharacters < 5) {
 				if (dayNames[day].length() >= maxDayCharacters) {
-					dayNames[day] = dayNames[day]
-							.substring(0, maxDayCharacters);
+					dayNames[day] = dayNames[day].substring(0, maxDayCharacters);
 				}
 			}
 
@@ -342,10 +341,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 			days[i + n + 7].setText(Integer.toString(n + 1));
 			days[i + n + 7].setVisible(true);
 
-			if ((tmpCalendar.get(Calendar.DAY_OF_YEAR) == today
-					.get(Calendar.DAY_OF_YEAR))
-					&& (tmpCalendar.get(Calendar.YEAR) == today
-							.get(Calendar.YEAR))) {
+			if ((tmpCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) && (tmpCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR))) {
 				days[i + n + 7].setForeground(sundayForeground);
 			} else {
 				days[i + n + 7].setForeground(foregroundColor);
@@ -358,23 +354,19 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 				days[i + n + 7].setBackground(oldDayBackgroundColor);
 			}
 
-			Iterator iterator = dateEvaluators.iterator(); 
+			Iterator iterator = dateEvaluators.iterator();
 			days[i + n + 7].setEnabled(true);
 			while (iterator.hasNext()) {
 				IDateEvaluator dateEvaluator = (IDateEvaluator) iterator.next();
 				if (dateEvaluator.isSpecial(day)) {
-					days[i + n + 7].setForeground(dateEvaluator
-							.getSpecialForegroundColor());
-					days[i + n + 7].setBackground(dateEvaluator
-							.getSpecialBackroundColor());
+					days[i + n + 7].setForeground(dateEvaluator.getSpecialForegroundColor());
+					days[i + n + 7].setBackground(dateEvaluator.getSpecialBackroundColor());
 					days[i + n + 7].setToolTipText(dateEvaluator.getSpecialTooltip());
 					days[i + n + 7].setEnabled(true);
-				} 
-				if (dateEvaluator.isInvalid(day)){
-					days[i + n + 7].setForeground(dateEvaluator
-							.getInvalidForegroundColor());
-					days[i + n + 7].setBackground(dateEvaluator
-							.getInvalidBackroundColor());
+				}
+				if (dateEvaluator.isInvalid(day)) {
+					days[i + n + 7].setForeground(dateEvaluator.getInvalidForegroundColor());
+					days[i + n + 7].setBackground(dateEvaluator.getInvalidBackroundColor());
 					days[i + n + 7].setToolTipText(dateEvaluator.getInvalidTooltip());
 					days[i + n + 7].setEnabled(false);
 				}
@@ -622,15 +614,12 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 	 *            the KeyEvent
 	 */
 	public void keyPressed(KeyEvent e) {
-		int offset = (e.getKeyCode() == KeyEvent.VK_UP) ? (-7) : ((e
-				.getKeyCode() == KeyEvent.VK_DOWN) ? (+7)
-				: ((e.getKeyCode() == KeyEvent.VK_LEFT) ? (-1) : ((e
-						.getKeyCode() == KeyEvent.VK_RIGHT) ? (+1) : 0)));
+		int offset = (e.getKeyCode() == KeyEvent.VK_UP) ? (-7) : ((e.getKeyCode() == KeyEvent.VK_DOWN) ? (+7) : ((e.getKeyCode() == KeyEvent.VK_LEFT) ? (-1)
+				: ((e.getKeyCode() == KeyEvent.VK_RIGHT) ? (+1) : 0)));
 
 		int newDay = getDay() + offset;
 
-		if ((newDay >= 1)
-				&& (newDay <= calendar.getMaximum(Calendar.DAY_OF_MONTH))) {
+		if ((newDay >= 1) && (newDay <= calendar.getMaximum(Calendar.DAY_OF_MONTH))) {
 			setDay(newDay);
 		}
 	}
@@ -814,8 +803,7 @@ public class JDayChooser extends JPanel implements ActionListener, KeyListener,
 	 * @param decorationBackgroundVisible
 	 *            true, if the decoration background shall be painted.
 	 */
-	public void setDecorationBackgroundVisible(
-			boolean decorationBackgroundVisible) {
+	public void setDecorationBackgroundVisible(boolean decorationBackgroundVisible) {
 		this.decorationBackgroundVisible = decorationBackgroundVisible;
 		initDecorations();
 	}

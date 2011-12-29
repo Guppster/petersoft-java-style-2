@@ -16,8 +16,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,22 +30,28 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.Highlighter;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.petersoft.CommonLib;
 import com.petersoft.advancedswing.pager.Pager;
 import com.petersoft.advancedswing.searchtextfield.JSearchTextField;
 
 /**
- * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI Builder, which is free for non-commercial use. If Jigloo is being used commercially (ie, by a
- * corporation, company or business for any purpose whatever) then you should purchase a license for each developer using Jigloo. Please visit www.cloudgarden.com for details. Use
- * of Jigloo implies acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR ANY
- * CORPORATE OR COMMERCIAL PURPOSE.
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
+ * Builder, which is free for non-commercial use. If Jigloo is being used
+ * commercially (ie, by a corporation, company or business for any purpose
+ * whatever) then you should purchase a license for each developer using Jigloo.
+ * Please visit www.cloudgarden.com for details. Use of Jigloo implies
+ * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
+ * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
+ * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
 public class EnhancedTextArea extends JPanel implements LogFileTailerListener, DocumentListener {
-	private JToolBar jToolBar1;
+	public JToolBar jToolBar;
 	private JScrollPane jScrollPane1;
 	public Pager pager;
 	private JComboBox jFontComboBox;
@@ -62,6 +70,8 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 	private JLabel jLabel1;
 	public int largeFileSeparateMode;
 	public int pageSize = 1024;
+	public int lineNoBase = 0;
+	public JButton jSaveButton;
 
 	/**
 	 * Auto-generated main method to display this JPanel inside a new JFrame.
@@ -87,11 +97,22 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 			this.setLayout(thisLayout);
 			this.setPreferredSize(new java.awt.Dimension(725, 290));
 			{
-				jToolBar1 = new JToolBar();
-				this.add(jToolBar1, BorderLayout.NORTH);
+				jToolBar = new JToolBar();
+				this.add(jToolBar, BorderLayout.NORTH);
+				{
+					jSaveButton = new JButton();
+					jToolBar.add(jSaveButton);
+					jSaveButton.setText("Save");
+					jSaveButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/advancedswing/enhancedtextarea/disk.png")));
+					jSaveButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							jSaveButtonActionPerformed(evt);
+						}
+					});
+				}
 				{
 					jLineWrapButton = new JToggleButton();
-					jToolBar1.add(jLineWrapButton);
+					jToolBar.add(jLineWrapButton);
 					jLineWrapButton.setText("Wrap");
 					jLineWrapButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/advancedswing/enhancedtextarea/linewrap.png")));
 					jLineWrapButton.addActionListener(new ActionListener() {
@@ -102,7 +123,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 				}
 				{
 					jFontBiggerButton = new JButton();
-					jToolBar1.add(jFontBiggerButton);
+					jToolBar.add(jFontBiggerButton);
 					jFontBiggerButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/advancedswing/enhancedtextarea/font_add.png")));
 					jFontBiggerButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -112,7 +133,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 				}
 				{
 					jFontSmallerButton = new JButton();
-					jToolBar1.add(jFontSmallerButton);
+					jToolBar.add(jFontSmallerButton);
 					jFontSmallerButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("com/petersoft/advancedswing/enhancedtextarea/font_delete.png")));
 					jFontSmallerButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -122,12 +143,12 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 				}
 				{
 					jLabel1 = new JLabel();
-					jToolBar1.add(jLabel1);
+					jToolBar.add(jLabel1);
 					jLabel1.setText(" ");
 				}
 				{
 					jSearchTextField = new JSearchTextField();
-					jToolBar1.add(jSearchTextField);
+					jToolBar.add(jSearchTextField);
 					jSearchTextField.setMaximumSize(new java.awt.Dimension(100, 22));
 					jSearchTextField.setPreferredSize(new java.awt.Dimension(100, 22));
 					jSearchTextField.setSize(new java.awt.Dimension(100, 22));
@@ -140,7 +161,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 				}
 				{
 					jSeparatorLabel = new JLabel();
-					jToolBar1.add(jSeparatorLabel);
+					jToolBar.add(jSeparatorLabel);
 					jSeparatorLabel.setText(" ");
 				}
 				{
@@ -153,7 +174,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 					}
 					ComboBoxModel jFontComboBoxModel = new DefaultComboBoxModel(fontNames);
 					jFontComboBox = new JComboBox();
-					jToolBar1.add(jFontComboBox);
+					jToolBar.add(jFontComboBox);
 					jFontComboBox.setModel(jFontComboBoxModel);
 					jFontComboBox.setMaximumSize(new java.awt.Dimension(180, 22));
 					jFontComboBox.setPreferredSize(new java.awt.Dimension(180, 22));
@@ -165,7 +186,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 				}
 				{
 					pager = new Pager();
-					jToolBar1.add(pager);
+					jToolBar.add(pager);
 					pager.setVisible(false);
 				}
 			}
@@ -196,6 +217,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 							} else {
 								base = (pager.getPage() - 1) * pageSize;
 							}
+							base += lineNoBase;
 							String text = " " + (base + 1) + " " + System.getProperty("line.separator");
 							for (int i = 2; i < root.getElementIndex(caretPosition) + 2; i++) {
 								text += " " + (base + i) + " " + System.getProperty("line.separator");
@@ -237,6 +259,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 					jStatusPanel.add(jSearchLabel);
 				}
 			}
+			this.jFontComboBox.setSelectedItem(jTextArea.getFont().getFamily() + ".plain");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -277,7 +300,11 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 	}
 
 	public void addTrailListener(File file) {
-		LogFileTailer tailer = new LogFileTailer(file, 1000, false);
+		addTrailListener(file, 1000, false);
+	}
+
+	public void addTrailListener(File file, long sampleInterval, boolean startAtBeginning) {
+		LogFileTailer tailer = new LogFileTailer(file, sampleInterval, startAtBeginning);
 		tailer.addLogFileTailerListener(this);
 		tailer.start();
 	}
@@ -287,15 +314,22 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 		if (maxRow == -1) {
 			jTextArea.append(line + System.getProperty("line.separator"));
 		} else {
-			if (jTextArea.getLineCount() > maxRow) {
-				for (int x = 0; x <= jTextArea.getLineCount() - maxRow; x++) {
+			if (line.split(System.getProperty("line.separator")).length > maxRow) {
+				jTextArea.setText(line);
+				try {
+					jTextArea.replaceRange("", jTextArea.getLineStartOffset(0), jTextArea.getLineEndOffset(jTextArea.getLineCount() - maxRow - 1));
+				} catch (BadLocationException e) {
+				}
+			} else {
+				jTextArea.append(line + System.getProperty("line.separator"));
+				if (jTextArea.getLineCount() > maxRow) {
+					lineNoBase += line.split(System.getProperty("line.separator")).length;
 					try {
-						jTextArea.replaceRange("", jTextArea.getLineStartOffset(0), jTextArea.getLineEndOffset(0));
+						jTextArea.replaceRange("", jTextArea.getLineStartOffset(0), jTextArea.getLineEndOffset(jTextArea.getLineCount() - maxRow - 1));
 					} catch (BadLocationException e) {
 					}
 				}
 			}
-			jTextArea.append(line + System.getProperty("line.separator"));
 		}
 		jTextArea.setCaretPosition(jTextArea.getDocument().getLength());
 		updateStatus();
@@ -412,5 +446,14 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 	public void setPage(int pageNo) {
 		pager.setPageNo(pageNo);
 		refreshPage();
+	}
+
+	private void jSaveButtonActionPerformed(ActionEvent evt) {
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showSaveDialog(this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			CommonLib.saveFile(this.jTextArea.getText(), file);
+		}
 	}
 }

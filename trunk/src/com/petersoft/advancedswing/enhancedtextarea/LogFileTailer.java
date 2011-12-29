@@ -10,7 +10,7 @@ public class LogFileTailer extends Thread {
 	/**
 	 * How frequently to check for file changes; defaults to 5 seconds
 	 */
-	private long sampleInterval = 5000;
+	private long sampleInterval = 1000;
 
 	/**
 	 * The log file to tail
@@ -18,7 +18,9 @@ public class LogFileTailer extends Thread {
 	private File logfile;
 
 	/**
-	 * Defines whether the log file tailer should include the entire contents of the exising log file or tail from the end of the file when the tailer starts
+	 * Defines whether the log file tailer should include the entire contents of
+	 * the exising log file or tail from the end of the file when the tailer
+	 * starts
 	 */
 	private boolean startAtBeginning = false;
 
@@ -32,23 +34,10 @@ public class LogFileTailer extends Thread {
 	 */
 	private Set listeners = new HashSet();
 
-	/**
-	 * Creates a new log file tailer that tails an existing file and checks the file for updates every 5000ms
-	 */
-	public LogFileTailer(File file) {
-		this.logfile = file;
-	}
+	//	public LogFileTailer(File file) {
+	//		this.logfile = file;
+	//	}
 
-	/**
-	 * Creates a new log file tailer
-	 * 
-	 * @param file
-	 *            The file to tail
-	 * @param sampleInterval
-	 *            How often to check for updates to the log file (default = 5000ms)
-	 * @param startAtBeginning
-	 *            Should the tailer simply tail or should it process the entire file and continue tailing (true) or simply start tailing from the end of the file
-	 */
 	public LogFileTailer(File file, long sampleInterval, boolean startAtBeginning) {
 		this.logfile = file;
 		this.sampleInterval = sampleInterval;
@@ -93,33 +82,39 @@ public class LogFileTailer extends Thread {
 			RandomAccessFile file = new RandomAccessFile(logfile, "r");
 			while (this.tailing) {
 				try {
-					// Compare the length of the file to the file pointer
 					long fileLength = this.logfile.length();
 					if (fileLength < filePointer) {
-						// Log file must have been rotated or deleted;
-						// reopen the file and reset the file pointer
+						file.close();
 						file = new RandomAccessFile(logfile, "r");
 						filePointer = 0;
 					}
 
 					if (fileLength > filePointer) {
-						// There is data to read
 						file.seek(filePointer);
 						String line = file.readLine();
+						String buffer = "";
+						int lineCount = 0;
 						while (line != null) {
-							this.fireNewLogFileLine(line);
+							buffer += line + System.getProperty("line.separator");
+							if (lineCount >= 500) {
+								this.fireNewLogFileLine(buffer);
+								buffer = "";
+								lineCount = 0;
+							}
 							line = file.readLine();
+							lineCount++;
 						}
+						this.fireNewLogFileLine(buffer);
 						filePointer = file.getFilePointer();
 					}
 
 					// Sleep for the specified interval
 					sleep(this.sampleInterval);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 
-			// Close the file that we are tailing
 			file.close();
 		} catch (Exception e) {
 			e.printStackTrace();

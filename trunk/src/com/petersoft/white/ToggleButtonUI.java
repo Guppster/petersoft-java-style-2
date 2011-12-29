@@ -46,7 +46,7 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 	Image selectedBackgroundImage = new ImageIcon(ToggleButtonUI.class.getResource("images/ToggleButton/selectedBackground.png")).getImage();
 
 	Color selectedBorder = new Color(43, 71, 103);
-	Color selectedBackground = new Color(200, 200, 200);
+	Color selectedBackground = new Color(226, 239, 241);
 	Color buttonRollOverColor = new Color(145, 145, 145);
 
 	public static ComponentUI createUI(final JComponent c) {
@@ -114,7 +114,7 @@ public class ToggleButtonUI extends BasicToggleButtonUI {
 			// if (button.isEnabled()) {
 			if (button.isSelected()) {
 				g.setColor(selectedBackground);
-				g.fillRect(5, 5, button.getWidth() - 10, button.getHeight() - 10);
+				g.fillRect(2, 2, button.getWidth() - 4, button.getHeight() - 4);
 			}
 			if (button.getModel().isRollover()) {
 				g.drawImage(mouseOverUpperLeft, 0, 0, 5, 5, null, null);
