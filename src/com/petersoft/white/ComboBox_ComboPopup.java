@@ -61,20 +61,21 @@ public class ComboBox_ComboPopup extends BasicComboPopup {
 	}
 
 	public void paintComponent(Graphics g) {
-		g.setColor(new Color(110, 162, 255));
-		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
-
-		// two left-most vertical lines
-		g.setColor(new Color(110, 162, 255));
-		g.fillRect(0, 1, 1, getHeight() - 1);
-
-		g.setColor(new Color(207, 226, 254));
-		g.fillRect(1, 1, 1, getHeight() - 2);
+//		g.setColor(new Color(110, 162, 255));
+//		g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
+//
+//		// two left-most vertical lines
+//		g.setColor(new Color(110, 162, 255));
+//		g.fillRect(0, 1, 1, getHeight() - 1);
+//
+//		g.setColor(new Color(207, 226, 254));
+//		g.fillRect(1, 1, 1, getHeight() - 2);
 	}
 
 	private void jbInit() throws Exception {
-		border1 = BorderFactory.createEmptyBorder(1, 2, 1, 1);
-		this.setBorder(border1);
+//		border1 = BorderFactory.createEmptyBorder(1, 2, 1, 1);
+//		border1 = BorderFactory.createLineBorder(Color.red);
+//		this.setBorder(border1);
 	}
 
 	// public void delegateFocus(MouseEvent e) {

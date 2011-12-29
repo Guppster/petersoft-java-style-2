@@ -51,7 +51,6 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 	JMaximizableTabbedPane originalClosableTabbedPane;
 	int originalSelectedIndex;
 
-	final String ENDING_STRING = "    ";
 	HashSet<Integer> closableTabIndex = new HashSet<Integer>();
 
 	public JMaximizableTabbedPane() {
@@ -125,9 +124,6 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 		try {
 			tooltip = "tab" + component.hashCode();
 			maps.put(tooltip, component);
-			if (!title.endsWith(ENDING_STRING)) {
-				title += ENDING_STRING;
-			}
 		} catch (Exception ex) {
 			// without this try-catch, jigloo cannot display the correct UI
 		}

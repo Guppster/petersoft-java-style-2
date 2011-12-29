@@ -17,10 +17,14 @@ import java.awt.event.FocusListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.text.JTextComponent;
+
+import com.toedter.calendar.JYearChooser;
+import com.toedter.components.JSpinField;
 
 public class TextFieldUI extends BasicTextFieldUI implements FocusListener {
 	// static JTextComponent _editor;
@@ -70,6 +74,7 @@ public class TextFieldUI extends BasicTextFieldUI implements FocusListener {
 
 	protected void paintBackground(Graphics g) {
 		JTextComponent editor = getComponent();
+
 		if (editor.isEnabled()) {
 			editor.setBackground(Color.white);
 		} else {
@@ -85,34 +90,32 @@ public class TextFieldUI extends BasicTextFieldUI implements FocusListener {
 		// int borderRight = border.getBorderInsets(this).right;
 		// if (this.isEnabled()) {
 
-		if (this.getComponent().hasFocus()) {
-			g.drawImage(onFocus_upperLeft, 0, 0, 2, 2, null);
-			g.drawImage(onFocus_middleLeft, 0, 2, 2, editor.getHeight() - 4, null);
-			g.drawImage(onFocus_lowerLeft, 0, editor.getHeight() - 2, 2, 2, null);
+		if (!(editor.getParent() instanceof DefaultEditor) && !(editor.getParent().getParent() instanceof JYearChooser)) {
+			if (this.getComponent().hasFocus()) {
+				g.drawImage(onFocus_upperLeft, 0, 0, 2, 2, null);
+				g.drawImage(onFocus_middleLeft, 0, 2, 2, editor.getHeight() - 4, null);
+				g.drawImage(onFocus_lowerLeft, 0, editor.getHeight() - 2, 2, 2, null);
 
-			g.drawImage(onFocus_middleUpper, 2, 0, editor.getWidth() - 4, 2, null);
-			g.drawImage(onFocus_middleLower, 2, editor.getHeight() - 2, editor.getWidth() - 4, 2, null);
+				g.drawImage(onFocus_middleUpper, 2, 0, editor.getWidth() - 4, 2, null);
+				g.drawImage(onFocus_middleLower, 2, editor.getHeight() - 2, editor.getWidth() - 4, 2, null);
 
-			g.drawImage(onFocus_upperRight, editor.getWidth() - 2, 0, 2, 2, null);
-			g.drawImage(onFocus_middleRight, editor.getWidth() - 2, 2, 2, editor.getHeight() - 4, null);
-			g.drawImage(onFocus_lowerRight, editor.getWidth() - 2, editor.getHeight() - 2, 2, 2, null);
+				g.drawImage(onFocus_upperRight, editor.getWidth() - 2, 0, 2, 2, null);
+				g.drawImage(onFocus_middleRight, editor.getWidth() - 2, 2, 2, editor.getHeight() - 4, null);
+				g.drawImage(onFocus_lowerRight, editor.getWidth() - 2, editor.getHeight() - 2, 2, 2, null);
 
-		} else {
-			g.drawImage(lostFocus_upperLeft, 0, 0, 2, 2, null);
-			g.drawImage(lostFocus_middleLeft, 0, 2, 2, editor.getHeight() - 4, null);
-			g.drawImage(lostFocus_lowerLeft, 0, editor.getHeight() - 2, 2, 2, null);
+			} else {
+				g.drawImage(lostFocus_upperLeft, 0, 0, 2, 2, null);
+				g.drawImage(lostFocus_middleLeft, 0, 2, 2, editor.getHeight() - 4, null);
+				g.drawImage(lostFocus_lowerLeft, 0, editor.getHeight() - 2, 2, 2, null);
 
-			g.drawImage(lostFocus_middleUpper, 2, 0, editor.getWidth() - 4, 2, null);
-			g.drawImage(lostFocus_middleLower, 2, editor.getHeight() - 2, editor.getWidth() - 4, 2, null);
+				g.drawImage(lostFocus_middleUpper, 2, 0, editor.getWidth() - 4, 2, null);
+				g.drawImage(lostFocus_middleLower, 2, editor.getHeight() - 2, editor.getWidth() - 4, 2, null);
 
-			g.drawImage(lostFocus_upperRight, editor.getWidth() - 2, 0, 2, 2, null);
-			g.drawImage(lostFocus_middleRight, editor.getWidth() - 2, 2, 2, editor.getHeight() - 4, null);
-			g.drawImage(lostFocus_lowerRight, editor.getWidth() - 2, editor.getHeight() - 2, 2, 2, null);
+				g.drawImage(lostFocus_upperRight, editor.getWidth() - 2, 0, 2, 2, null);
+				g.drawImage(lostFocus_middleRight, editor.getWidth() - 2, 2, 2, editor.getHeight() - 4, null);
+				g.drawImage(lostFocus_lowerRight, editor.getWidth() - 2, editor.getHeight() - 2, 2, 2, null);
+			}
 		}
-		// }else{
-		// g.setColor(Color.red);
-		// g.fillRect(0,0,getWidth(),getHeight());
-		// }
 	}
 
 	public void focusGained(FocusEvent e) {

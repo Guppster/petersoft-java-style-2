@@ -140,6 +140,7 @@ public class JMainFrame extends JFrame {
 	private JPanel jPanel22;
 	private JPanel jPanel24;
 	private JPanel jPanel26;
+	private JButton jButton23;
 	private JButton jButton22;
 	private JPanel jPanel28;
 	private JProgressBar jProgressBar3;
@@ -1235,11 +1236,22 @@ public class JMainFrame extends JFrame {
 			{
 				pOpenPFileChooserDialogButton = new JButton();
 				pPFileChooserDialogPanel.add(pOpenPFileChooserDialogButton);
-				pOpenPFileChooserDialogButton.setBounds(99, 35, 198, 31);
-				pOpenPFileChooserDialogButton.setText("PFileChooserDialog");
+				pOpenPFileChooserDialogButton.setBounds(99, 35, 338, 31);
+				pOpenPFileChooserDialogButton.setText("JFileChooserDialog.showOpenDialog");
 				pOpenPFileChooserDialogButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						pOpenPFileChooserDialogButtonActionPerformed(evt);
+					}
+				});
+			}
+			{
+				jButton23 = new JButton();
+				pPFileChooserDialogPanel.add(jButton23);
+				jButton23.setText("JFileChooserDialog.showSaveDialog");
+				jButton23.setBounds(99, 88, 335, 31);
+				jButton23.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						jButton23ActionPerformed(evt);
 					}
 				});
 			}
@@ -1489,6 +1501,12 @@ public class JMainFrame extends JFrame {
 		};
 		d.thread = longRunningThread;
 		d.setVisible(true);
+	}
+	
+	private void jButton23ActionPerformed(ActionEvent evt) {
+		JFileChooser jFileChooser = new JFileChooser();
+		jFileChooser.setPreferredSize(new Dimension(700, 400));
+		jFileChooser.showSaveDialog(this);
 	}
 }
 

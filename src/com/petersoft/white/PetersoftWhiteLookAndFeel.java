@@ -128,21 +128,31 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 				"RadioButtonUI", "com.petersoft.white.RadioButtonUI", "ComboBoxUI", "com.petersoft.white.ComboBoxUI", "ToolBarUI", "com.petersoft.white.ToolBarUI",
 				"FileChooserUI", "com.petersoft.white.FileChooserUI", "TableUI", "com.petersoft.white.TableUI", "TableHeaderUI", "com.petersoft.white.TableHeaderUI",
 				"ProgressBarUI", "com.petersoft.white.ProgressBarUI", "SliderUI", "com.petersoft.white.SliderUI", "SplitPaneUI", "com.petersoft.white.SplitPaneUI", "MenuBarUI",
-				"com.petersoft.white.MenuBarUI", "MenuUI", "com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI" });
+				"com.petersoft.white.MenuBarUI", "MenuUI", "com.petersoft.white.MenuUI", "ViewportUI", "com.petersoft.white.ViewPortUI", "TreeUI", "com.petersoft.white.TreeUI",
+				"SpinnerUI", "com.petersoft.white.PeterSpinnerUI" });
 	}
 
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
+		table.put("Spinner.border", new LineBorder(Color.gray));
+		table.put("Spinner.background", Color.white);
+
 		table.put("TextArea.background", Color.white);
-		table.put("TextArea.border", new LineBorder(Color.gray));
+//		table.put("TextArea.border", new LineBorder(Color.gray));
+		table.put("TextArea.font", getFont(Font.PLAIN, 12));
 
 		table.put("TextField.focusInputMap", fieldInputMap);
 		table.put("PasswordField.focusInputMap", fieldInputMap);
+
 		table.put("TextArea.focusInputMap", multilineInputMap);
 		table.put("TextPane.focusInputMap", multilineInputMap);
 		table.put("TextPane.background", table.get("text"));
+		table.put("TextPane.font", getFont(Font.PLAIN, 12));
+
 		table.put("EditorPane.focusInputMap", multilineInputMap);
+		table.put("EditorPane.font", getFont(Font.PLAIN, 12));
+
 		table.put("FormattedTextField.focusInputMap", formattedInputMap);
 
 		table.put("FileView.directoryIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/dir.png")));
@@ -158,10 +168,11 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("FileChooser.upFolderIcon", new ImageIcon(this.getClass().getResource("images/PFileChooser/directoryUp.png")));
 
 		table.put("List.background", Color.white);
-		table.put("List.border", new LineBorder(Color.gray));
+//		table.put("List.border", new LineBorder(Color.gray));
 		table.put("List.selectionForeground", table.get("textHighlightText"));
 		table.put("List.selectionBackground", table.get("textHighlight"));
 		table.put("List.focusCellHighlightBorder", new EmptyBorder(new Insets(0, 0, 0, 0)));
+		table.put("List.font", getFont(Font.PLAIN, 12));
 
 		table.put("Panel.background", Color.white);
 
@@ -169,11 +180,11 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("TabbedPane.tabAreaBackground", Color.white);
 		table.put("TabbedPane.shadow", new Color(169, 209, 255));
 		table.put("TabbedPane.darkShadow", Color.white);
-
 		table.put("TabbedPane.highlight", new Color(169, 209, 255));
 		table.put("TabbedPane.contentAreaColor", new Color(169, 209, 255));
+		table.put("TabbedPane.contentBorderInsets",new Insets(1,1,2,2));
 
-		table.put("SplitPane.border", new LineBorder(Color.gray));
+		table.put("SplitPane.border", new LineBorder(Color.white));
 		table.put("SplitPane.background", Color.white);
 
 		table.put("Tree.background", Color.white);
@@ -204,7 +215,8 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("Table.focusCellBackground", table.get("textHighlight"));
 		table.put("Table.focusCellForeground", table.get("textHighlightText"));
 		table.put("Table.focusCellHighlightBorder", new EmptyBorder(new Insets(1, 1, 1, 1)));
-		table.put("Table.scrollPaneBorder", new LineBorder(Color.gray));
+		//		table.put("Table.scrollPaneBorder", new LineBorder(Color.LIGHT_GRAY));
+		table.put("Table.scrollPaneBorder", new EmptyBorder(0, 0, 0, 0));
 		// table.put("TableHeader.font", getFont(Font.PLAIN, 12));
 		table.put("TableHeader.foreground", table.get("textText"));
 		table.put("TableHeader.background", table.get("window"));
@@ -244,7 +256,7 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("InternalFrame.maximizeIcon", new ImageIcon(this.getClass().getResource("images/JInternalFrame/max.png")));
 		table.put("InternalFrame.iconifyIcon", new ImageIcon(this.getClass().getResource("images/JInternalFrame/min.png")));
 		table.put("InternalFrame.minimizeIcon", new ImageIcon(this.getClass().getResource("images/JInternalFrame/altMax.png")));
-		// table.put("InternalFrame.titleFont", windowTitleValue);
+		table.put("InternalFrame.titleFont", getFont(Font.PLAIN, 12));
 		table.put("InternalFrame.windowBindings", null);
 		// Internal Frame Auditory Cue Mappings
 		table.put("InternalFrame.closeSound", "sounds/FrameClose.wav");
@@ -257,7 +269,7 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		table.put("Viewport.background", Color.white);
 
 		// menu
-		table.put("MenuBar.background", Color.red);
+		table.put("MenuBar.background", Color.green);
 		table.put("MenuBar.foreground", Color.black);
 		table.put("Menu.background", Color.white);
 		table.put("Menu.foreground", Color.black);
@@ -302,13 +314,13 @@ public class PetersoftWhiteLookAndFeel extends BasicLookAndFeel {
 		// table.put("ComboBox.selectionBackground", Color.red);
 		// table.put("ComboBox.selectionForeground", Color.blue);
 
-		table.put("ScrollPane.border", new EmptyBorder(0, 0, 0, 0));
-		table.put("ScrollPane.viewportBorder", new LineBorder(Color.gray));
+//		table.put("ScrollPane.border", new EmptyBorder(0, 0, 0, 0));
+		//		table.put("ScrollPane.border", new LineBorder(Color.red));
+//		table.put("ScrollPane.viewportBorder", new LineBorder(Color.LIGHT_GRAY));
 
 		boolean lafCond = SwingUtilities2.isLocalDisplay();
 		Object aaTextInfo = SwingUtilities2.AATextInfo.getAATextInfo(lafCond);
 		table.put(SwingUtilities2.AA_TEXT_PROPERTY_KEY, aaTextInfo);
-
 	}
 
 	protected void initSystemColorDefaults(UIDefaults table) {

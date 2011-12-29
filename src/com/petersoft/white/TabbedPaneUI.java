@@ -15,6 +15,8 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
+import com.petersoft.advancedswing.jmaximizabletabbedpane.JMaximizableTabbedPane;
+
 public class TabbedPaneUI extends BasicTabbedPaneUI {
 	// north
 	protected Image top_tabLeft = new ImageIcon(TabbedPaneUI.class.getResource("images/PTabbedPane/ptabbedpane_top_leftTab.png")).getImage();
@@ -48,7 +50,6 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	}
 
 	protected void installListeners() {
-
 		super.installListeners();
 		// tabPane.addMouseMotionListener((MouseMotionListener) mouseListener);
 	}
@@ -146,12 +147,25 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	// }
 
 	public void paint(Graphics g, JComponent c) {
-		 g.setColor(Color.white);
-		 g.fillRect(0, 0, c.getWidth(), c.getHeight());
+		g.setColor(Color.white);
+		g.fillRect(0, 0, c.getWidth(), c.getHeight());
 		super.paint(g, c);
 	}
 
 	public void update(Graphics g, JComponent c) {
 		paint(g, c);
+	}
+
+	public int calculateTabWidth(int tabPlacement, int tabIndex, FontMetrics metrics) {
+		if (tabPane instanceof JMaximizableTabbedPane) {
+			JMaximizableTabbedPane p = (JMaximizableTabbedPane) tabPane;
+			if (p.getClosableTabIndex().contains(tabIndex)) {
+				return super.calculateTabWidth(tabPlacement, tabIndex, metrics) + 30;
+			} else {
+				return super.calculateTabWidth(tabPlacement, tabIndex, metrics);
+			}
+		} else {
+			return super.calculateTabWidth(tabPlacement, tabIndex, metrics);
+		}
 	}
 }
