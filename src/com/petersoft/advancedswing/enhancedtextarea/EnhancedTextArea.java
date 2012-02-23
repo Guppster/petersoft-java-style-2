@@ -19,7 +19,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -30,7 +29,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
-import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.Highlighter;
 
@@ -68,7 +66,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 	private String str;
 	private JLabel jSeparatorLabel;
 	private JLabel jLabel1;
-	public int largeFileSeparateMode;
+	public boolean separateByLine;
 	public int pageSize = 1024;
 	public int lineNoBase = 0;
 	public JButton jSaveButton;
@@ -88,7 +86,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 		super();
 		initGUI();
 		this.pageSize = 20;
-		largeFileSeparateMode = 1;
+		separateByLine = true;
 	}
 
 	private void initGUI() {
@@ -207,7 +205,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 							Element root = jTextArea.getDocument().getDefaultRootElement();
 
 							int base = 0;
-							if (largeFileSeparateMode == 0) {
+							if (separateByLine == false) {
 								if (str != null) {
 									base = StringUtils.countMatches(str.substring(0, (pager.getPage() - 1) * pageSize), System.getProperty("line.separator"));
 									if (base == 1) {
@@ -418,7 +416,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 
 	public void loadLargeFile(String str) {
 		this.str = str;
-		if (largeFileSeparateMode == 0) {
+		if (separateByLine == false) {
 			pager.maxPageNo = str.length() / pageSize + 1;
 		} else {
 			pager.maxPageNo = str.split(System.getProperty("line.separator")).length / pageSize + 1;
@@ -426,7 +424,7 @@ public class EnhancedTextArea extends JPanel implements LogFileTailerListener, D
 	}
 
 	public void refreshPage() {
-		if (largeFileSeparateMode == 0) {
+		if (separateByLine == false) {
 			if (pager.getPage() * pageSize < str.length()) {
 				this.jTextArea.setText(str.substring((pager.getPage() - 1) * pageSize, pager.getPage() * pageSize));
 			} else {

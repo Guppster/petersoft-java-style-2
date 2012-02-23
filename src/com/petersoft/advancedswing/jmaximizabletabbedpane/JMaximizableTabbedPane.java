@@ -37,7 +37,7 @@ import javax.swing.JToolBar;
 import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-import javax.swing.plaf.TabbedPaneUI;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener, MouseMotionListener {
 	double scaleRatio = 0.7;
@@ -79,7 +79,7 @@ public class JMaximizableTabbedPane extends JTabbedPane implements MouseListener
 		addMouseMotionListener(this);
 	}
 
-	public void setUI(TabbedPaneUI ui) {
+	public void setUI(BasicTabbedPaneUI ui) {
 		super.setUI(new JMaximizableTabbedPaneUI());
 	}
 

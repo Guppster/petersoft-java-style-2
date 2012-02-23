@@ -30,6 +30,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -77,6 +78,15 @@ public class CommonLib {
 			} else {
 				return Long.parseLong(s, 10);
 			}
+		}
+	}
+
+	public static boolean isNumber(String s) {
+		try {
+			long l = string2decimal(s);
+			return true;
+		} catch (Exception ex) {
+			return false;
 		}
 	}
 
@@ -536,8 +546,13 @@ public class CommonLib {
 	}
 
 	public static String runCommand(String command) {
+		return runCommand(command, 0);
+	}
+
+	public static String runCommand(String command, int skipLine) {
 		StringBuffer sb = new StringBuffer(4096);
 		try {
+			int x = 0;
 			String s;
 			Process p = Runtime.getRuntime().exec(command);
 
@@ -545,11 +560,15 @@ public class CommonLib {
 
 			// read the output from the command
 			while ((s = stdInput.readLine()) != null) {
-				sb.append(s);
-				sb.append(System.getProperty("line.separator"));
+				if (x >= skipLine) {
+					sb.append(s);
+					sb.append(System.getProperty("line.separator"));
+				}
+				x++;
 			}
 			stdInput.close();
 		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
 		}
 		return sb.toString();
@@ -649,13 +668,13 @@ public class CommonLib {
 
 	public static void saveFile(String str, File file) {
 		try {
-			// Create file 
+			// Create file
 			FileWriter fstream = new FileWriter(file);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(str);
-			//Close the output stream
+			// Close the output stream
 			out.close();
-		} catch (Exception e) {//Catch exception if any
+		} catch (Exception e) {// Catch exception if any
 			e.printStackTrace();
 		}
 	}
@@ -672,15 +691,6 @@ public class CommonLib {
 			fOut.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
-	}
-
-	public static Long hex2decimal(String s) {
-		s = s.trim().toLowerCase();
-		if (s.startsWith("0x")) {
-			return Long.parseLong(s.substring(2), 16);
-		} else {
-			return Long.parseLong(s, 16);
 		}
 	}
 

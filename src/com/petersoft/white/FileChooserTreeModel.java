@@ -25,8 +25,10 @@ public class FileChooserTreeModel extends DefaultTreeModel {
 			node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home"))));
 			this.root.add(node);
 
-			node = new FileChooserTreeNode("Desktop", new File(System.getProperty("user.home") + "/Desktop"), true);
-			node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home") + "/Desktop")));
+			if (new File(System.getProperty("user.home") + "/Desktop").exists()) {
+				node = new FileChooserTreeNode("Desktop", new File(System.getProperty("user.home") + "/Desktop"), true);
+				node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home") + "/Desktop")));
+			}
 			this.root.add(node);
 		} else if (System.getProperty("os.name").contains("Windows")) {
 			FileSystemView view = FileSystemView.getFileSystemView();
@@ -36,8 +38,10 @@ public class FileChooserTreeModel extends DefaultTreeModel {
 			node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home"))));
 			this.root.add(node);
 
-			node = new FileChooserTreeNode("Desktop", new File(System.getProperty("user.home") + "/Desktop"), false);
-			node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home") + "/Desktop")));
+			if (new File(System.getProperty("user.home") + "/Desktop").exists()) {
+				node = new FileChooserTreeNode("Desktop", new File(System.getProperty("user.home") + "/Desktop"), false);
+				node.setIcon(view.getSystemIcon(new File(System.getProperty("user.home") + "/Desktop")));
+			}
 			this.root.add(node);
 
 			File[] roots = File.listRoots();
