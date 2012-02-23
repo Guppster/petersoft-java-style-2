@@ -51,26 +51,11 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 
 	protected void installListeners() {
 		super.installListeners();
-		// tabPane.addMouseMotionListener((MouseMotionListener) mouseListener);
 	}
 
 	boolean isLeftToRight(Component c) {
 		return c.getComponentOrientation().isLeftToRight();
 	}
-
-	// protected void paintTopTabBorder(int tabIndex, Graphics g, int x, int y,
-	// int w, int h, int btm, int rght, boolean isSelected) {
-	// System.out.println("paintTopTabBorder");
-	// if (isSelected) {
-	// g.drawImage(tabSelectedLeft, x, y, null);
-	// g.drawImage(tabSelectedMiddle, x + 4, y, w - 8, h, null);
-	// g.drawImage(tabSelectedRight, x + 4 + (w - 8), y, null);
-	// } else {
-	// g.drawImage(tabLeft, x, y, null);
-	// g.drawImage(tabMiddle, x + 4, y, w - 8, h, null);
-	// g.drawImage(tabRight, x + 4 + (w - 8), y, null);
-	// }
-	// }
 
 	protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 		Insets contentBorderInsets = getContentBorderInsets(tabPlacement);
@@ -131,20 +116,6 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
 		super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
 	}
-
-	// protected void layoutLabel(int tabPlacement, FontMetrics metrics, int
-	// tabIndex, String title, Icon icon, Rectangle tabRect, Rectangle iconRect,
-	// Rectangle textRect, boolean isSelected) {
-	// // this function layoutLabel put the close icon to the right hand side
-	// textRect.x = 0;
-	// textRect.y = 0;
-	// iconRect.x = 0;
-	// iconRect.y = 0;
-	// SwingUtilities.layoutCompoundLabel((JComponent) tabPane, metrics, title,
-	// icon, SwingUtilities.CENTER, SwingUtilities.CENTER,
-	// SwingUtilities.CENTER, SwingUtilities.LEFT, tabRect, iconRect,
-	// textRect, textIconGap + 2);
-	// }
 
 	public void paint(Graphics g, JComponent c) {
 		g.setColor(Color.white);
