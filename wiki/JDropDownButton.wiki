@@ -2,7 +2,7 @@
 
 = JDropDownButton =
 
-[http://petersoft-java-style-2.googlecode.com/files/jDropDownButton.png]
+[https://lh4.googleusercontent.com/-tXFWwRSy6Nk/T3VhkZ-NitI/AAAAAAAAAnQ/bNqbhLu86nc/h120/jDropDownButton.png]
 
 {{{
 JDropDownButton jDropDownButton1 = new JDropDownButton();
