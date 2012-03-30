@@ -4,7 +4,7 @@
 
 It is a JTabbedPane that supports "close" and "maximum" for each tab. Pretty much like the tabbedpane in eclipse.
 
-[http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane20100118.png]
+[https://lh6.googleusercontent.com/-zBAfLkgSUTo/T3Viq6HbhOI/AAAAAAAAAn8/DpvLHyAqllE/s589/JMaximizableTabbedPane20100118.png]
 
 
 = Usage =
@@ -23,4 +23,4 @@ Example:
 
 checkout this file [http://code.google.com/p/petersoft-java-style-2/source/browse/trunk/src/com/petersoft/JMainFrame.java] from svn to see a real example
 
-[http://petersoft-java-style-2.googlecode.com/files/JMaximizableTabbedPane.png]
+[https://lh6.googleusercontent.com/-n8X_TvH5j4U/T3Vi9YgYukI/AAAAAAAAAoU/RcspQzFGPlQ/s900/JMaximizableTabbedPane.png]
