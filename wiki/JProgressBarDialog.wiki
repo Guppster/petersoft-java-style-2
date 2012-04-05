@@ -8,7 +8,7 @@
 class XXX implements JProgressBarDialogEventListener{
     ...
     void function(){
-        final JProgressBarDialog d = new JProgressBarDialog(this,     "JProgressBarDialog", true);
+        final JProgressBarDialog d = new JProgressBarDialog(this, "JProgressBarDialog", true);
 
         d.jProgressBar.setIndeterminate(true);
         d.jProgressBar.setStringPainted(true);
