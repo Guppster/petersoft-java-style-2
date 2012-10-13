@@ -568,7 +568,7 @@ public class CommonLib {
 			}
 			stdInput.close();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
 		}
 		return sb.toString();
